@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "890174238222-bj2tn3a0h2kvipco989d1stni6m9g10f.apps.googleusercontent.com",
+          "client_id": "890174238222-m9j6road897j3fl6lsq043oqgvrf7q4j.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "pl.jakubdkier.doghub.dev",
-            "certificate_hash": "5393f12017f6aeffbb6e20672891db839bf6bf45"
+            "certificate_hash": "6e17d2467c19ea8f51bb4fabbfe4afd4b4ba31da"
           }
         },
         {

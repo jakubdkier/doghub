@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../domain/app_user.dart';
@@ -30,6 +31,7 @@ class FirebaseAuthRepository implements AuthRepository {
       account = await _googleSignIn.authenticate();
     } on GoogleSignInException catch (e) {
       if (e.code == GoogleSignInExceptionCode.canceled) {
+        debugPrint('Google sign-in canceled: ${e.description}');
         throw const SignInCancelledException();
       }
       rethrow;

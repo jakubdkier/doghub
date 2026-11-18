@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -35,6 +36,9 @@ class AuthController extends _$AuthController {
         // Not an error: the user closed the account picker.
       }
     });
+    if (result case AsyncError(:final error, :final stackTrace)) {
+      debugPrint('Google sign-in failed: $error\n$stackTrace');
+    }
     if (ref.mounted) state = result;
   }
 
