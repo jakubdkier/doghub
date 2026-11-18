@@ -34,6 +34,8 @@ createdAt (serverTimestamp), by (uid), pola zależne od typu, deleted.
 - dart run build_runner build -d
 - firebase emulators:start (Firestore + Auth)
 - flutter run --flavor dev -t lib/main_dev.dart
+- flutter run --flavor dev -t lib/main_dev.dart --dart-define=USE_EMULATOR=true
+  (fizyczny telefon: dodatkowo --dart-define=EMULATOR_HOST=<IP komputera>)
 
 ## Zasady pracy
 - Po każdej zmianie: flutter analyze i flutter test muszą przechodzić.

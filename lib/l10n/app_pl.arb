@@ -1,0 +1,13 @@
+{
+  "@@locale": "pl",
+  "appTitle": "DogHub",
+  "navToday": "Dziś",
+  "navHistory": "Historia",
+  "navFood": "Karma",
+  "navHealth": "Zdrowie",
+  "loginTagline": "Wspólny dziennik Twojego psa",
+  "loginWithGoogle": "Zaloguj przez Google",
+  "loginError": "Nie udało się zalogować. Spróbuj ponownie.",
+  "signOut": "Wyloguj",
+  "comingSoon": "Wkrótce"
+}
