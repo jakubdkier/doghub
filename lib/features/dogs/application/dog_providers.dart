@@ -22,11 +22,24 @@ Stream<List<Dog>> dogs(Ref ref) {
   return ref.watch(dogRepositoryProvider).watchAll(householdId);
 }
 
-/// Dog shown in the app. The dog switcher (stage 3) will make this selectable.
+/// Dog shown in the app (the first one; no switcher while there is one dog).
 @Riverpod(keepAlive: true)
 Dog? currentDog(Ref ref) {
   final dogs = ref.watch(dogsProvider).value;
   return (dogs == null || dogs.isEmpty) ? null : dogs.first;
+}
+
+/// Firestore location of the current dog's data; null until both are known.
+typedef DogScope = ({String householdId, String dogId});
+
+@Riverpod(keepAlive: true)
+DogScope? dogScope(Ref ref) {
+  final householdId = ref.watch(
+    currentHouseholdProvider.select((h) => h.value?.id),
+  );
+  final dogId = ref.watch(currentDogProvider.select((d) => d?.id));
+  if (householdId == null || dogId == null) return null;
+  return (householdId: householdId, dogId: dogId);
 }
 
 @riverpod

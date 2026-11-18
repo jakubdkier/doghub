@@ -84,16 +84,16 @@ final class DogsProvider
 
 String _$dogsHash() => r'a44303eaa6817a9a257ea14469fce948bedd98c8';
 
-/// Dog shown in the app. The dog switcher (stage 3) will make this selectable.
+/// Dog shown in the app (the first one; no switcher while there is one dog).
 
 @ProviderFor(currentDog)
 final currentDogProvider = CurrentDogProvider._();
 
-/// Dog shown in the app. The dog switcher (stage 3) will make this selectable.
+/// Dog shown in the app (the first one; no switcher while there is one dog).
 
 final class CurrentDogProvider extends $FunctionalProvider<Dog?, Dog?, Dog?>
     with $Provider<Dog?> {
-  /// Dog shown in the app. The dog switcher (stage 3) will make this selectable.
+  /// Dog shown in the app (the first one; no switcher while there is one dog).
   CurrentDogProvider._()
     : super(
         from: null,
@@ -128,6 +128,47 @@ final class CurrentDogProvider extends $FunctionalProvider<Dog?, Dog?, Dog?>
 }
 
 String _$currentDogHash() => r'41243214d40e4c837d46a84de118ac1f41f4de3f';
+
+@ProviderFor(dogScope)
+final dogScopeProvider = DogScopeProvider._();
+
+final class DogScopeProvider
+    extends $FunctionalProvider<DogScope?, DogScope?, DogScope?>
+    with $Provider<DogScope?> {
+  DogScopeProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'dogScopeProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$dogScopeHash();
+
+  @$internal
+  @override
+  $ProviderElement<DogScope?> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  DogScope? create(Ref ref) {
+    return dogScope(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(DogScope? value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<DogScope?>(value),
+    );
+  }
+}
+
+String _$dogScopeHash() => r'02114406d65e1e22833538c80a3c98eec6098dd9';
 
 @ProviderFor(DogController)
 final dogControllerProvider = DogControllerProvider._();

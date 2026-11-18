@@ -10,6 +10,12 @@ abstract final class FirestorePaths {
   static String weights(String householdId, String dogId) =>
       '${dog(householdId, dogId)}/weights';
 
+  static String events(String householdId, String dogId) =>
+      '${dog(householdId, dogId)}/events';
+
+  static String foods(String householdId, String dogId) =>
+      '${dog(householdId, dogId)}/foods';
+
   static const invites = 'invites';
   static String invite(String code) => '$invites/$code';
 }
