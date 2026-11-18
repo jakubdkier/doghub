@@ -1,7 +1,7 @@
 # Dog App
 
 Aplikacja Flutter (Android + iOS) do prowadzenia dziennika psa we wspólnym
-household (2 osoby, model gotowy na wiele psów). Pełny plan: dokument
+household (2 osoby, model gotowy na wiele psów). Pełny plan: docs/PLAN.md
 "Aplikacja dla psa – plan MVP".
 
 ## Stack i decyzje
