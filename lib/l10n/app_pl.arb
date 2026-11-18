@@ -9,5 +9,51 @@
   "loginWithGoogle": "Zaloguj przez Google",
   "loginError": "Nie udało się zalogować. Spróbuj ponownie.",
   "signOut": "Wyloguj",
-  "comingSoon": "Wkrótce"
+  "comingSoon": "Wkrótce",
+  "genericError": "Coś poszło nie tak.",
+  "fieldRequired": "To pole jest wymagane",
+  "save": "Zapisz",
+
+  "splashError": "Nie udało się wczytać danych. Sprawdź połączenie i uruchom aplikację ponownie.",
+
+  "onboardingHouseholdTitle": "Wspólny dom",
+  "onboardingHouseholdIntro": "Dziennik psa prowadzicie razem w ramach jednego domu. Utwórz nowy albo dołącz kodem od domownika.",
+  "createHouseholdHeader": "Utwórz nowy dom",
+  "householdNameLabel": "Nazwa domu",
+  "householdNameDefault": "Nasz dom",
+  "createHouseholdButton": "Utwórz",
+  "joinHouseholdHeader": "Mam kod zaproszenia",
+  "inviteCodeLabel": "Kod zaproszenia",
+  "joinButton": "Dołącz",
+  "joinErrorInvalidCode": "Kod ma 6 znaków (litery i cyfry).",
+  "joinErrorNotFound": "Nie ma takiego kodu.",
+  "joinErrorExpired": "Kod wygasł. Poproś domownika o nowy.",
+  "joinErrorOffline": "Brak połączenia z internetem.",
+  "joinErrorDenied": "Nie udało się dołączyć. Poproś o nowy kod.",
+
+  "onboardingDogTitle": "Dodaj psa",
+  "dogNameLabel": "Imię",
+  "dogBreedLabel": "Rasa (opcjonalnie)",
+  "dogBirthDateLabel": "Data urodzenia (opcjonalnie)",
+  "dogWeightLabel": "Waga startowa w kg (opcjonalnie)",
+  "dogWeightInvalid": "Podaj wagę, np. 12,5",
+
+  "settingsTitle": "Ustawienia",
+  "settingsHousehold": "Dom i domownicy",
+  "householdMembers": "Domownicy",
+  "memberYou": "{name} (Ty)",
+  "@memberYou": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "inviteHeader": "Zaproś domownika",
+  "inviteDescription": "Kod jest ważny 24 godziny. Domownik wpisuje go po zalogowaniu się w aplikacji.",
+  "inviteGenerate": "Wygeneruj kod",
+  "inviteValidUntil": "Ważny do {date}",
+  "@inviteValidUntil": {
+    "placeholders": { "date": { "type": "String" } }
+  },
+  "inviteCopy": "Kopiuj kod",
+  "inviteCopied": "Skopiowano kod",
+  "inviteRevoke": "Unieważnij",
+  "inviteErrorOffline": "Wygenerowanie kodu wymaga połączenia z internetem."
 }

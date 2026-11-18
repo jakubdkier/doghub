@@ -1,9 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
+import '../../../app/routes.dart';
 import '../../../core/widgets/placeholder_page.dart';
 import '../../../l10n/app_localizations.dart';
-import '../../auth/application/auth_providers.dart';
+import '../../dogs/application/dog_providers.dart';
 
 class TodayPage extends ConsumerWidget {
   const TodayPage({super.key});
@@ -11,14 +13,14 @@ class TodayPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
+    final dog = ref.watch(currentDogProvider);
     return PlaceholderPage(
-      title: l10n.navToday,
+      title: dog == null ? l10n.navToday : '${dog.name} · ${l10n.navToday}',
       actions: [
-        // Temporary until the settings screen exists.
         IconButton(
-          tooltip: l10n.signOut,
-          icon: const Icon(Icons.logout),
-          onPressed: () => ref.read(authControllerProvider.notifier).signOut(),
+          tooltip: l10n.settingsTitle,
+          icon: const Icon(Icons.settings_outlined),
+          onPressed: () => context.push(Routes.settings),
         ),
       ],
     );

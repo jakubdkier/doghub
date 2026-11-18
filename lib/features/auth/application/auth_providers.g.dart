@@ -48,7 +48,7 @@ final class AuthRepositoryProvider
   }
 }
 
-String _$authRepositoryHash() => r'f815a3c1111e691ee37807d8cf1b6263f51c1b98';
+String _$authRepositoryHash() => r'3e1c2e906a873677619946669564a3b75a4d0bee';
 
 @ProviderFor(authState)
 final authStateProvider = AuthStateProvider._();
@@ -112,7 +112,7 @@ final class AuthControllerProvider
   AuthController create() => AuthController();
 }
 
-String _$authControllerHash() => r'2a3941dde5ae80ff302ac50e328f36087646c644';
+String _$authControllerHash() => r'f5af7419c19f005b6079a75012082fa97ab95fa1';
 
 /// Sign-in / sign-out actions with loading and error state for the UI.
 

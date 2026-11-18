@@ -47,9 +47,15 @@ class FirebaseAuthRepository implements AuthRepository {
 
   @override
   Future<void> signOut() async {
-    await _ensureInitialized();
-    await _googleSignIn.signOut();
+    // Firebase first so the UI reacts immediately; clearing the Google
+    // credential state on Android can take a moment.
     await _auth.signOut();
+    try {
+      await _ensureInitialized();
+      await _googleSignIn.signOut();
+    } on Object catch (e) {
+      debugPrint('Google sign-out failed: $e');
+    }
   }
 
   static AppUser? _toAppUser(User? user) => user == null

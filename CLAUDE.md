@@ -33,6 +33,7 @@ createdAt (serverTimestamp), by (uid), pola zależne od typu, deleted.
 - flutter test
 - dart run build_runner build -d
 - firebase emulators:start (Firestore + Auth)
+- cd firestore-tests && npm test (testy reguł na emulatorze)
 - flutter run --flavor dev -t lib/main_dev.dart
 - flutter run --flavor dev -t lib/main_dev.dart --dart-define=USE_EMULATOR=true
   (fizyczny telefon: dodatkowo --dart-define=EMULATOR_HOST=<IP komputera>)

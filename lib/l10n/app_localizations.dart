@@ -153,6 +153,222 @@ abstract class AppLocalizations {
   /// In pl, this message translates to:
   /// **'Wkrótce'**
   String get comingSoon;
+
+  /// No description provided for @genericError.
+  ///
+  /// In pl, this message translates to:
+  /// **'Coś poszło nie tak.'**
+  String get genericError;
+
+  /// No description provided for @fieldRequired.
+  ///
+  /// In pl, this message translates to:
+  /// **'To pole jest wymagane'**
+  String get fieldRequired;
+
+  /// No description provided for @save.
+  ///
+  /// In pl, this message translates to:
+  /// **'Zapisz'**
+  String get save;
+
+  /// No description provided for @splashError.
+  ///
+  /// In pl, this message translates to:
+  /// **'Nie udało się wczytać danych. Sprawdź połączenie i uruchom aplikację ponownie.'**
+  String get splashError;
+
+  /// No description provided for @onboardingHouseholdTitle.
+  ///
+  /// In pl, this message translates to:
+  /// **'Wspólny dom'**
+  String get onboardingHouseholdTitle;
+
+  /// No description provided for @onboardingHouseholdIntro.
+  ///
+  /// In pl, this message translates to:
+  /// **'Dziennik psa prowadzicie razem w ramach jednego domu. Utwórz nowy albo dołącz kodem od domownika.'**
+  String get onboardingHouseholdIntro;
+
+  /// No description provided for @createHouseholdHeader.
+  ///
+  /// In pl, this message translates to:
+  /// **'Utwórz nowy dom'**
+  String get createHouseholdHeader;
+
+  /// No description provided for @householdNameLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Nazwa domu'**
+  String get householdNameLabel;
+
+  /// No description provided for @householdNameDefault.
+  ///
+  /// In pl, this message translates to:
+  /// **'Nasz dom'**
+  String get householdNameDefault;
+
+  /// No description provided for @createHouseholdButton.
+  ///
+  /// In pl, this message translates to:
+  /// **'Utwórz'**
+  String get createHouseholdButton;
+
+  /// No description provided for @joinHouseholdHeader.
+  ///
+  /// In pl, this message translates to:
+  /// **'Mam kod zaproszenia'**
+  String get joinHouseholdHeader;
+
+  /// No description provided for @inviteCodeLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Kod zaproszenia'**
+  String get inviteCodeLabel;
+
+  /// No description provided for @joinButton.
+  ///
+  /// In pl, this message translates to:
+  /// **'Dołącz'**
+  String get joinButton;
+
+  /// No description provided for @joinErrorInvalidCode.
+  ///
+  /// In pl, this message translates to:
+  /// **'Kod ma 6 znaków (litery i cyfry).'**
+  String get joinErrorInvalidCode;
+
+  /// No description provided for @joinErrorNotFound.
+  ///
+  /// In pl, this message translates to:
+  /// **'Nie ma takiego kodu.'**
+  String get joinErrorNotFound;
+
+  /// No description provided for @joinErrorExpired.
+  ///
+  /// In pl, this message translates to:
+  /// **'Kod wygasł. Poproś domownika o nowy.'**
+  String get joinErrorExpired;
+
+  /// No description provided for @joinErrorOffline.
+  ///
+  /// In pl, this message translates to:
+  /// **'Brak połączenia z internetem.'**
+  String get joinErrorOffline;
+
+  /// No description provided for @joinErrorDenied.
+  ///
+  /// In pl, this message translates to:
+  /// **'Nie udało się dołączyć. Poproś o nowy kod.'**
+  String get joinErrorDenied;
+
+  /// No description provided for @onboardingDogTitle.
+  ///
+  /// In pl, this message translates to:
+  /// **'Dodaj psa'**
+  String get onboardingDogTitle;
+
+  /// No description provided for @dogNameLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Imię'**
+  String get dogNameLabel;
+
+  /// No description provided for @dogBreedLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Rasa (opcjonalnie)'**
+  String get dogBreedLabel;
+
+  /// No description provided for @dogBirthDateLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Data urodzenia (opcjonalnie)'**
+  String get dogBirthDateLabel;
+
+  /// No description provided for @dogWeightLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Waga startowa w kg (opcjonalnie)'**
+  String get dogWeightLabel;
+
+  /// No description provided for @dogWeightInvalid.
+  ///
+  /// In pl, this message translates to:
+  /// **'Podaj wagę, np. 12,5'**
+  String get dogWeightInvalid;
+
+  /// No description provided for @settingsTitle.
+  ///
+  /// In pl, this message translates to:
+  /// **'Ustawienia'**
+  String get settingsTitle;
+
+  /// No description provided for @settingsHousehold.
+  ///
+  /// In pl, this message translates to:
+  /// **'Dom i domownicy'**
+  String get settingsHousehold;
+
+  /// No description provided for @householdMembers.
+  ///
+  /// In pl, this message translates to:
+  /// **'Domownicy'**
+  String get householdMembers;
+
+  /// No description provided for @memberYou.
+  ///
+  /// In pl, this message translates to:
+  /// **'{name} (Ty)'**
+  String memberYou(String name);
+
+  /// No description provided for @inviteHeader.
+  ///
+  /// In pl, this message translates to:
+  /// **'Zaproś domownika'**
+  String get inviteHeader;
+
+  /// No description provided for @inviteDescription.
+  ///
+  /// In pl, this message translates to:
+  /// **'Kod jest ważny 24 godziny. Domownik wpisuje go po zalogowaniu się w aplikacji.'**
+  String get inviteDescription;
+
+  /// No description provided for @inviteGenerate.
+  ///
+  /// In pl, this message translates to:
+  /// **'Wygeneruj kod'**
+  String get inviteGenerate;
+
+  /// No description provided for @inviteValidUntil.
+  ///
+  /// In pl, this message translates to:
+  /// **'Ważny do {date}'**
+  String inviteValidUntil(String date);
+
+  /// No description provided for @inviteCopy.
+  ///
+  /// In pl, this message translates to:
+  /// **'Kopiuj kod'**
+  String get inviteCopy;
+
+  /// No description provided for @inviteCopied.
+  ///
+  /// In pl, this message translates to:
+  /// **'Skopiowano kod'**
+  String get inviteCopied;
+
+  /// No description provided for @inviteRevoke.
+  ///
+  /// In pl, this message translates to:
+  /// **'Unieważnij'**
+  String get inviteRevoke;
+
+  /// No description provided for @inviteErrorOffline.
+  ///
+  /// In pl, this message translates to:
+  /// **'Wygenerowanie kodu wymaga połączenia z internetem.'**
+  String get inviteErrorOffline;
 }
 
 class _AppLocalizationsDelegate

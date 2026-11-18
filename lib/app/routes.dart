@@ -1,17 +1,13 @@
 /// Route paths used across the app.
 abstract final class Routes {
+  static const splash = '/splash';
   static const login = '/login';
+  static const onboardingHousehold = '/onboarding/household';
+  static const onboardingDog = '/onboarding/dog';
   static const today = '/today';
   static const history = '/history';
   static const food = '/food';
   static const health = '/health';
-}
-
-/// Pure redirect rule: no user -> /login; signed-in user on /login -> /today.
-/// Onboarding steps (household, dog) are added in stage 2.
-String? authRedirect({required bool signedIn, required String location}) {
-  final onLogin = location == Routes.login;
-  if (!signedIn) return onLogin ? null : Routes.login;
-  if (onLogin || location == '/') return Routes.today;
-  return null;
+  static const settings = '/settings';
+  static const settingsHousehold = '/settings/household';
 }
