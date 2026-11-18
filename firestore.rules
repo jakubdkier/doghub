@@ -107,28 +107,103 @@ service cloud.firestore {
             && optionalTimestamp(dog, 'birthDate');
         }
 
-        // Entries carrying an author: `by` is the creator and never changes.
-        match /{coll}/{id} {
-          allow read: if isMember(h)
-            && coll in ['events', 'weights', 'health', 'foods', 'purchases'];
-
-          allow create: if isMember(h) && (
-            (coll in ['events', 'weights'] && request.resource.data.by == uid())
-            || coll in ['health', 'foods', 'purchases']
-          ) && (coll != 'weights' || validWeight());
-
-          allow update: if isMember(h) && (
-            (coll in ['events', 'weights'] && request.resource.data.by == resource.data.by)
-            || coll in ['health', 'foods', 'purchases']
-          ) && (coll != 'weights' || validWeight());
-
+        // ---------- events ----------
+        // `by` is the creator and never changes; partners may edit and
+        // soft-delete each other's entries.
+        match /events/{id} {
+          allow read: if isMember(h);
+          allow create: if isMember(h)
+            && validEvent()
+            && request.resource.data.by == uid()
+            && request.resource.data.createdAt == request.time;
+          allow update: if isMember(h)
+            && validEvent()
+            && unchanged('by')
+            && unchanged('createdAt')
+            && unchanged('type');
           // Soft delete only (`deleted: true`).
           allow delete: if false;
+        }
+
+        // ---------- weights ----------
+        match /weights/{id} {
+          allow read: if isMember(h);
+          allow create: if isMember(h)
+            && validWeight()
+            && request.resource.data.by == uid();
+          allow update: if isMember(h) && validWeight() && unchanged('by');
+          allow delete: if false;
+        }
+
+        // ---------- foods ----------
+        match /foods/{id} {
+          allow read: if isMember(h);
+          allow create: if isMember(h)
+            && validFood()
+            && request.resource.data.createdAt == request.time;
+          allow update: if isMember(h) && validFood() && unchanged('createdAt');
+          allow delete: if false;
+        }
+
+        // Validated in later stages (purchases: 4, health: 6).
+        match /{coll}/{id} {
+          allow read, create, update: if isMember(h)
+            && coll in ['health', 'purchases'];
+          allow delete: if false;
+        }
+
+        function unchanged(key) {
+          return request.resource.data.get(key, null) == resource.data.get(key, null);
+        }
+
+        function optionalNumberIn(data, key, minExclusive, maxInclusive) {
+          return !(key in data) || data[key] == null
+            || (data[key] is number && data[key] > minExclusive && data[key] <= maxInclusive);
+        }
+
+        function optionalIntIn(data, key, minInclusive, maxInclusive) {
+          return !(key in data) || data[key] == null
+            || (data[key] is int && data[key] >= minInclusive && data[key] <= maxInclusive);
+        }
+
+        function present(data, key) {
+          return key in data && data[key] != null;
+        }
+
+        function validEvent() {
+          let e = request.resource.data;
+          return e.keys().hasOnly(['type', 'at', 'createdAt', 'by', 'foodId',
+              'grams', 'poopScore', 'poopColor', 'durationMin', 'note', 'deleted'])
+            && e.type in ['meal', 'poop', 'pee', 'walk', 'note']
+            && e.at is timestamp
+            // Not in the future, with slack for device clock skew.
+            && e.at <= request.time + duration.value(1, 'h')
+            && e.by is string
+            && e.deleted is bool
+            && optionalShortString(e, 'foodId', 100)
+            && optionalNumberIn(e, 'grams', 0, 5000)
+            && optionalIntIn(e, 'poopScore', 1, 7)
+            && (!present(e, 'poopColor')
+              || e.poopColor in ['brown', 'dark', 'yellow', 'green', 'grey', 'bloody'])
+            && optionalIntIn(e, 'durationMin', 1, 1440)
+            && optionalShortString(e, 'note', 500)
+            && (e.type != 'meal' || present(e, 'grams'))
+            && (e.type != 'poop' || present(e, 'poopScore'))
+            && (e.type != 'walk' || present(e, 'durationMin'))
+            && (e.type != 'note' || (present(e, 'note') && e.note.size() > 0));
         }
 
         function validWeight() {
           let w = request.resource.data;
           return w.kg is number && w.kg > 0 && w.kg < 150 && w.at is timestamp;
+        }
+
+        function validFood() {
+          let f = request.resource.data;
+          return f.keys().hasOnly(['name', 'brand', 'active', 'createdAt'])
+            && isShortString(f.name, 1, 50)
+            && optionalShortString(f, 'brand', 50)
+            && f.active is bool;
         }
       }
     }
