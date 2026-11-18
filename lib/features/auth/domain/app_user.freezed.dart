@@ -217,8 +217,8 @@ return $default(_that.uid,_that.displayName,_that.email,_that.photoUrl);case _:
 /// @nodoc
 @JsonSerializable()
 
-class _AppUser implements AppUser {
-  const _AppUser({required this.uid, this.displayName, this.email, this.photoUrl});
+class _AppUser extends AppUser {
+  const _AppUser({required this.uid, this.displayName, this.email, this.photoUrl}): super._();
   factory _AppUser.fromJson(Map<String, dynamic> json) => _$AppUserFromJson(json);
 
 @override final  String uid;

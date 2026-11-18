@@ -74,7 +74,7 @@ beforeEach(async () => {
       expiresAt: hours(24),
       createdAt: Timestamp.now(),
     });
-    await setDoc(doc(f, 'invites/OLD234'), {
+    await setDoc(doc(f, 'invites/EXP234'), {
       householdId: H,
       createdBy: ALICE,
       expiresAt: hours(-1),
@@ -182,7 +182,7 @@ describe('joining with an invite', () => {
   });
 
   test('expired code is rejected', async () => {
-    await assertFails(updateDoc(doc(db(BOB), `households/${H}`), joinPayload(BOB, 'OLD234')));
+    await assertFails(updateDoc(doc(db(BOB), `households/${H}`), joinPayload(BOB, 'EXP234')));
   });
 
   test('unknown code is rejected', async () => {

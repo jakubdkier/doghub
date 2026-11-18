@@ -9,4 +9,18 @@ void main() {
     expect(json, {'uid': 'u1', 'email': 'a@b.pl'});
     expect(AppUser.fromJson(json), user);
   });
+
+  group('preferredName', () {
+    test('uses the first name', () {
+      expect(
+        const AppUser(uid: 'u', displayName: 'Jakub Kier').preferredName,
+        'Jakub',
+      );
+    });
+
+    test('falls back to e-mail local part, then to Ja', () {
+      expect(const AppUser(uid: 'u', email: 'kuba@x.pl').preferredName, 'kuba');
+      expect(const AppUser(uid: 'u', displayName: '  ').preferredName, 'Ja');
+    });
+  });
 }
