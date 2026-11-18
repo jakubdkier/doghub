@@ -1,5 +1,5 @@
 name: dog_app
-description: "A new Flutter project."
+description: "DogHub – shared dog diary."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -35,6 +35,23 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  flutter_riverpod: ^3.5.0
+  riverpod_annotation: ^4.0.8
+  go_router: ^18.1.4
+  freezed_annotation: ^3.1.0
+  json_annotation: ^4.12.0
+  firebase_core: ^5.2.0
+  firebase_auth: ^7.1.0
+  cloud_firestore: ^7.2.0
+  google_sign_in: ^7.2.0
+  flutter_local_notifications: ^23.0.2
+  timezone: ^0.11.2
+  flutter_timezone: ^5.1.1
+  fl_chart: ^1.3.1
+  home_widget: ^0.10.0
+  intl: ^0.20.3
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
@@ -46,6 +63,12 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
+  build_runner: ^2.17.1
+  riverpod_generator: ^4.0.10
+  freezed: ^4.0.3
+  json_serializable: ^6.15.2
+  mocktail: ^1.0.5
+  fake_cloud_firestore: ^4.5.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -57,6 +80,7 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  generate: true
 
   # To add assets to your application, add an assets section, like this:
   # assets:
