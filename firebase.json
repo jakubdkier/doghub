@@ -1,0 +1,42 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "buildConfigurations": {
+          "src/dev": {
+            "projectId": "dog-app-dev-8f3dc",
+            "appId": "1:890174238222:android:e41f00ffd3fc1fdd7b965f",
+            "fileOutput": "android/app/src/dev/google-services.json"
+          }
+        }
+      },
+      "dart": {
+        "lib/core/firebase/firebase_options_dev.dart": {
+          "projectId": "dog-app-dev-8f3dc",
+          "configurations": {
+            "android": "1:890174238222:android:e41f00ffd3fc1fdd7b965f"
+          }
+        }
+      }
+    }
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "emulators": {
+    "auth": {
+      "host": "0.0.0.0",
+      "port": 9099
+    },
+    "firestore": {
+      "host": "0.0.0.0",
+      "port": 8080
+    },
+    "ui": {
+      "enabled": true,
+      "port": 4000
+    },
+    "singleProjectMode": true
+  }
+}

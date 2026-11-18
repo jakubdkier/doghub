@@ -1,4 +1,4 @@
-package pl.twojadomena.dog_app
+package pl.jakubdkier.doghub
 
 import io.flutter.embedding.android.FlutterActivity
 
