@@ -260,21 +260,27 @@ final class EventFamily extends $Family
 }
 
 /// Writes for the current dog. All work offline.
+/// Kept alive: callbacks such as snackbar undo outlive the widgets that
+/// read it.
 
 @ProviderFor(EventController)
 final eventControllerProvider = EventControllerProvider._();
 
 /// Writes for the current dog. All work offline.
+/// Kept alive: callbacks such as snackbar undo outlive the widgets that
+/// read it.
 final class EventControllerProvider
     extends $NotifierProvider<EventController, void> {
   /// Writes for the current dog. All work offline.
+  /// Kept alive: callbacks such as snackbar undo outlive the widgets that
+  /// read it.
   EventControllerProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
         name: r'eventControllerProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -295,9 +301,11 @@ final class EventControllerProvider
   }
 }
 
-String _$eventControllerHash() => r'217f4e6cf0d849f790c7a521713c11cea2c1b232';
+String _$eventControllerHash() => r'53d3c879630a8b0b46aa22e0c57e89675bae1d25';
 
 /// Writes for the current dog. All work offline.
+/// Kept alive: callbacks such as snackbar undo outlive the widgets that
+/// read it.
 
 abstract class _$EventController extends $Notifier<void> {
   void build();

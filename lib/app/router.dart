@@ -4,7 +4,9 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../features/auth/presentation/login_page.dart';
 import '../features/dogs/presentation/onboarding_dog_page.dart';
+import '../features/events/presentation/event_edit_page.dart';
 import '../features/events/presentation/history_page.dart';
+import '../features/events/presentation/quick_add.dart';
 import '../features/events/presentation/today_page.dart';
 import '../features/food/presentation/food_page.dart';
 import '../features/health/presentation/health_page.dart';
@@ -53,6 +55,16 @@ GoRouter router(Ref ref) {
             builder: (_, _) => const HouseholdSettingsPage(),
           ),
         ],
+      ),
+      GoRoute(
+        path: Routes.eventPattern,
+        builder: (_, state) => EventEditPage(id: state.pathParameters['id']!),
+      ),
+      GoRoute(
+        path: Routes.quickAdd,
+        builder: (_, state) => QuickAddPage(
+          type: QuickAddPage.parseType(state.uri.queryParameters['type']),
+        ),
       ),
       StatefulShellRoute.indexedStack(
         builder: (_, _, shell) => AppShell(navigationShell: shell),

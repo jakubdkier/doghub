@@ -93,18 +93,25 @@ final class FoodsProvider
 
 String _$foodsHash() => r'487629254087f04a7ea4c899336f61d49ff9d210';
 
+/// Kept alive: callbacks such as snackbar undo outlive the widgets that
+/// read it.
+
 @ProviderFor(FoodController)
 final foodControllerProvider = FoodControllerProvider._();
 
+/// Kept alive: callbacks such as snackbar undo outlive the widgets that
+/// read it.
 final class FoodControllerProvider
     extends $NotifierProvider<FoodController, void> {
+  /// Kept alive: callbacks such as snackbar undo outlive the widgets that
+  /// read it.
   FoodControllerProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
         name: r'foodControllerProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -125,7 +132,10 @@ final class FoodControllerProvider
   }
 }
 
-String _$foodControllerHash() => r'6a6f0ed81da28c2c37a05ca260f2137ed68f5351';
+String _$foodControllerHash() => r'597880ddef41978efd20660bd3c070a53838a2aa';
+
+/// Kept alive: callbacks such as snackbar undo outlive the widgets that
+/// read it.
 
 abstract class _$FoodController extends $Notifier<void> {
   void build();

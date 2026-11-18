@@ -369,6 +369,348 @@ abstract class AppLocalizations {
   /// In pl, this message translates to:
   /// **'Wygenerowanie kodu wymaga połączenia z internetem.'**
   String get inviteErrorOffline;
+
+  /// No description provided for @cancel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Anuluj'**
+  String get cancel;
+
+  /// No description provided for @delete.
+  ///
+  /// In pl, this message translates to:
+  /// **'Usuń'**
+  String get delete;
+
+  /// No description provided for @undo.
+  ///
+  /// In pl, this message translates to:
+  /// **'Cofnij'**
+  String get undo;
+
+  /// No description provided for @eventMeal.
+  ///
+  /// In pl, this message translates to:
+  /// **'Posiłek'**
+  String get eventMeal;
+
+  /// No description provided for @eventPoop.
+  ///
+  /// In pl, this message translates to:
+  /// **'Kupa'**
+  String get eventPoop;
+
+  /// No description provided for @eventPee.
+  ///
+  /// In pl, this message translates to:
+  /// **'Siku'**
+  String get eventPee;
+
+  /// No description provided for @eventWalk.
+  ///
+  /// In pl, this message translates to:
+  /// **'Spacer'**
+  String get eventWalk;
+
+  /// No description provided for @eventNote.
+  ///
+  /// In pl, this message translates to:
+  /// **'Notatka'**
+  String get eventNote;
+
+  /// No description provided for @poopColorBrown.
+  ///
+  /// In pl, this message translates to:
+  /// **'brązowa'**
+  String get poopColorBrown;
+
+  /// No description provided for @poopColorDark.
+  ///
+  /// In pl, this message translates to:
+  /// **'ciemna / czarna'**
+  String get poopColorDark;
+
+  /// No description provided for @poopColorYellow.
+  ///
+  /// In pl, this message translates to:
+  /// **'żółta / pomarańczowa'**
+  String get poopColorYellow;
+
+  /// No description provided for @poopColorGreen.
+  ///
+  /// In pl, this message translates to:
+  /// **'zielona'**
+  String get poopColorGreen;
+
+  /// No description provided for @poopColorGrey.
+  ///
+  /// In pl, this message translates to:
+  /// **'szara / gliniasta'**
+  String get poopColorGrey;
+
+  /// No description provided for @poopColorBloody.
+  ///
+  /// In pl, this message translates to:
+  /// **'z krwią'**
+  String get poopColorBloody;
+
+  /// No description provided for @bristol1.
+  ///
+  /// In pl, this message translates to:
+  /// **'twarde, oddzielne grudki'**
+  String get bristol1;
+
+  /// No description provided for @bristol2.
+  ///
+  /// In pl, this message translates to:
+  /// **'zbita, grudkowata'**
+  String get bristol2;
+
+  /// No description provided for @bristol3.
+  ///
+  /// In pl, this message translates to:
+  /// **'kształtna, z pęknięciami'**
+  String get bristol3;
+
+  /// No description provided for @bristol4.
+  ///
+  /// In pl, this message translates to:
+  /// **'gładka i miękka (norma)'**
+  String get bristol4;
+
+  /// No description provided for @bristol5.
+  ///
+  /// In pl, this message translates to:
+  /// **'miękkie kawałki'**
+  String get bristol5;
+
+  /// No description provided for @bristol6.
+  ///
+  /// In pl, this message translates to:
+  /// **'papkowata'**
+  String get bristol6;
+
+  /// No description provided for @bristol7.
+  ///
+  /// In pl, this message translates to:
+  /// **'wodnista'**
+  String get bristol7;
+
+  /// No description provided for @gramsValue.
+  ///
+  /// In pl, this message translates to:
+  /// **'{grams} g'**
+  String gramsValue(int grams);
+
+  /// No description provided for @minutesValue.
+  ///
+  /// In pl, this message translates to:
+  /// **'{minutes} min'**
+  String minutesValue(int minutes);
+
+  /// No description provided for @bristolValue.
+  ///
+  /// In pl, this message translates to:
+  /// **'Bristol {score}'**
+  String bristolValue(int score);
+
+  /// No description provided for @agoJustNow.
+  ///
+  /// In pl, this message translates to:
+  /// **'przed chwilą'**
+  String get agoJustNow;
+
+  /// No description provided for @agoMinutes.
+  ///
+  /// In pl, this message translates to:
+  /// **'{minutes} min temu'**
+  String agoMinutes(int minutes);
+
+  /// No description provided for @agoHours.
+  ///
+  /// In pl, this message translates to:
+  /// **'{hours} h temu'**
+  String agoHours(int hours);
+
+  /// No description provided for @agoDays.
+  ///
+  /// In pl, this message translates to:
+  /// **'{days, plural, =1{wczoraj} other{{days} dni temu}}'**
+  String agoDays(int days);
+
+  /// No description provided for @dayToday.
+  ///
+  /// In pl, this message translates to:
+  /// **'Dziś'**
+  String get dayToday;
+
+  /// No description provided for @dayYesterday.
+  ///
+  /// In pl, this message translates to:
+  /// **'Wczoraj'**
+  String get dayYesterday;
+
+  /// No description provided for @recentHeader.
+  ///
+  /// In pl, this message translates to:
+  /// **'Ostatnio'**
+  String get recentHeader;
+
+  /// No description provided for @recentNone.
+  ///
+  /// In pl, this message translates to:
+  /// **'brak w ostatnich 7 dniach'**
+  String get recentNone;
+
+  /// No description provided for @todayTimelineHeader.
+  ///
+  /// In pl, this message translates to:
+  /// **'Dzisiejsze wpisy'**
+  String get todayTimelineHeader;
+
+  /// No description provided for @todayEmpty.
+  ///
+  /// In pl, this message translates to:
+  /// **'Nic jeszcze dziś nie zapisano.'**
+  String get todayEmpty;
+
+  /// No description provided for @eventTimeLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Czas'**
+  String get eventTimeLabel;
+
+  /// No description provided for @eventNoteLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Notatka (opcjonalnie)'**
+  String get eventNoteLabel;
+
+  /// No description provided for @eventNoteRequired.
+  ///
+  /// In pl, this message translates to:
+  /// **'Wpisz treść notatki'**
+  String get eventNoteRequired;
+
+  /// No description provided for @mealGramsLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Porcja w gramach'**
+  String get mealGramsLabel;
+
+  /// No description provided for @mealGramsInvalid.
+  ///
+  /// In pl, this message translates to:
+  /// **'Podaj porcję od 1 do 5000 g'**
+  String get mealGramsInvalid;
+
+  /// No description provided for @mealFoodLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Karma'**
+  String get mealFoodLabel;
+
+  /// No description provided for @walkDurationLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Czas spaceru w minutach'**
+  String get walkDurationLabel;
+
+  /// No description provided for @walkDurationInvalid.
+  ///
+  /// In pl, this message translates to:
+  /// **'Podaj od 1 do 1440 minut'**
+  String get walkDurationInvalid;
+
+  /// No description provided for @poopScoreLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Skala Bristol'**
+  String get poopScoreLabel;
+
+  /// No description provided for @poopColorLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Kolor'**
+  String get poopColorLabel;
+
+  /// No description provided for @eventDeleted.
+  ///
+  /// In pl, this message translates to:
+  /// **'Usunięto wpis'**
+  String get eventDeleted;
+
+  /// No description provided for @eventNotFound.
+  ///
+  /// In pl, this message translates to:
+  /// **'Nie znaleziono wpisu.'**
+  String get eventNotFound;
+
+  /// No description provided for @editEventTitle.
+  ///
+  /// In pl, this message translates to:
+  /// **'Edycja wpisu'**
+  String get editEventTitle;
+
+  /// No description provided for @historyEmpty.
+  ///
+  /// In pl, this message translates to:
+  /// **'Brak wpisów.'**
+  String get historyEmpty;
+
+  /// No description provided for @historyFilterAll.
+  ///
+  /// In pl, this message translates to:
+  /// **'Wszystkie'**
+  String get historyFilterAll;
+
+  /// No description provided for @foodsEmpty.
+  ///
+  /// In pl, this message translates to:
+  /// **'Nie dodano jeszcze żadnej karmy.'**
+  String get foodsEmpty;
+
+  /// No description provided for @addFood.
+  ///
+  /// In pl, this message translates to:
+  /// **'Dodaj karmę'**
+  String get addFood;
+
+  /// No description provided for @editFood.
+  ///
+  /// In pl, this message translates to:
+  /// **'Edytuj karmę'**
+  String get editFood;
+
+  /// No description provided for @foodNameLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Nazwa'**
+  String get foodNameLabel;
+
+  /// No description provided for @foodBrandLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Marka (opcjonalnie)'**
+  String get foodBrandLabel;
+
+  /// No description provided for @foodActive.
+  ///
+  /// In pl, this message translates to:
+  /// **'W użyciu'**
+  String get foodActive;
+
+  /// No description provided for @foodArchivedHeader.
+  ///
+  /// In pl, this message translates to:
+  /// **'Nieużywane'**
+  String get foodArchivedHeader;
+
+  /// No description provided for @eventAuthorTime.
+  ///
+  /// In pl, this message translates to:
+  /// **'{time} · {author}'**
+  String eventAuthorTime(String time, String author);
 }
 
 class _AppLocalizationsDelegate

@@ -154,4 +154,195 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get inviteErrorOffline =>
       'Wygenerowanie kodu wymaga połączenia z internetem.';
+
+  @override
+  String get cancel => 'Anuluj';
+
+  @override
+  String get delete => 'Usuń';
+
+  @override
+  String get undo => 'Cofnij';
+
+  @override
+  String get eventMeal => 'Posiłek';
+
+  @override
+  String get eventPoop => 'Kupa';
+
+  @override
+  String get eventPee => 'Siku';
+
+  @override
+  String get eventWalk => 'Spacer';
+
+  @override
+  String get eventNote => 'Notatka';
+
+  @override
+  String get poopColorBrown => 'brązowa';
+
+  @override
+  String get poopColorDark => 'ciemna / czarna';
+
+  @override
+  String get poopColorYellow => 'żółta / pomarańczowa';
+
+  @override
+  String get poopColorGreen => 'zielona';
+
+  @override
+  String get poopColorGrey => 'szara / gliniasta';
+
+  @override
+  String get poopColorBloody => 'z krwią';
+
+  @override
+  String get bristol1 => 'twarde, oddzielne grudki';
+
+  @override
+  String get bristol2 => 'zbita, grudkowata';
+
+  @override
+  String get bristol3 => 'kształtna, z pęknięciami';
+
+  @override
+  String get bristol4 => 'gładka i miękka (norma)';
+
+  @override
+  String get bristol5 => 'miękkie kawałki';
+
+  @override
+  String get bristol6 => 'papkowata';
+
+  @override
+  String get bristol7 => 'wodnista';
+
+  @override
+  String gramsValue(int grams) {
+    return '$grams g';
+  }
+
+  @override
+  String minutesValue(int minutes) {
+    return '$minutes min';
+  }
+
+  @override
+  String bristolValue(int score) {
+    return 'Bristol $score';
+  }
+
+  @override
+  String get agoJustNow => 'przed chwilą';
+
+  @override
+  String agoMinutes(int minutes) {
+    return '$minutes min temu';
+  }
+
+  @override
+  String agoHours(int hours) {
+    return '$hours h temu';
+  }
+
+  @override
+  String agoDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days dni temu',
+      one: 'wczoraj',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get dayToday => 'Dziś';
+
+  @override
+  String get dayYesterday => 'Wczoraj';
+
+  @override
+  String get recentHeader => 'Ostatnio';
+
+  @override
+  String get recentNone => 'brak w ostatnich 7 dniach';
+
+  @override
+  String get todayTimelineHeader => 'Dzisiejsze wpisy';
+
+  @override
+  String get todayEmpty => 'Nic jeszcze dziś nie zapisano.';
+
+  @override
+  String get eventTimeLabel => 'Czas';
+
+  @override
+  String get eventNoteLabel => 'Notatka (opcjonalnie)';
+
+  @override
+  String get eventNoteRequired => 'Wpisz treść notatki';
+
+  @override
+  String get mealGramsLabel => 'Porcja w gramach';
+
+  @override
+  String get mealGramsInvalid => 'Podaj porcję od 1 do 5000 g';
+
+  @override
+  String get mealFoodLabel => 'Karma';
+
+  @override
+  String get walkDurationLabel => 'Czas spaceru w minutach';
+
+  @override
+  String get walkDurationInvalid => 'Podaj od 1 do 1440 minut';
+
+  @override
+  String get poopScoreLabel => 'Skala Bristol';
+
+  @override
+  String get poopColorLabel => 'Kolor';
+
+  @override
+  String get eventDeleted => 'Usunięto wpis';
+
+  @override
+  String get eventNotFound => 'Nie znaleziono wpisu.';
+
+  @override
+  String get editEventTitle => 'Edycja wpisu';
+
+  @override
+  String get historyEmpty => 'Brak wpisów.';
+
+  @override
+  String get historyFilterAll => 'Wszystkie';
+
+  @override
+  String get foodsEmpty => 'Nie dodano jeszcze żadnej karmy.';
+
+  @override
+  String get addFood => 'Dodaj karmę';
+
+  @override
+  String get editFood => 'Edytuj karmę';
+
+  @override
+  String get foodNameLabel => 'Nazwa';
+
+  @override
+  String get foodBrandLabel => 'Marka (opcjonalnie)';
+
+  @override
+  String get foodActive => 'W użyciu';
+
+  @override
+  String get foodArchivedHeader => 'Nieużywane';
+
+  @override
+  String eventAuthorTime(String time, String author) {
+    return '$time · $author';
+  }
 }

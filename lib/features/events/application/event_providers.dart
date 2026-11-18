@@ -70,7 +70,9 @@ Stream<DogEvent?> event(Ref ref, String id) {
 }
 
 /// Writes for the current dog. All work offline.
-@riverpod
+/// Kept alive: callbacks such as snackbar undo outlive the widgets that
+/// read it.
+@Riverpod(keepAlive: true)
 class EventController extends _$EventController {
   @override
   void build() {}

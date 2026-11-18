@@ -21,7 +21,9 @@ Stream<List<Food>> foods(Ref ref) {
       .watchAll(scope.householdId, scope.dogId);
 }
 
-@riverpod
+/// Kept alive: callbacks such as snackbar undo outlive the widgets that
+/// read it.
+@Riverpod(keepAlive: true)
 class FoodController extends _$FoodController {
   @override
   void build() {}

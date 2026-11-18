@@ -13,9 +13,7 @@
   "genericError": "Coś poszło nie tak.",
   "fieldRequired": "To pole jest wymagane",
   "save": "Zapisz",
-
   "splashError": "Nie udało się wczytać danych. Sprawdź połączenie i uruchom aplikację ponownie.",
-
   "onboardingHouseholdTitle": "Wspólny dom",
   "onboardingHouseholdIntro": "Dziennik psa prowadzicie razem w ramach jednego domu. Utwórz nowy albo dołącz kodem od domownika.",
   "createHouseholdHeader": "Utwórz nowy dom",
@@ -30,30 +28,145 @@
   "joinErrorExpired": "Kod wygasł. Poproś domownika o nowy.",
   "joinErrorOffline": "Brak połączenia z internetem.",
   "joinErrorDenied": "Nie udało się dołączyć. Poproś o nowy kod.",
-
   "onboardingDogTitle": "Dodaj psa",
   "dogNameLabel": "Imię",
   "dogBreedLabel": "Rasa (opcjonalnie)",
   "dogBirthDateLabel": "Data urodzenia (opcjonalnie)",
   "dogWeightLabel": "Waga startowa w kg (opcjonalnie)",
   "dogWeightInvalid": "Podaj wagę, np. 12,5",
-
   "settingsTitle": "Ustawienia",
   "settingsHousehold": "Dom i domownicy",
   "householdMembers": "Domownicy",
   "memberYou": "{name} (Ty)",
   "@memberYou": {
-    "placeholders": { "name": { "type": "String" } }
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   },
   "inviteHeader": "Zaproś domownika",
   "inviteDescription": "Kod jest ważny 24 godziny. Domownik wpisuje go po zalogowaniu się w aplikacji.",
   "inviteGenerate": "Wygeneruj kod",
   "inviteValidUntil": "Ważny do {date}",
   "@inviteValidUntil": {
-    "placeholders": { "date": { "type": "String" } }
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
   },
   "inviteCopy": "Kopiuj kod",
   "inviteCopied": "Skopiowano kod",
   "inviteRevoke": "Unieważnij",
-  "inviteErrorOffline": "Wygenerowanie kodu wymaga połączenia z internetem."
+  "inviteErrorOffline": "Wygenerowanie kodu wymaga połączenia z internetem.",
+  "cancel": "Anuluj",
+  "delete": "Usuń",
+  "undo": "Cofnij",
+  "eventMeal": "Posiłek",
+  "eventPoop": "Kupa",
+  "eventPee": "Siku",
+  "eventWalk": "Spacer",
+  "eventNote": "Notatka",
+  "poopColorBrown": "brązowa",
+  "poopColorDark": "ciemna / czarna",
+  "poopColorYellow": "żółta / pomarańczowa",
+  "poopColorGreen": "zielona",
+  "poopColorGrey": "szara / gliniasta",
+  "poopColorBloody": "z krwią",
+  "bristol1": "twarde, oddzielne grudki",
+  "bristol2": "zbita, grudkowata",
+  "bristol3": "kształtna, z pęknięciami",
+  "bristol4": "gładka i miękka (norma)",
+  "bristol5": "miękkie kawałki",
+  "bristol6": "papkowata",
+  "bristol7": "wodnista",
+  "gramsValue": "{grams} g",
+  "@gramsValue": {
+    "placeholders": {
+      "grams": {
+        "type": "int"
+      }
+    }
+  },
+  "minutesValue": "{minutes} min",
+  "@minutesValue": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "bristolValue": "Bristol {score}",
+  "@bristolValue": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "agoJustNow": "przed chwilą",
+  "agoMinutes": "{minutes} min temu",
+  "@agoMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "agoHours": "{hours} h temu",
+  "@agoHours": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "agoDays": "{days, plural, =1{wczoraj} other{{days} dni temu}}",
+  "@agoDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "dayToday": "Dziś",
+  "dayYesterday": "Wczoraj",
+  "recentHeader": "Ostatnio",
+  "recentNone": "brak w ostatnich 7 dniach",
+  "todayTimelineHeader": "Dzisiejsze wpisy",
+  "todayEmpty": "Nic jeszcze dziś nie zapisano.",
+  "eventTimeLabel": "Czas",
+  "eventNoteLabel": "Notatka (opcjonalnie)",
+  "eventNoteRequired": "Wpisz treść notatki",
+  "mealGramsLabel": "Porcja w gramach",
+  "mealGramsInvalid": "Podaj porcję od 1 do 5000 g",
+  "mealFoodLabel": "Karma",
+  "walkDurationLabel": "Czas spaceru w minutach",
+  "walkDurationInvalid": "Podaj od 1 do 1440 minut",
+  "poopScoreLabel": "Skala Bristol",
+  "poopColorLabel": "Kolor",
+  "eventDeleted": "Usunięto wpis",
+  "eventNotFound": "Nie znaleziono wpisu.",
+  "editEventTitle": "Edycja wpisu",
+  "historyEmpty": "Brak wpisów.",
+  "historyFilterAll": "Wszystkie",
+  "foodsEmpty": "Nie dodano jeszcze żadnej karmy.",
+  "addFood": "Dodaj karmę",
+  "editFood": "Edytuj karmę",
+  "foodNameLabel": "Nazwa",
+  "foodBrandLabel": "Marka (opcjonalnie)",
+  "foodActive": "W użyciu",
+  "foodArchivedHeader": "Nieużywane",
+  "eventAuthorTime": "{time} · {author}",
+  "@eventAuthorTime": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      },
+      "author": {
+        "type": "String"
+      }
+    }
+  }
 }
