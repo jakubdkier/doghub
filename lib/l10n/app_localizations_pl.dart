@@ -732,4 +732,33 @@ class AppLocalizationsPl extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String widgetFood(String stock) {
+    return 'Karma: $stock';
+  }
+
+  @override
+  String widgetHealthOverdue(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count terminów po terminie',
+      few: '$count terminy po terminie',
+      one: '1 termin po terminie',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String widgetHealthSoon(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count terminów wkrótce',
+      few: '$count terminy wkrótce',
+      one: '1 termin wkrótce',
+    );
+    return '$_temp0';
+  }
 }

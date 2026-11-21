@@ -228,11 +228,10 @@ class _FoodStockTile extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final scheme = Theme.of(context).colorScheme;
     final foods = ref.watch(foodsProvider).value ?? const <Food>[];
-    final active = foods.where((f) => f.active).toList();
-    final lastFoodId = latestOfType(recent, EventType.meal)?.foodId;
-    final food =
-        foods.where((f) => f.id == lastFoodId).firstOrNull ??
-        (active.length == 1 ? active.single : null);
+    final food = currentFood(
+      foods,
+      latestOfType(recent, EventType.meal)?.foodId,
+    );
     final stock = food == null ? null : ref.watch(stockProvider)?[food.id];
     final threshold = ref.watch(
       reminderSettingsControllerProvider.select((s) => s.foodThresholdKg),

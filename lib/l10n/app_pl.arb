@@ -431,5 +431,29 @@
         "type": "int"
       }
     }
+  },
+  "widgetFood": "Karma: {stock}",
+  "@widgetFood": {
+    "placeholders": {
+      "stock": {
+        "type": "String"
+      }
+    }
+  },
+  "widgetHealthOverdue": "{count, plural, =1{1 termin po terminie} few{{count} terminy po terminie} other{{count} terminów po terminie}}",
+  "@widgetHealthOverdue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "widgetHealthSoon": "{count, plural, =1{1 termin wkrótce} few{{count} terminy wkrótce} other{{count} terminów wkrótce}}",
+  "@widgetHealthSoon": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   }
 }

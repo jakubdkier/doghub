@@ -3,6 +3,7 @@ import 'package:material_ui/material_ui.dart';
 
 import '../core/config/app_config_provider.dart';
 import '../core/notifications/reminder_scheduler.dart';
+import '../features/home_widget/application/home_widget_sync.dart';
 import '../l10n/app_localizations.dart';
 import 'router.dart';
 import 'theme.dart';
@@ -15,6 +16,8 @@ class DogHubApp extends ConsumerWidget {
     final config = ref.watch(appConfigProvider);
     // Reschedules local reminders whenever their inputs change.
     ref.watch(reminderSyncProvider);
+    // Keeps the home screen widgets up to date.
+    ref.watch(homeWidgetSyncProvider);
     return MaterialApp.router(
       onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
       debugShowCheckedModeBanner: config.isDev,

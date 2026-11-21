@@ -5,6 +5,7 @@ import 'package:dog_app/core/config/app_config_provider.dart';
 import 'package:dog_app/core/firebase/firebase_providers.dart';
 import 'package:dog_app/core/notifications/local_notifications.dart';
 import 'package:dog_app/core/storage/preferences.dart';
+import 'package:dog_app/features/home_widget/data/home_widget_service.dart';
 import 'package:dog_app/features/auth/application/auth_providers.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -17,6 +18,7 @@ import 'package:material_ui/material_ui.dart'
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'fake_auth_repository.dart';
+import 'fake_home_widget.dart';
 import 'fake_notifications.dart';
 
 const testConfig = AppConfig(
@@ -35,6 +37,7 @@ Future<void> pumpApp(
   FakeAuthRepository auth, {
   FakeFirebaseFirestore? firestore,
   FakeLocalNotifications? notifications,
+  FakeHomeWidgetService? homeWidget,
   Map<String, Object> prefs = const {},
 }) async {
   Intl.defaultLocale = 'pl_PL';
@@ -52,6 +55,9 @@ Future<void> pumpApp(
         sharedPreferencesProvider.overrideWithValue(sharedPreferences),
         localNotificationsProvider.overrideWithValue(
           notifications ?? FakeLocalNotifications(),
+        ),
+        homeWidgetServiceProvider.overrideWithValue(
+          homeWidget ?? FakeHomeWidgetService(),
         ),
       ],
       child: const DogHubApp(),

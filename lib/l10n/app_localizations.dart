@@ -1299,6 +1299,24 @@ abstract class AppLocalizations {
   /// In pl, this message translates to:
   /// **'{count, plural, =1{1 termin wymaga uwagi} few{{count} terminy wymagają uwagi} other{{count} terminów wymaga uwagi}}'**
   String healthAttentionBanner(int count);
+
+  /// No description provided for @widgetFood.
+  ///
+  /// In pl, this message translates to:
+  /// **'Karma: {stock}'**
+  String widgetFood(String stock);
+
+  /// No description provided for @widgetHealthOverdue.
+  ///
+  /// In pl, this message translates to:
+  /// **'{count, plural, =1{1 termin po terminie} few{{count} terminy po terminie} other{{count} terminów po terminie}}'**
+  String widgetHealthOverdue(int count);
+
+  /// No description provided for @widgetHealthSoon.
+  ///
+  /// In pl, this message translates to:
+  /// **'{count, plural, =1{1 termin wkrótce} few{{count} terminy wkrótce} other{{count} terminów wkrótce}}'**
+  String widgetHealthSoon(int count);
 }
 
 class _AppLocalizationsDelegate

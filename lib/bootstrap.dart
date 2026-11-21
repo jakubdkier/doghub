@@ -17,6 +17,7 @@ import 'core/config/app_config.dart';
 import 'core/config/app_config_provider.dart';
 import 'core/notifications/local_notifications.dart';
 import 'core/storage/preferences.dart';
+import 'features/home_widget/data/home_widget_service.dart';
 
 Future<void> bootstrap(AppConfig config) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,6 +48,7 @@ Future<void> bootstrap(AppConfig config) async {
         appConfigProvider.overrideWithValue(config),
         sharedPreferencesProvider.overrideWithValue(prefs),
         localNotificationsProvider.overrideWithValue(notifications),
+        homeWidgetServiceProvider.overrideWithValue(PluginHomeWidgetService()),
       ],
       child: const DogHubApp(),
     ),

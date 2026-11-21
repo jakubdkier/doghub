@@ -11,6 +11,7 @@ import '../features/events/presentation/history_page.dart';
 import '../features/events/presentation/quick_add.dart';
 import '../features/events/presentation/today_page.dart';
 import '../core/notifications/local_notifications.dart';
+import '../features/home_widget/data/home_widget_service.dart';
 import '../features/food/presentation/food_detail_page.dart';
 import '../features/food/presentation/food_page.dart';
 import '../features/food/presentation/purchase_form_page.dart';
@@ -184,13 +185,19 @@ GoRouter router(Ref ref) {
     }
   }
 
+  // Taps on notifications and home screen widgets (also cold starts).
   final notifications = ref.read(localNotificationsProvider);
-  final taps = notifications.taps.listen(open);
-  ref.onDispose(taps.cancel);
-  unawaited(
-    notifications.launchRoute().then((route) {
-      if (route != null) open(route);
-    }),
-  );
+  final widgets = ref.read(homeWidgetServiceProvider);
+  for (final taps in [notifications.taps, widgets.taps]) {
+    final sub = taps.listen(open);
+    ref.onDispose(sub.cancel);
+  }
+  for (final launch in [notifications.launchRoute(), widgets.launchRoute()]) {
+    unawaited(
+      launch.then((route) {
+        if (route != null) open(route);
+      }),
+    );
+  }
   return router;
 }
