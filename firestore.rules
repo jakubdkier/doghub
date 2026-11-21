@@ -130,8 +130,12 @@ service cloud.firestore {
           allow read: if isMember(h);
           allow create: if isMember(h)
             && validWeight()
-            && request.resource.data.by == uid();
-          allow update: if isMember(h) && validWeight() && unchanged('by');
+            && request.resource.data.by == uid()
+            && request.resource.data.createdAt == request.time;
+          allow update: if isMember(h)
+            && validWeight()
+            && unchanged('by')
+            && unchanged('createdAt');
           allow delete: if false;
         }
 
@@ -209,7 +213,13 @@ service cloud.firestore {
 
         function validWeight() {
           let w = request.resource.data;
-          return w.kg is number && w.kg > 0 && w.kg < 150 && w.at is timestamp;
+          return w.keys().hasOnly(['kg', 'at', 'by', 'createdAt', 'deleted'])
+            && w.kg is number && w.kg > 0 && w.kg < 150
+            && w.at is timestamp
+            && w.at <= request.time + duration.value(1, 'h')
+            && w.by is string
+            // Optional for entries written before stage 5.
+            && (!('deleted' in w) || w.deleted is bool);
         }
 
         function validFood() {

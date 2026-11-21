@@ -347,13 +347,6 @@ describe('dogs and entries', () => {
     await assertFails(deleteDoc(doc(db(ALICE), `${dogPath}/d1`)));
   });
 
-  test('weight must be authored by the caller and plausible', async () => {
-    const w = (data) => setDoc(doc(db(ALICE), `${dogPath}/d1/weights/${Math.random()}`), data);
-    await assertSucceeds(w({ kg: 12.5, at: Timestamp.now(), by: ALICE }));
-    await assertFails(w({ kg: 12.5, at: Timestamp.now(), by: BOB }));
-    await assertFails(w({ kg: 0, at: Timestamp.now(), by: ALICE }));
-    await assertFails(w({ kg: 500, at: Timestamp.now(), by: ALICE }));
-  });
 
   test("partner edits an entry but its author stays", async () => {
     await addBob();
@@ -532,5 +525,60 @@ describe('purchases', () => {
     await assertSucceeds(updateDoc(p1, { deleted: true }));
     await assertFails(updateDoc(p1, { by: BOB }));
     await assertFails(deleteDoc(p1));
+  });
+});
+
+describe('weights', () => {
+  const weights = `${dogPath}/d1/weights`;
+  const w = (uid, data, id = 'w1') =>
+    setDoc(doc(db(uid), `${weights}/${id}`), {
+      kg: 12.5,
+      at: Timestamp.now(),
+      by: uid,
+      createdAt: serverTimestamp(),
+      deleted: false,
+      ...data,
+    });
+
+  test('member adds a plausible weight', async () => {
+    await assertSucceeds(w(ALICE, {}));
+    await assertSucceeds(w(ALICE, { kg: 3, at: hours(-24 * 30) }, 'w2'));
+  });
+
+  test('non-member cannot read or add weights', async () => {
+    await assertFails(getDocs(collection(db(EVE), weights)));
+    await assertFails(w(EVE, {}));
+  });
+
+  test('author and server time are enforced', async () => {
+    await assertFails(w(ALICE, { by: BOB }));
+    await assertFails(w(ALICE, { createdAt: Timestamp.now() }));
+  });
+
+  test('implausible or malformed weights are rejected', async () => {
+    await assertFails(w(ALICE, { kg: 0 }));
+    await assertFails(w(ALICE, { kg: 150 }));
+    await assertFails(w(ALICE, { kg: '12' }));
+    await assertFails(w(ALICE, { at: hours(3) }));
+    await assertFails(w(ALICE, { deleted: 'no' }));
+    await assertFails(w(ALICE, { note: 'po spacerze' }));
+  });
+
+  test('partner edits and soft-deletes; author stays; no hard delete', async () => {
+    await addBob();
+    await assertSucceeds(w(ALICE, {}));
+    const w1 = doc(db(BOB), `${weights}/w1`);
+    await assertSucceeds(updateDoc(w1, { kg: 12.7, at: Timestamp.now() }));
+    await assertSucceeds(updateDoc(w1, { deleted: true }));
+    await assertFails(updateDoc(w1, { by: BOB }));
+    await assertFails(updateDoc(w1, { createdAt: Timestamp.now() }));
+    await assertFails(deleteDoc(w1));
+  });
+
+  test('a pre-stage-5 entry without createdAt/deleted can be soft-deleted', async () => {
+    await env.withSecurityRulesDisabled((ctx) =>
+      setDoc(doc(ctx.firestore(), `${weights}/old`), { kg: 12, at: Timestamp.now(), by: ALICE }),
+    );
+    await assertSucceeds(updateDoc(doc(db(ALICE), `${weights}/old`), { deleted: true }));
   });
 });
