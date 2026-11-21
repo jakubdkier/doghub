@@ -22,10 +22,15 @@ void main() {
     expect(parseWeightKg('12,44'), 12.4);
   });
 
-  test('weighDay keeps the date at noon', () {
+  test('weighDay stores noon, but never in the future', () {
+    final evening = DateTime(2026, 11, 21, 20);
+    final morning = DateTime(2026, 11, 21, 8, 56);
     expect(
-      weighDay(DateTime(2026, 11, 21, 23, 59)),
-      DateTime(2026, 11, 21, 12),
+      weighDay(DateTime(2026, 11, 20, 23, 59), now: evening),
+      DateTime(2026, 11, 20, 12),
     );
+    expect(weighDay(morning, now: evening), DateTime(2026, 11, 21, 12));
+    // Before noon today: the current time (rules reject future times).
+    expect(weighDay(morning, now: morning), morning);
   });
 }

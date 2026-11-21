@@ -29,7 +29,13 @@ abstract class WeightEntry with _$WeightEntry {
 }
 
 /// Measurements are per day; noon keeps the date stable across time zones.
-DateTime weighDay(DateTime d) => DateTime(d.year, d.month, d.day, 12);
+/// Never later than [now] (default: the current time), since the rules
+/// reject future times: a measurement today before noon keeps [now].
+DateTime weighDay(DateTime d, {DateTime? now}) {
+  final noon = DateTime(d.year, d.month, d.day, 12);
+  final current = now ?? DateTime.now();
+  return noon.isAfter(current) ? current : noon;
+}
 
 /// Parses user input like "12,5" or "12.5 kg". Returns null if not a
 /// plausible dog weight (0 < kg < 150, same bounds as firestore.rules).

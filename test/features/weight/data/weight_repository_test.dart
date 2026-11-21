@@ -14,16 +14,27 @@ void main() {
     repo = WeightRepository(db);
   });
 
+  test('a measurement today is never stored in the future', () async {
+    final id = repo.add(
+      'h1',
+      'd1',
+      WeightEntry(kg: 12.5, at: DateTime.now(), by: 'u1'),
+    );
+    await pumpEventQueue();
+    final at = ((await db.doc('$path/$id').get())['at'] as Timestamp).toDate();
+    expect(at.isAfter(DateTime.now()), isFalse);
+  });
+
   test('add stores the day at noon with rule-compliant keys', () async {
     final id = repo.add(
       'h1',
       'd1',
-      WeightEntry(kg: 12.5, at: DateTime(2026, 11, 21, 8, 15), by: 'u1'),
+      WeightEntry(kg: 12.5, at: DateTime(2026, 11, 20, 8, 15), by: 'u1'),
     );
     await pumpEventQueue();
     final raw = (await db.doc('$path/$id').get()).data()!;
     expect(raw.keys.toSet(), {'kg', 'at', 'by', 'createdAt', 'deleted'});
-    expect((raw['at'] as Timestamp).toDate(), DateTime(2026, 11, 21, 12));
+    expect((raw['at'] as Timestamp).toDate(), DateTime(2026, 11, 20, 12));
   });
 
   test(

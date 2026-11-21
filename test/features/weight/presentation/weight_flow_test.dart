@@ -69,7 +69,11 @@ void main() {
     final saved = (await db.collection(weights).get()).docs.single.data();
     expect(saved['kg'], 12.5);
     expect(saved['by'], 'u1');
-    expect((saved['at'] as Timestamp).toDate().hour, 12);
+    // Today: noon, or the current time if it is still before noon.
+    final at = (saved['at'] as Timestamp).toDate();
+    final now = DateTime.now();
+    expect(at.isAfter(now), isFalse);
+    expect(at.day, now.day);
   });
 
   testWidgets('summary, change, chart ranges and edit', (tester) async {
