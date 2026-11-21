@@ -8,11 +8,15 @@ abstract class ReminderSettings with _$ReminderSettings {
   static const minThresholdKg = 0.5;
   static const maxThresholdKg = 10.0;
 
+  /// "Zważ psa" comes this long after the last measurement.
+  static const weighIntervalDays = 30;
+
   const factory ReminderSettings({
     @Default(true) bool foodEnabled,
 
     /// Remind when a food's stock drops to this many kg.
     @Default(2.0) double foodThresholdKg,
+    @Default(true) bool weighEnabled,
     @Default(18) int hour,
     @Default(0) int minute,
   }) = _ReminderSettings;

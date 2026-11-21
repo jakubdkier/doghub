@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 mixin _$ReminderSettings {
 
  bool get foodEnabled;/// Remind when a food's stock drops to this many kg.
- double get foodThresholdKg; int get hour; int get minute;
+ double get foodThresholdKg; bool get weighEnabled; int get hour; int get minute;
 /// Create a copy of ReminderSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,20 +28,20 @@ $ReminderSettingsCopyWith<ReminderSettings> get copyWith => _$ReminderSettingsCo
 @override
 bool operator ==(Object other) {
   final _this = this as ReminderSettings;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReminderSettings&&(identical(other.foodEnabled, _this.foodEnabled) || other.foodEnabled == _this.foodEnabled)&&(identical(other.foodThresholdKg, _this.foodThresholdKg) || other.foodThresholdKg == _this.foodThresholdKg)&&(identical(other.hour, _this.hour) || other.hour == _this.hour)&&(identical(other.minute, _this.minute) || other.minute == _this.minute));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReminderSettings&&(identical(other.foodEnabled, _this.foodEnabled) || other.foodEnabled == _this.foodEnabled)&&(identical(other.foodThresholdKg, _this.foodThresholdKg) || other.foodThresholdKg == _this.foodThresholdKg)&&(identical(other.weighEnabled, _this.weighEnabled) || other.weighEnabled == _this.weighEnabled)&&(identical(other.hour, _this.hour) || other.hour == _this.hour)&&(identical(other.minute, _this.minute) || other.minute == _this.minute));
 }
 
 
 @override
 int get hashCode {
   final _this = this as ReminderSettings;
-  return Object.hash(runtimeType,_this.foodEnabled,_this.foodThresholdKg,_this.hour,_this.minute);
+  return Object.hash(runtimeType,_this.foodEnabled,_this.foodThresholdKg,_this.weighEnabled,_this.hour,_this.minute);
 }
 
 @override
 String toString() {
   final _this = this as ReminderSettings;
-  return 'ReminderSettings(foodEnabled: ${_this.foodEnabled}, foodThresholdKg: ${_this.foodThresholdKg}, hour: ${_this.hour}, minute: ${_this.minute})';
+  return 'ReminderSettings(foodEnabled: ${_this.foodEnabled}, foodThresholdKg: ${_this.foodThresholdKg}, weighEnabled: ${_this.weighEnabled}, hour: ${_this.hour}, minute: ${_this.minute})';
 }
 
 
@@ -52,7 +52,7 @@ abstract mixin class $ReminderSettingsCopyWith<$Res>  {
   factory $ReminderSettingsCopyWith(ReminderSettings value, $Res Function(ReminderSettings) _then) = _$ReminderSettingsCopyWithImpl;
 @useResult
 $Res call({
- bool foodEnabled, double foodThresholdKg, int hour, int minute
+ bool foodEnabled, double foodThresholdKg, bool weighEnabled, int hour, int minute
 });
 
 
@@ -69,11 +69,12 @@ class _$ReminderSettingsCopyWithImpl<$Res>
 
 /// Create a copy of ReminderSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? foodEnabled = null,Object? foodThresholdKg = null,Object? hour = null,Object? minute = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? foodEnabled = null,Object? foodThresholdKg = null,Object? weighEnabled = null,Object? hour = null,Object? minute = null,}) {
   return _then(ReminderSettings(
 foodEnabled: null == foodEnabled ? _self.foodEnabled : foodEnabled // ignore: cast_nullable_to_non_nullable
 as bool,foodThresholdKg: null == foodThresholdKg ? _self.foodThresholdKg : foodThresholdKg // ignore: cast_nullable_to_non_nullable
-as double,hour: null == hour ? _self.hour : hour // ignore: cast_nullable_to_non_nullable
+as double,weighEnabled: null == weighEnabled ? _self.weighEnabled : weighEnabled // ignore: cast_nullable_to_non_nullable
+as bool,hour: null == hour ? _self.hour : hour // ignore: cast_nullable_to_non_nullable
 as int,minute: null == minute ? _self.minute : minute // ignore: cast_nullable_to_non_nullable
 as int,
   ));
@@ -160,10 +161,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool foodEnabled,  double foodThresholdKg,  int hour,  int minute)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool foodEnabled,  double foodThresholdKg,  bool weighEnabled,  int hour,  int minute)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ReminderSettings() when $default != null:
-return $default(_that.foodEnabled,_that.foodThresholdKg,_that.hour,_that.minute);case _:
+return $default(_that.foodEnabled,_that.foodThresholdKg,_that.weighEnabled,_that.hour,_that.minute);case _:
   return orElse();
 
 }
@@ -181,10 +182,10 @@ return $default(_that.foodEnabled,_that.foodThresholdKg,_that.hour,_that.minute)
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool foodEnabled,  double foodThresholdKg,  int hour,  int minute)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool foodEnabled,  double foodThresholdKg,  bool weighEnabled,  int hour,  int minute)  $default,) {final _that = this;
 switch (_that) {
 case _ReminderSettings():
-return $default(_that.foodEnabled,_that.foodThresholdKg,_that.hour,_that.minute);case _:
+return $default(_that.foodEnabled,_that.foodThresholdKg,_that.weighEnabled,_that.hour,_that.minute);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -201,10 +202,10 @@ return $default(_that.foodEnabled,_that.foodThresholdKg,_that.hour,_that.minute)
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool foodEnabled,  double foodThresholdKg,  int hour,  int minute)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool foodEnabled,  double foodThresholdKg,  bool weighEnabled,  int hour,  int minute)?  $default,) {final _that = this;
 switch (_that) {
 case _ReminderSettings() when $default != null:
-return $default(_that.foodEnabled,_that.foodThresholdKg,_that.hour,_that.minute);case _:
+return $default(_that.foodEnabled,_that.foodThresholdKg,_that.weighEnabled,_that.hour,_that.minute);case _:
   return null;
 
 }
@@ -216,12 +217,13 @@ return $default(_that.foodEnabled,_that.foodThresholdKg,_that.hour,_that.minute)
 
 
 class _ReminderSettings implements ReminderSettings {
-  const _ReminderSettings({this.foodEnabled = true, this.foodThresholdKg = 2.0, this.hour = 18, this.minute = 0});
+  const _ReminderSettings({this.foodEnabled = true, this.foodThresholdKg = 2.0, this.weighEnabled = true, this.hour = 18, this.minute = 0});
   
 
 @override@JsonKey() final  bool foodEnabled;
 /// Remind when a food's stock drops to this many kg.
 @override@JsonKey() final  double foodThresholdKg;
+@override@JsonKey() final  bool weighEnabled;
 @override@JsonKey() final  int hour;
 @override@JsonKey() final  int minute;
 
@@ -235,18 +237,18 @@ _$ReminderSettingsCopyWith<_ReminderSettings> get copyWith => __$ReminderSetting
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReminderSettings&&(identical(other.foodEnabled, foodEnabled) || other.foodEnabled == foodEnabled)&&(identical(other.foodThresholdKg, foodThresholdKg) || other.foodThresholdKg == foodThresholdKg)&&(identical(other.hour, hour) || other.hour == hour)&&(identical(other.minute, minute) || other.minute == minute));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReminderSettings&&(identical(other.foodEnabled, foodEnabled) || other.foodEnabled == foodEnabled)&&(identical(other.foodThresholdKg, foodThresholdKg) || other.foodThresholdKg == foodThresholdKg)&&(identical(other.weighEnabled, weighEnabled) || other.weighEnabled == weighEnabled)&&(identical(other.hour, hour) || other.hour == hour)&&(identical(other.minute, minute) || other.minute == minute));
 }
 
 
 @override
 int get hashCode {
-    return Object.hash(runtimeType,foodEnabled,foodThresholdKg,hour,minute);
+    return Object.hash(runtimeType,foodEnabled,foodThresholdKg,weighEnabled,hour,minute);
 }
 
 @override
 String toString() {
-    return 'ReminderSettings(foodEnabled: $foodEnabled, foodThresholdKg: $foodThresholdKg, hour: $hour, minute: $minute)';
+    return 'ReminderSettings(foodEnabled: $foodEnabled, foodThresholdKg: $foodThresholdKg, weighEnabled: $weighEnabled, hour: $hour, minute: $minute)';
 }
 
 
@@ -257,7 +259,7 @@ abstract mixin class _$ReminderSettingsCopyWith<$Res> implements $ReminderSettin
   factory _$ReminderSettingsCopyWith(_ReminderSettings value, $Res Function(_ReminderSettings) _then) = __$ReminderSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- bool foodEnabled, double foodThresholdKg, int hour, int minute
+ bool foodEnabled, double foodThresholdKg, bool weighEnabled, int hour, int minute
 });
 
 
@@ -274,11 +276,12 @@ class __$ReminderSettingsCopyWithImpl<$Res>
 
 /// Create a copy of ReminderSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? foodEnabled = null,Object? foodThresholdKg = null,Object? hour = null,Object? minute = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? foodEnabled = null,Object? foodThresholdKg = null,Object? weighEnabled = null,Object? hour = null,Object? minute = null,}) {
   return _then(_ReminderSettings(
 foodEnabled: null == foodEnabled ? _self.foodEnabled : foodEnabled // ignore: cast_nullable_to_non_nullable
 as bool,foodThresholdKg: null == foodThresholdKg ? _self.foodThresholdKg : foodThresholdKg // ignore: cast_nullable_to_non_nullable
-as double,hour: null == hour ? _self.hour : hour // ignore: cast_nullable_to_non_nullable
+as double,weighEnabled: null == weighEnabled ? _self.weighEnabled : weighEnabled // ignore: cast_nullable_to_non_nullable
+as bool,hour: null == hour ? _self.hour : hour // ignore: cast_nullable_to_non_nullable
 as int,minute: null == minute ? _self.minute : minute // ignore: cast_nullable_to_non_nullable
 as int,
   ));

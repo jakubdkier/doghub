@@ -11,18 +11,27 @@ CollectionReference<WeightEntry> weightsRef(
 ) => db
     .collection(FirestorePaths.weights(householdId, dogId))
     .withConverter(
-      fromFirestore: (snap, _) {
-        final data = snap.data()!;
-        return WeightEntry(
-          id: snap.id,
-          kg: (data['kg'] as num).toDouble(),
-          at: dateFromFirestore(data['at']) ?? DateTime.now(),
-          by: data['by'] as String,
-        );
-      },
-      toFirestore: (w, _) => {
-        'kg': w.kg,
-        'at': dateToFirestore(w.at),
-        'by': w.by,
-      },
+      fromFirestore: (snap, _) => weightFromFirestore(snap),
+      toFirestore: (w, _) => weightToFirestoreCreate(w),
     );
+
+WeightEntry weightFromFirestore(DocumentSnapshot<Map<String, dynamic>> snap) {
+  final data = snap.data()!;
+  return WeightEntry(
+    id: snap.id,
+    kg: (data['kg'] as num).toDouble(),
+    at: dateFromFirestore(data['at']) ?? DateTime.now(),
+    by: data['by'] as String? ?? '',
+    createdAt: dateFromFirestore(data['createdAt']),
+    deleted: data['deleted'] as bool? ?? false,
+  );
+}
+
+/// Must match `validWeight()` in firestore.rules.
+Map<String, Object?> weightToFirestoreCreate(WeightEntry w) => {
+  'kg': w.kg,
+  'at': dateToFirestore(weighDay(w.at)),
+  'by': w.by,
+  'createdAt': FieldValue.serverTimestamp(),
+  'deleted': false,
+};
