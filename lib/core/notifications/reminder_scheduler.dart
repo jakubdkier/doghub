@@ -36,6 +36,7 @@ class PlannedReminder {
     required this.body,
     required this.at,
     required this.route,
+    this.exact = false,
   });
 
   final int id;
@@ -44,9 +45,13 @@ class PlannedReminder {
   final DateTime at;
   final String route;
 
+  /// Needs the exact minute (medication doses).
+  final bool exact;
+
   @override
   bool operator ==(Object other) =>
       other is PlannedReminder &&
+      other.exact == exact &&
       other.id == id &&
       other.title == title &&
       other.body == body &&
@@ -54,7 +59,7 @@ class PlannedReminder {
       other.route == route;
 
   @override
-  int get hashCode => Object.hash(id, title, body, at, route);
+  int get hashCode => Object.hash(id, title, body, at, route, exact);
 }
 
 /// Replaces all scheduled notifications with the given plan.
@@ -77,6 +82,7 @@ class ReminderScheduler {
               body: r.body,
               at: r.at,
               route: r.route,
+              exact: r.exact,
             );
           }
         } catch (e, st) {
@@ -212,6 +218,7 @@ List<PlannedReminder>? reminderPlan(Ref ref) {
         ),
         at: m.slot,
         route: Routes.today,
+        exact: true,
       ),
   ];
 }

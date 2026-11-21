@@ -12,6 +12,10 @@ abstract interface class LocalNotifications {
   /// Asks for the Android 13+ permission; true if granted.
   Future<bool> requestPermission();
 
+  /// Opens the system screen for exact alarms (Android 14+) unless
+  /// already allowed; true if exact alarms can be scheduled now.
+  Future<bool> requestExactPermission();
+
   Future<void> cancelAll();
 
   Future<void> schedule({
@@ -20,6 +24,9 @@ abstract interface class LocalNotifications {
     required String body,
     required DateTime at,
     required String route,
+
+    /// At the exact minute when allowed; otherwise Android may delay it.
+    bool exact = false,
   });
 
   /// Route of the notification that cold-started the app, if any.
@@ -37,6 +44,8 @@ class NoopLocalNotifications implements LocalNotifications {
   @override
   Future<bool> requestPermission() async => false;
   @override
+  Future<bool> requestExactPermission() async => false;
+  @override
   Future<void> cancelAll() async {}
   @override
   Future<void> schedule({
@@ -45,6 +54,7 @@ class NoopLocalNotifications implements LocalNotifications {
     required String body,
     required DateTime at,
     required String route,
+    bool exact = false,
   }) async {}
   @override
   Future<String?> launchRoute() async => null;
@@ -91,6 +101,14 @@ class PluginLocalNotifications implements LocalNotifications {
       await _android?.requestNotificationsPermission() ?? false;
 
   @override
+  Future<bool> requestExactPermission() async {
+    final android = _android;
+    if (android == null) return false;
+    if (await android.canScheduleExactNotifications() ?? false) return true;
+    return await android.requestExactAlarmsPermission() ?? false;
+  }
+
+  @override
   Future<void> cancelAll() => _plugin.cancelAll();
 
   @override
@@ -100,7 +118,10 @@ class PluginLocalNotifications implements LocalNotifications {
     required String body,
     required DateTime at,
     required String route,
+    bool exact = false,
   }) async {
+    final canExact =
+        exact && (await _android?.canScheduleExactNotifications() ?? false);
     try {
       await _plugin.zonedSchedule(
         id: id,
@@ -108,8 +129,10 @@ class PluginLocalNotifications implements LocalNotifications {
         body: body,
         scheduledDate: tz.TZDateTime.from(at, tz.local),
         notificationDetails: const NotificationDetails(android: _channel),
-        // Inexact: no exact-alarm permission needed; may arrive a bit late.
-        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+        // Inexact needs no permission but may arrive up to ~1 h late.
+        androidScheduleMode: canExact
+            ? AndroidScheduleMode.exactAllowWhileIdle
+            : AndroidScheduleMode.inexactAllowWhileIdle,
         payload: route,
       );
     } catch (e, st) {

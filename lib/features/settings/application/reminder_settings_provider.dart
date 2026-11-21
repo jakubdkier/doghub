@@ -16,6 +16,7 @@ abstract final class _Keys {
   static const hour = 'reminders.hour';
   static const minute = 'reminders.minute';
   static const permissionAsked = 'reminders.permissionAsked';
+  static const exactAsked = 'reminders.exactAsked';
 }
 
 /// Per-device reminder settings stored in shared preferences.
@@ -60,7 +61,10 @@ class ReminderSettingsController extends _$ReminderSettingsController {
   void setMedsEnabled(bool enabled) {
     state = state.copyWith(medsEnabled: enabled);
     ref.read(sharedPreferencesProvider).setBool(_Keys.medsEnabled, enabled);
-    if (enabled) ensurePermission(force: true);
+    if (enabled) {
+      ensurePermission(force: true);
+      ensureExactPermission(force: true);
+    }
   }
 
   void setHealthDaysBefore(int days) {
@@ -97,5 +101,14 @@ class ReminderSettingsController extends _$ReminderSettingsController {
     if (!force && (prefs.getBool(_Keys.permissionAsked) ?? false)) return;
     await prefs.setBool(_Keys.permissionAsked, true);
     await ref.read(localNotificationsProvider).requestPermission();
+  }
+
+  /// Asks once (e.g. when the first med is saved) to allow exact alarms,
+  /// so dose reminders come on the minute; [force] asks again.
+  Future<void> ensureExactPermission({bool force = false}) async {
+    final prefs = ref.read(sharedPreferencesProvider);
+    if (!force && (prefs.getBool(_Keys.exactAsked) ?? false)) return;
+    await prefs.setBool(_Keys.exactAsked, true);
+    await ref.read(localNotificationsProvider).requestExactPermission();
   }
 }

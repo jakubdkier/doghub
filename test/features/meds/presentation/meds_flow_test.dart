@@ -61,7 +61,13 @@ Future<void> tapVisible(WidgetTester tester, Finder finder) async {
 void main() {
   testWidgets('add a med from Health; it shows up on Today', (tester) async {
     final db = await seededFirestore();
-    await pumpApp(tester, signedIn(), firestore: db);
+    final notifications = FakeLocalNotifications();
+    await pumpApp(
+      tester,
+      signedIn(),
+      firestore: db,
+      notifications: notifications,
+    );
 
     await tapTab(tester, 'Zdrowie');
     await tester.scrollUntilVisible(
@@ -91,6 +97,8 @@ void main() {
     await tester.enterText(find.byKey(const Key('medDose')), '1 tabletka');
     await tapVisible(tester, find.byKey(const Key('medSave')));
 
+    // Dose reminders need exact alarms: asked once with the first med.
+    expect(notifications.exactPermissionRequests, 1);
     final med = (await db.collection('$dog/meds').get()).docs.single.data();
     expect(med['name'], 'Magnez');
     expect(med['times'], ['08:00']);
@@ -124,6 +132,10 @@ void main() {
     ];
     expect(medTimes(), contains(evening));
     expect(notifications.scheduled.first.body, contains('1 tabletka'));
+    expect(
+      notifications.scheduled.where((n) => n.title.startsWith('Czas na lek')),
+      everyElement(predicate<ScheduledNotification>((n) => n.exact)),
+    );
     expect(widget.last!.medsText, 'Leki: 0/2 dziś');
     expect(widget.last!.medsMissed, isTrue);
 

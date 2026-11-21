@@ -8,12 +8,14 @@ typedef ScheduledNotification = ({
   String body,
   DateTime at,
   String route,
+  bool exact,
 });
 
 class FakeLocalNotifications implements LocalNotifications {
   final scheduled = <ScheduledNotification>[];
   final _taps = StreamController<String>.broadcast();
   int permissionRequests = 0;
+  int exactPermissionRequests = 0;
   String? launch;
 
   void tap(String route) => _taps.add(route);
@@ -21,6 +23,12 @@ class FakeLocalNotifications implements LocalNotifications {
   @override
   Future<bool> requestPermission() async {
     permissionRequests++;
+    return true;
+  }
+
+  @override
+  Future<bool> requestExactPermission() async {
+    exactPermissionRequests++;
     return true;
   }
 
@@ -34,8 +42,15 @@ class FakeLocalNotifications implements LocalNotifications {
     required String body,
     required DateTime at,
     required String route,
-  }) async =>
-      scheduled.add((id: id, title: title, body: body, at: at, route: route));
+    bool exact = false,
+  }) async => scheduled.add((
+    id: id,
+    title: title,
+    body: body,
+    at: at,
+    route: route,
+    exact: exact,
+  ));
 
   @override
   Future<String?> launchRoute() async => launch;

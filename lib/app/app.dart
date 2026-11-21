@@ -8,11 +8,29 @@ import '../l10n/app_localizations.dart';
 import 'router.dart';
 import 'theme.dart';
 
-class DogHubApp extends ConsumerWidget {
+class DogHubApp extends ConsumerStatefulWidget {
   const DogHubApp({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<DogHubApp> createState() => _DogHubAppState();
+}
+
+class _DogHubAppState extends ConsumerState<DogHubApp> {
+  // Back from system settings (e.g. exact alarms allowed) or a new day:
+  // recompute and reschedule reminders.
+  late final _lifecycle = AppLifecycleListener(
+    onResume: () => ref.invalidate(reminderPlanProvider),
+  );
+
+  @override
+  void dispose() {
+    _lifecycle.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    _lifecycle;
     final config = ref.watch(appConfigProvider);
     // Reschedules local reminders whenever their inputs change.
     ref.watch(reminderSyncProvider);

@@ -8,6 +8,7 @@ import '../../../core/utils/clock.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../events/domain/event_timeline.dart';
 import '../../household/application/household_providers.dart';
+import '../../settings/application/reminder_settings_provider.dart';
 import '../application/med_providers.dart';
 import '../domain/med.dart';
 import '../domain/med_dose.dart';
@@ -119,6 +120,9 @@ class _MedFormState extends ConsumerState<_MedForm> {
             note: note.isEmpty ? null : note,
           ),
         );
+    // Dose reminders need exact times; ask for both permissions once.
+    final settings = ref.read(reminderSettingsControllerProvider.notifier);
+    settings.ensurePermission().then((_) => settings.ensureExactPermission());
     context.pop();
   }
 
