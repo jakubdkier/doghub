@@ -16,6 +16,9 @@ abstract final class FirestorePaths {
   static String foods(String householdId, String dogId) =>
       '${dog(householdId, dogId)}/foods';
 
+  static String purchases(String householdId, String dogId) =>
+      '${dog(householdId, dogId)}/purchases';
+
   static const invites = 'invites';
   static String invite(String code) => '$invites/$code';
 }

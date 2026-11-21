@@ -2,12 +2,16 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'food.freezed.dart';
 
+/// How the dog takes to a food. Stored as [name] (see firestore.rules).
+enum FoodRating { good, neutral, bad }
+
 @freezed
 abstract class Food with _$Food {
   const factory Food({
     required String id,
     required String name,
     String? brand,
+    FoodRating? rating,
     @Default(true) bool active,
 
     /// Null until the server timestamp is synced.

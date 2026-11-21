@@ -42,6 +42,7 @@ class FoodRepository {
     _db.doc('${FirestorePaths.foods(householdId, dogId)}/${food.id}').update({
       'name': food.name,
       'brand': _blankToNull(food.brand) ?? FieldValue.delete(),
+      'rating': food.rating?.name ?? FieldValue.delete(),
       'active': food.active,
     }),
     'update food',
@@ -57,6 +58,7 @@ Food foodFromFirestore(DocumentSnapshot<Map<String, dynamic>> snap) {
     id: snap.id,
     name: data['name'] as String? ?? '',
     brand: data['brand'] as String?,
+    rating: FoodRating.values.asNameMap()[data['rating']],
     active: data['active'] as bool? ?? true,
     createdAt: dateFromFirestore(data['createdAt']),
   );
@@ -66,6 +68,7 @@ Food foodFromFirestore(DocumentSnapshot<Map<String, dynamic>> snap) {
 Map<String, Object?> foodToFirestoreCreate(Food food) => {
   'name': food.name.trim(),
   'brand': ?_blankToNull(food.brand),
+  'rating': ?food.rating?.name,
   'active': food.active,
   'createdAt': FieldValue.serverTimestamp(),
 };

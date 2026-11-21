@@ -1,4 +1,5 @@
 import 'package:dog_app/features/food/data/food_repository.dart';
+import 'package:dog_app/features/food/domain/food.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -28,11 +29,18 @@ void main() {
     await pumpEventQueue();
     final food = (await repo.watchAll('h1', 'd1').first).single;
 
-    repo.update('h1', 'd1', food.copyWith(brand: null, active: false));
+    repo.update(
+      'h1',
+      'd1',
+      food.copyWith(brand: null, active: false, rating: FoodRating.bad),
+    );
     await pumpEventQueue();
 
     final raw = (await db.doc('households/h1/dogs/d1/foods/$id').get()).data()!;
     expect(raw.containsKey('brand'), isFalse);
+    expect(raw['rating'], 'bad');
+    final updated = (await repo.watchAll('h1', 'd1').first).single;
+    expect(updated.rating, FoodRating.bad);
     expect(raw['active'], false);
   });
 }

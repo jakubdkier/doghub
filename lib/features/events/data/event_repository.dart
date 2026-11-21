@@ -35,6 +35,19 @@ class EventRepository {
         ],
       );
 
+  /// All non-deleted meals (for food stock). Equality filter only, so no
+  /// composite index is needed.
+  Stream<List<DogEvent>> watchMeals(String householdId, String dogId) =>
+      _events(householdId, dogId)
+          .where('type', isEqualTo: EventType.meal.name)
+          .snapshots()
+          .map(
+            (s) => [
+              for (final d in s.docs)
+                if (!d.data().deleted) d.data(),
+            ],
+          );
+
   /// History page: newest first, optionally filtered by type. Deleted
   /// entries are dropped after the limit is applied, so [EventPage.hasMore]
   /// reflects the raw query.
