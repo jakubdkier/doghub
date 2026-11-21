@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_background"
+    android:clipToOutline="true"
+    android:orientation="horizontal"
+    android:padding="6dp">
+
+        <LinearLayout
+            android:id="@+id/widget_btn_meal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/widget_button"
+            android:contentDescription="@string/widget_meal"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:text="🍽"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:maxLines="1"
+                android:text="@string/widget_meal"
+                android:textColor="@color/widget_text"
+                android:textSize="11sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/widget_btn_poop"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/widget_button"
+            android:contentDescription="@string/widget_poop"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:text="💩"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:maxLines="1"
+                android:text="@string/widget_poop"
+                android:textColor="@color/widget_text"
+                android:textSize="11sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/widget_btn_walk"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/widget_button"
+            android:contentDescription="@string/widget_walk"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:text="🦮"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:maxLines="1"
+                android:text="@string/widget_walk"
+                android:textColor="@color/widget_text"
+                android:textSize="11sp" />
+        </LinearLayout>
+</LinearLayout>

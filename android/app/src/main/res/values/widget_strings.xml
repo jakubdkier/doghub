@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_large_description">Ostatnie wpisy, karma, terminy i szybkie dodawanie</string>
+    <string name="widget_small_description">Szybkie dodawanie: posiłek, kupa, spacer</string>
+    <string name="widget_open_app">Otwórz DogHub, żeby zobaczyć dane psa</string>
+    <string name="widget_meal">Posiłek</string>
+    <string name="widget_poop">Kupa</string>
+    <string name="widget_pee">Siku</string>
+    <string name="widget_walk">Spacer</string>
+    <string name="widget_note">Notatka</string>
+    <string name="widget_none">—</string>
+    <string name="widget_just_now">przed chwilą</string>
+    <string name="widget_minutes_ago">%d min temu</string>
+    <string name="widget_hours_ago">%d h temu</string>
+    <string name="widget_yesterday">wczoraj</string>
+    <string name="widget_days_ago">%d dni temu</string>
+</resources>

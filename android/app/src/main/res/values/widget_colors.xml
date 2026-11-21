@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fallback below Android 12; values-v31 uses the system (Material You) palette. -->
+<resources>
+    <color name="widget_background">#FFF8F4F1</color>
+    <color name="widget_button">#FFEADDD7</color>
+    <color name="widget_text">#FF201A18</color>
+    <color name="widget_text_secondary">#FF53433E</color>
+    <color name="widget_alert">#FFB3261E</color>
+</resources>
