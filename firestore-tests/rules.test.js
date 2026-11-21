@@ -476,3 +476,61 @@ describe('foods', () => {
     await assertFails(deleteDoc(doc(db(ALICE), `${foods}/f1`)));
   });
 });
+
+describe('food ratings', () => {
+  const f1 = `${dogPath}/d1/foods/f1`;
+
+  test('rating is one of good/neutral/bad and can be cleared', async () => {
+    await assertSucceeds(updateDoc(doc(db(ALICE), f1), { rating: 'good' }));
+    await assertSucceeds(updateDoc(doc(db(ALICE), f1), { rating: deleteField() }));
+    await assertFails(updateDoc(doc(db(ALICE), f1), { rating: 'great' }));
+  });
+});
+
+describe('purchases', () => {
+  const purchases = `${dogPath}/d1/purchases`;
+  const buy = (uid, data, id = 'p1') =>
+    setDoc(doc(db(uid), `${purchases}/${id}`), {
+      foodId: 'f1',
+      kg: 12,
+      at: Timestamp.now(),
+      by: uid,
+      createdAt: serverTimestamp(),
+      deleted: false,
+      ...data,
+    });
+
+  test('member adds a purchase with or without a price', async () => {
+    await assertSucceeds(buy(ALICE, { price: 249.99 }, 'a'));
+    await assertSucceeds(buy(ALICE, { kg: 1.5 }, 'b'));
+  });
+
+  test('non-member cannot read or add purchases', async () => {
+    await assertFails(getDocs(collection(db(EVE), purchases)));
+    await assertFails(buy(EVE, {}));
+  });
+
+  test('author and server time are enforced', async () => {
+    await assertFails(buy(ALICE, { by: BOB }));
+    await assertFails(buy(ALICE, { createdAt: Timestamp.now() }));
+  });
+
+  test('invalid purchases are rejected', async () => {
+    await assertFails(buy(ALICE, { kg: 0 }));
+    await assertFails(buy(ALICE, { kg: 150 }));
+    await assertFails(buy(ALICE, { kg: '12' }));
+    await assertFails(buy(ALICE, { price: -1 }));
+    await assertFails(buy(ALICE, { foodId: '' }));
+    await assertFails(buy(ALICE, { at: hours(3) }));
+    await assertFails(buy(ALICE, { shop: 'Zooplus' }));
+  });
+
+  test('partner soft-deletes a purchase; author stays; no hard delete', async () => {
+    await addBob();
+    await assertSucceeds(buy(ALICE, {}));
+    const p1 = doc(db(BOB), `${purchases}/p1`);
+    await assertSucceeds(updateDoc(p1, { deleted: true }));
+    await assertFails(updateDoc(p1, { by: BOB }));
+    await assertFails(deleteDoc(p1));
+  });
+});
