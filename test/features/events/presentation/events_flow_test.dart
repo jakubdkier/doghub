@@ -184,13 +184,7 @@ void main() {
     await seedEvent(db, 'p1', {'type': 'pee'});
     await pumpApp(tester, signedIn(), firestore: db);
 
-    await tester.tap(
-      find.descendant(
-        of: find.byType(NavigationBar),
-        matching: find.text('Historia'),
-      ),
-    );
-    await tester.pumpAndSettle();
+    await tapTab(tester, 'Historia');
     expect(find.text('Wczoraj'), findsOneWidget);
     expect(find.text('Spacer · 30 min'), findsOneWidget);
     expect(find.text('Siku'), findsWidgets);
@@ -251,27 +245,33 @@ void main() {
     expect((await allEvents(db)).single['durationMin'], 30);
   });
 
-  testWidgets('food tab adds and archives foods', (tester) async {
+  testWidgets('food tab adds a food, then archives it from its page', (
+    tester,
+  ) async {
     final db = await seededFirestore();
     await pumpApp(tester, signedIn(), firestore: db);
 
-    await tester.tap(find.text('Karma'));
-    await tester.pumpAndSettle();
+    await tapTab(tester, 'Karma');
     expect(find.text('Nie dodano jeszcze żadnej karmy.'), findsOneWidget);
 
-    await tester.tap(find.text('Dodaj karmę'));
+    await tester.tap(find.widgetWithText(FilledButton, 'Dodaj karmę'));
     await tester.pumpAndSettle();
     await tester.enterText(find.byKey(const Key('foodName')), 'Adult');
     await tester.tap(find.widgetWithText(FilledButton, 'Zapisz'));
     await tester.pumpAndSettle();
     expect(find.text('Adult'), findsOneWidget);
+    expect(find.text('brak zakupów'), findsOneWidget);
 
     await tester.tap(find.text('Adult'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('Edytuj karmę'));
     await tester.pumpAndSettle();
     await tester.tap(find.byType(Switch));
     await tester.tap(find.widgetWithText(FilledButton, 'Zapisz'));
     await tester.pumpAndSettle();
-    expect(find.text('Nieużywane'), findsOneWidget);
     expect((await db.collection(foods).get()).docs.single['active'], isFalse);
+
+    await tapBack(tester);
+    expect(find.text('Nieużywane'), findsOneWidget);
   });
 }

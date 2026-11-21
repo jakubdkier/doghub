@@ -7,9 +7,13 @@ abstract final class Routes {
   static const today = '/today';
   static const history = '/history';
   static const food = '/food';
+  static String foodDetail(String foodId) => '/food/$foodId';
+  static const newPurchase = '/food/purchase/new';
+  static String newPurchaseFor(String foodId) => '$newPurchase?foodId=$foodId';
   static const health = '/health';
   static const settings = '/settings';
   static const settingsHousehold = '/settings/household';
+  static const settingsReminders = '/settings/reminders';
 
   /// Edit an event (outside the shell, like settings).
   static const eventPattern = '/event/:id';

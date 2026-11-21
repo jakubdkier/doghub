@@ -113,8 +113,7 @@ void main() {
         findsOneWidget,
       );
     }
-    await tester.tap(find.text('Karma'));
-    await tester.pumpAndSettle();
+    await tapTab(tester, 'Karma');
     expect(find.widgetWithText(AppBar, 'Karma'), findsOneWidget);
   });
 

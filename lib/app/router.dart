@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -8,10 +10,14 @@ import '../features/events/presentation/event_edit_page.dart';
 import '../features/events/presentation/history_page.dart';
 import '../features/events/presentation/quick_add.dart';
 import '../features/events/presentation/today_page.dart';
+import '../core/notifications/local_notifications.dart';
+import '../features/food/presentation/food_detail_page.dart';
 import '../features/food/presentation/food_page.dart';
+import '../features/food/presentation/purchase_form_page.dart';
 import '../features/health/presentation/health_page.dart';
 import '../features/household/presentation/household_settings_page.dart';
 import '../features/household/presentation/onboarding_household_page.dart';
+import '../features/settings/presentation/reminder_settings_page.dart';
 import '../features/settings/presentation/settings_page.dart';
 import 'app_shell.dart';
 import 'onboarding_provider.dart';
@@ -30,11 +36,21 @@ GoRouter router(Ref ref) {
   ref.listen(onboardingStepProvider, (_, step) => refresh.value = step);
   ref.onDispose(refresh.dispose);
 
+  // Notification route waiting for onboarding to finish (cold start).
+  String? pendingRoute;
+
   final router = GoRouter(
     initialLocation: Routes.splash,
     refreshListenable: refresh,
-    redirect: (context, state) =>
-        onboardingRedirect(refresh.value, state.matchedLocation),
+    redirect: (context, state) {
+      final target = onboardingRedirect(refresh.value, state.matchedLocation);
+      if (target == Routes.today && pendingRoute != null) {
+        final route = pendingRoute;
+        pendingRoute = null;
+        return route;
+      }
+      return target;
+    },
     routes: [
       GoRoute(path: Routes.splash, builder: (_, _) => const SplashPage()),
       GoRoute(path: Routes.login, builder: (_, _) => const LoginPage()),
@@ -53,6 +69,10 @@ GoRouter router(Ref ref) {
           GoRoute(
             path: 'household',
             builder: (_, _) => const HouseholdSettingsPage(),
+          ),
+          GoRoute(
+            path: 'reminders',
+            builder: (_, _) => const ReminderSettingsPage(),
           ),
         ],
       ),
@@ -84,7 +104,24 @@ GoRouter router(Ref ref) {
           ),
           StatefulShellBranch(
             routes: [
-              GoRoute(path: Routes.food, builder: (_, _) => const FoodPage()),
+              GoRoute(
+                path: Routes.food,
+                builder: (_, _) => const FoodPage(),
+                routes: [
+                  // Before ':foodId' so "purchase" isn't taken as an id.
+                  GoRoute(
+                    path: 'purchase/new',
+                    builder: (_, state) => PurchaseFormPage(
+                      foodId: state.uri.queryParameters['foodId'],
+                    ),
+                  ),
+                  GoRoute(
+                    path: ':foodId',
+                    builder: (_, state) =>
+                        FoodDetailPage(foodId: state.pathParameters['foodId']!),
+                  ),
+                ],
+              ),
             ],
           ),
           StatefulShellBranch(
@@ -100,5 +137,23 @@ GoRouter router(Ref ref) {
     ],
   );
   ref.onDispose(router.dispose);
+
+  // Notification taps open their route once the user is set up.
+  void open(String route) {
+    if (refresh.value == OnboardingStep.ready) {
+      router.push(route);
+    } else {
+      pendingRoute = route;
+    }
+  }
+
+  final notifications = ref.read(localNotificationsProvider);
+  final taps = notifications.taps.listen(open);
+  ref.onDispose(taps.cancel);
+  unawaited(
+    notifications.launchRoute().then((route) {
+      if (route != null) open(route);
+    }),
+  );
   return router;
 }

@@ -8,6 +8,11 @@ import '../../../app/routes.dart';
 import '../../../core/utils/clock.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../dogs/application/dog_providers.dart';
+import '../../food/application/food_providers.dart';
+import '../../food/application/purchase_providers.dart';
+import '../../food/domain/food.dart';
+import '../../food/presentation/stock_labels.dart';
+import '../../settings/application/reminder_settings_provider.dart';
 import '../application/event_providers.dart';
 import '../application/hidden_events.dart';
 import '../domain/dog_event.dart';
@@ -102,6 +107,10 @@ class _TodayPageState extends ConsumerState<TodayPage> {
             ),
           ),
           Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: _FoodStockTile(recent: recent),
+          ),
+          Padding(
             padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
             child: Text(l10n.todayTimelineHeader, style: textTheme.titleMedium),
           ),
@@ -188,6 +197,48 @@ class _LastTile extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+/// Stock of the food from the last meal (or the only food in use).
+class _FoodStockTile extends ConsumerWidget {
+  const _FoodStockTile({required this.recent});
+
+  final List<DogEvent> recent;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final scheme = Theme.of(context).colorScheme;
+    final foods = ref.watch(foodsProvider).value ?? const <Food>[];
+    final active = foods.where((f) => f.active).toList();
+    final lastFoodId = latestOfType(recent, EventType.meal)?.foodId;
+    final food =
+        foods.where((f) => f.id == lastFoodId).firstOrNull ??
+        (active.length == 1 ? active.single : null);
+    final stock = food == null ? null : ref.watch(stockProvider)?[food.id];
+    final threshold = ref.watch(
+      reminderSettingsControllerProvider.select((s) => s.foodThresholdKg),
+    );
+    final low =
+        stock != null && stock.hasPurchases && stock.remainingKg <= threshold;
+
+    return Card(
+      key: const Key('foodStockTile'),
+      color: low ? scheme.errorContainer : null,
+      clipBehavior: Clip.antiAlias,
+      child: ListTile(
+        leading: Icon(low ? Icons.warning_amber : Icons.set_meal_outlined),
+        title: Text(food?.label ?? l10n.navFood),
+        subtitle: Text(
+          food == null ? l10n.stockUnknownFood : stockSummary(l10n, stock),
+        ),
+        trailing: const Icon(Icons.chevron_right),
+        onTap: () => food == null
+            ? context.go(Routes.food)
+            : context.push(Routes.foodDetail(food.id)),
       ),
     );
   }

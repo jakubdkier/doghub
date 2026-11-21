@@ -168,5 +168,104 @@
         "type": "String"
       }
     }
+  },
+  "reminderFoodTitle": "Kup karmę",
+  "reminderFoodBody": "{food}: zostało ok. {kg} kg.",
+  "@reminderFoodBody": {
+    "placeholders": {
+      "food": {
+        "type": "String"
+      },
+      "kg": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderFoodBodyDays": "{food}: zostało ok. {kg} kg, czyli na {days, plural, =0{niecały dzień} =1{1 dzień} other{{days} dni}}.",
+  "@reminderFoodBodyDays": {
+    "placeholders": {
+      "food": {
+        "type": "String"
+      },
+      "kg": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "ratingLabel": "Ocena psa",
+  "ratingGood": "Smakuje",
+  "ratingNeutral": "Tak sobie",
+  "ratingBad": "Nie smakuje",
+  "stockNoPurchases": "brak zakupów",
+  "stockNoPace": "brak danych o zużyciu",
+  "stockLow": "Kończy się",
+  "stockUnknownFood": "wybierz karmę przy posiłku",
+  "purchasesHeader": "Zakupy",
+  "purchasesEmpty": "Brak zakupów. Napoczęty worek możesz dodać jako zakup bez ceny.",
+  "addPurchase": "Dodaj zakup",
+  "purchaseKgLabel": "Ilość w kg",
+  "purchaseKgInvalid": "Podaj ilość, np. 12 albo 1,5",
+  "purchasePriceLabel": "Cena w zł (opcjonalnie)",
+  "purchasePriceInvalid": "Podaj cenę, np. 249,99",
+  "purchaseDateLabel": "Data",
+  "purchaseFoodRequired": "Wybierz karmę",
+  "purchaseDeleted": "Usunięto zakup",
+  "purchaseNoFoods": "Najpierw dodaj karmę.",
+  "foodNotFound": "Nie znaleziono karmy.",
+  "consumptionChartTitle": "Zużycie w ostatnich 30 dniach (g)",
+  "settingsReminders": "Przypomnienia",
+  "remindersFoodEnabled": "Przypominaj o kupnie karmy",
+  "remindersTime": "Godzina przypomnień",
+  "remindersInfo": "Ustawienia dotyczą tylko tego telefonu. Przypomnienie przychodzi w dniu, w którym przy obecnym tempie jedzenia zapas spadnie poniżej progu.",
+  "kgValue": "{kg} kg",
+  "@kgValue": {
+    "placeholders": {
+      "kg": {
+        "type": "String"
+      }
+    }
+  },
+  "stockRemaining": "zostało {kg} kg",
+  "@stockRemaining": {
+    "placeholders": {
+      "kg": {
+        "type": "String"
+      }
+    }
+  },
+  "stockDaysLeft": "~{days, plural, =0{mniej niż dzień} =1{1 dzień} other{{days} dni}}",
+  "@stockDaysLeft": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "stockAverage": "średnio {grams} g dziennie",
+  "@stockAverage": {
+    "placeholders": {
+      "grams": {
+        "type": "int"
+      }
+    }
+  },
+  "stockEnds": "koniec ok. {date}",
+  "@stockEnds": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "remindersThreshold": "Gdy zostanie mniej niż {kg} kg",
+  "@remindersThreshold": {
+    "placeholders": {
+      "kg": {
+        "type": "String"
+      }
+    }
   }
 }

@@ -345,4 +345,138 @@ class AppLocalizationsPl extends AppLocalizations {
   String eventAuthorTime(String time, String author) {
     return '$time · $author';
   }
+
+  @override
+  String get reminderFoodTitle => 'Kup karmę';
+
+  @override
+  String reminderFoodBody(String food, String kg) {
+    return '$food: zostało ok. $kg kg.';
+  }
+
+  @override
+  String reminderFoodBodyDays(String food, String kg, int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days dni',
+      one: '1 dzień',
+      zero: 'niecały dzień',
+    );
+    return '$food: zostało ok. $kg kg, czyli na $_temp0.';
+  }
+
+  @override
+  String get ratingLabel => 'Ocena psa';
+
+  @override
+  String get ratingGood => 'Smakuje';
+
+  @override
+  String get ratingNeutral => 'Tak sobie';
+
+  @override
+  String get ratingBad => 'Nie smakuje';
+
+  @override
+  String get stockNoPurchases => 'brak zakupów';
+
+  @override
+  String get stockNoPace => 'brak danych o zużyciu';
+
+  @override
+  String get stockLow => 'Kończy się';
+
+  @override
+  String get stockUnknownFood => 'wybierz karmę przy posiłku';
+
+  @override
+  String get purchasesHeader => 'Zakupy';
+
+  @override
+  String get purchasesEmpty =>
+      'Brak zakupów. Napoczęty worek możesz dodać jako zakup bez ceny.';
+
+  @override
+  String get addPurchase => 'Dodaj zakup';
+
+  @override
+  String get purchaseKgLabel => 'Ilość w kg';
+
+  @override
+  String get purchaseKgInvalid => 'Podaj ilość, np. 12 albo 1,5';
+
+  @override
+  String get purchasePriceLabel => 'Cena w zł (opcjonalnie)';
+
+  @override
+  String get purchasePriceInvalid => 'Podaj cenę, np. 249,99';
+
+  @override
+  String get purchaseDateLabel => 'Data';
+
+  @override
+  String get purchaseFoodRequired => 'Wybierz karmę';
+
+  @override
+  String get purchaseDeleted => 'Usunięto zakup';
+
+  @override
+  String get purchaseNoFoods => 'Najpierw dodaj karmę.';
+
+  @override
+  String get foodNotFound => 'Nie znaleziono karmy.';
+
+  @override
+  String get consumptionChartTitle => 'Zużycie w ostatnich 30 dniach (g)';
+
+  @override
+  String get settingsReminders => 'Przypomnienia';
+
+  @override
+  String get remindersFoodEnabled => 'Przypominaj o kupnie karmy';
+
+  @override
+  String get remindersTime => 'Godzina przypomnień';
+
+  @override
+  String get remindersInfo =>
+      'Ustawienia dotyczą tylko tego telefonu. Przypomnienie przychodzi w dniu, w którym przy obecnym tempie jedzenia zapas spadnie poniżej progu.';
+
+  @override
+  String kgValue(String kg) {
+    return '$kg kg';
+  }
+
+  @override
+  String stockRemaining(String kg) {
+    return 'zostało $kg kg';
+  }
+
+  @override
+  String stockDaysLeft(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days dni',
+      one: '1 dzień',
+      zero: 'mniej niż dzień',
+    );
+    return '~$_temp0';
+  }
+
+  @override
+  String stockAverage(int grams) {
+    return 'średnio $grams g dziennie';
+  }
+
+  @override
+  String stockEnds(String date) {
+    return 'koniec ok. $date';
+  }
+
+  @override
+  String remindersThreshold(String kg) {
+    return 'Gdy zostanie mniej niż $kg kg';
+  }
 }

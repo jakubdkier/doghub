@@ -22,6 +22,12 @@ class SettingsPage extends ConsumerWidget {
             trailing: const Icon(Icons.chevron_right),
             onTap: () => context.push(Routes.settingsHousehold),
           ),
+          ListTile(
+            leading: const Icon(Icons.notifications_outlined),
+            title: Text(l10n.settingsReminders),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => context.push(Routes.settingsReminders),
+          ),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.logout),

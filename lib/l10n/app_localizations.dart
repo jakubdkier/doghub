@@ -711,6 +711,210 @@ abstract class AppLocalizations {
   /// In pl, this message translates to:
   /// **'{time} · {author}'**
   String eventAuthorTime(String time, String author);
+
+  /// No description provided for @reminderFoodTitle.
+  ///
+  /// In pl, this message translates to:
+  /// **'Kup karmę'**
+  String get reminderFoodTitle;
+
+  /// No description provided for @reminderFoodBody.
+  ///
+  /// In pl, this message translates to:
+  /// **'{food}: zostało ok. {kg} kg.'**
+  String reminderFoodBody(String food, String kg);
+
+  /// No description provided for @reminderFoodBodyDays.
+  ///
+  /// In pl, this message translates to:
+  /// **'{food}: zostało ok. {kg} kg, czyli na {days, plural, =0{niecały dzień} =1{1 dzień} other{{days} dni}}.'**
+  String reminderFoodBodyDays(String food, String kg, int days);
+
+  /// No description provided for @ratingLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Ocena psa'**
+  String get ratingLabel;
+
+  /// No description provided for @ratingGood.
+  ///
+  /// In pl, this message translates to:
+  /// **'Smakuje'**
+  String get ratingGood;
+
+  /// No description provided for @ratingNeutral.
+  ///
+  /// In pl, this message translates to:
+  /// **'Tak sobie'**
+  String get ratingNeutral;
+
+  /// No description provided for @ratingBad.
+  ///
+  /// In pl, this message translates to:
+  /// **'Nie smakuje'**
+  String get ratingBad;
+
+  /// No description provided for @stockNoPurchases.
+  ///
+  /// In pl, this message translates to:
+  /// **'brak zakupów'**
+  String get stockNoPurchases;
+
+  /// No description provided for @stockNoPace.
+  ///
+  /// In pl, this message translates to:
+  /// **'brak danych o zużyciu'**
+  String get stockNoPace;
+
+  /// No description provided for @stockLow.
+  ///
+  /// In pl, this message translates to:
+  /// **'Kończy się'**
+  String get stockLow;
+
+  /// No description provided for @stockUnknownFood.
+  ///
+  /// In pl, this message translates to:
+  /// **'wybierz karmę przy posiłku'**
+  String get stockUnknownFood;
+
+  /// No description provided for @purchasesHeader.
+  ///
+  /// In pl, this message translates to:
+  /// **'Zakupy'**
+  String get purchasesHeader;
+
+  /// No description provided for @purchasesEmpty.
+  ///
+  /// In pl, this message translates to:
+  /// **'Brak zakupów. Napoczęty worek możesz dodać jako zakup bez ceny.'**
+  String get purchasesEmpty;
+
+  /// No description provided for @addPurchase.
+  ///
+  /// In pl, this message translates to:
+  /// **'Dodaj zakup'**
+  String get addPurchase;
+
+  /// No description provided for @purchaseKgLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Ilość w kg'**
+  String get purchaseKgLabel;
+
+  /// No description provided for @purchaseKgInvalid.
+  ///
+  /// In pl, this message translates to:
+  /// **'Podaj ilość, np. 12 albo 1,5'**
+  String get purchaseKgInvalid;
+
+  /// No description provided for @purchasePriceLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Cena w zł (opcjonalnie)'**
+  String get purchasePriceLabel;
+
+  /// No description provided for @purchasePriceInvalid.
+  ///
+  /// In pl, this message translates to:
+  /// **'Podaj cenę, np. 249,99'**
+  String get purchasePriceInvalid;
+
+  /// No description provided for @purchaseDateLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Data'**
+  String get purchaseDateLabel;
+
+  /// No description provided for @purchaseFoodRequired.
+  ///
+  /// In pl, this message translates to:
+  /// **'Wybierz karmę'**
+  String get purchaseFoodRequired;
+
+  /// No description provided for @purchaseDeleted.
+  ///
+  /// In pl, this message translates to:
+  /// **'Usunięto zakup'**
+  String get purchaseDeleted;
+
+  /// No description provided for @purchaseNoFoods.
+  ///
+  /// In pl, this message translates to:
+  /// **'Najpierw dodaj karmę.'**
+  String get purchaseNoFoods;
+
+  /// No description provided for @foodNotFound.
+  ///
+  /// In pl, this message translates to:
+  /// **'Nie znaleziono karmy.'**
+  String get foodNotFound;
+
+  /// No description provided for @consumptionChartTitle.
+  ///
+  /// In pl, this message translates to:
+  /// **'Zużycie w ostatnich 30 dniach (g)'**
+  String get consumptionChartTitle;
+
+  /// No description provided for @settingsReminders.
+  ///
+  /// In pl, this message translates to:
+  /// **'Przypomnienia'**
+  String get settingsReminders;
+
+  /// No description provided for @remindersFoodEnabled.
+  ///
+  /// In pl, this message translates to:
+  /// **'Przypominaj o kupnie karmy'**
+  String get remindersFoodEnabled;
+
+  /// No description provided for @remindersTime.
+  ///
+  /// In pl, this message translates to:
+  /// **'Godzina przypomnień'**
+  String get remindersTime;
+
+  /// No description provided for @remindersInfo.
+  ///
+  /// In pl, this message translates to:
+  /// **'Ustawienia dotyczą tylko tego telefonu. Przypomnienie przychodzi w dniu, w którym przy obecnym tempie jedzenia zapas spadnie poniżej progu.'**
+  String get remindersInfo;
+
+  /// No description provided for @kgValue.
+  ///
+  /// In pl, this message translates to:
+  /// **'{kg} kg'**
+  String kgValue(String kg);
+
+  /// No description provided for @stockRemaining.
+  ///
+  /// In pl, this message translates to:
+  /// **'zostało {kg} kg'**
+  String stockRemaining(String kg);
+
+  /// No description provided for @stockDaysLeft.
+  ///
+  /// In pl, this message translates to:
+  /// **'~{days, plural, =0{mniej niż dzień} =1{1 dzień} other{{days} dni}}'**
+  String stockDaysLeft(int days);
+
+  /// No description provided for @stockAverage.
+  ///
+  /// In pl, this message translates to:
+  /// **'średnio {grams} g dziennie'**
+  String stockAverage(int grams);
+
+  /// No description provided for @stockEnds.
+  ///
+  /// In pl, this message translates to:
+  /// **'koniec ok. {date}'**
+  String stockEnds(String date);
+
+  /// No description provided for @remindersThreshold.
+  ///
+  /// In pl, this message translates to:
+  /// **'Gdy zostanie mniej niż {kg} kg'**
+  String remindersThreshold(String kg);
 }
 
 class _AppLocalizationsDelegate

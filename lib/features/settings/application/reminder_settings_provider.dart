@@ -1,0 +1,65 @@
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import '../../../core/notifications/local_notifications.dart';
+import '../../../core/storage/preferences.dart';
+import '../domain/reminder_settings.dart';
+
+part 'reminder_settings_provider.g.dart';
+
+abstract final class _Keys {
+  static const foodEnabled = 'reminders.food.enabled';
+  static const foodThresholdKg = 'reminders.food.thresholdKg';
+  static const hour = 'reminders.hour';
+  static const minute = 'reminders.minute';
+  static const permissionAsked = 'reminders.permissionAsked';
+}
+
+/// Per-device reminder settings stored in shared preferences.
+@Riverpod(keepAlive: true)
+class ReminderSettingsController extends _$ReminderSettingsController {
+  @override
+  ReminderSettings build() {
+    final prefs = ref.watch(sharedPreferencesProvider);
+    const d = ReminderSettings();
+    return ReminderSettings(
+      foodEnabled: prefs.getBool(_Keys.foodEnabled) ?? d.foodEnabled,
+      foodThresholdKg:
+          prefs.getDouble(_Keys.foodThresholdKg) ?? d.foodThresholdKg,
+      hour: prefs.getInt(_Keys.hour) ?? d.hour,
+      minute: prefs.getInt(_Keys.minute) ?? d.minute,
+    );
+  }
+
+  void setFoodEnabled(bool enabled) {
+    state = state.copyWith(foodEnabled: enabled);
+    ref.read(sharedPreferencesProvider).setBool(_Keys.foodEnabled, enabled);
+    if (enabled) ensurePermission(force: true);
+  }
+
+  void setFoodThresholdKg(double kg) {
+    final clamped = kg.clamp(
+      ReminderSettings.minThresholdKg,
+      ReminderSettings.maxThresholdKg,
+    );
+    state = state.copyWith(foodThresholdKg: clamped);
+    ref
+        .read(sharedPreferencesProvider)
+        .setDouble(_Keys.foodThresholdKg, clamped);
+  }
+
+  void setTime(int hour, int minute) {
+    state = state.copyWith(hour: hour, minute: minute);
+    ref.read(sharedPreferencesProvider)
+      ..setInt(_Keys.hour, hour)
+      ..setInt(_Keys.minute, minute);
+  }
+
+  /// Asks for the notification permission once (e.g. at the first
+  /// purchase), or again when [force]d by enabling reminders.
+  Future<void> ensurePermission({bool force = false}) async {
+    final prefs = ref.read(sharedPreferencesProvider);
+    if (!force && (prefs.getBool(_Keys.permissionAsked) ?? false)) return;
+    await prefs.setBool(_Keys.permissionAsked, true);
+    await ref.read(localNotificationsProvider).requestPermission();
+  }
+}
