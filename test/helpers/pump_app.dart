@@ -10,6 +10,7 @@ import 'package:dog_app/features/auth/application/auth_providers.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
@@ -39,6 +40,7 @@ Future<void> pumpApp(
   FakeLocalNotifications? notifications,
   FakeHomeWidgetService? homeWidget,
   Map<String, Object> prefs = const {},
+  List<Override> extraOverrides = const [],
 }) async {
   Intl.defaultLocale = 'pl_PL';
   await initializeDateFormatting('pl_PL');
@@ -59,6 +61,7 @@ Future<void> pumpApp(
         homeWidgetServiceProvider.overrideWithValue(
           homeWidget ?? FakeHomeWidgetService(),
         ),
+        ...extraOverrides,
       ],
       child: const DogHubApp(),
     ),
