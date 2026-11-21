@@ -681,3 +681,86 @@ describe('health templates', () => {
     await assertFails(deleteDoc(doc(db(ALICE), `${templates}/tick_collar`)));
   });
 });
+
+describe('medications', () => {
+  const meds = `${dogPath}/d1/meds`;
+  const med = (uid, data, id = 'm1') =>
+    setDoc(doc(db(uid), `${meds}/${id}`), {
+      name: 'Magnez',
+      dose: '1 tabletka',
+      scheduleType: 'daily',
+      times: ['08:00'],
+      startDate: Timestamp.now(),
+      active: true,
+      createdAt: serverTimestamp(),
+      ...data,
+    });
+
+  test('member adds daily and interval meds', async () => {
+    await assertSucceeds(med(ALICE, {}));
+    await assertSucceeds(med(ALICE, { times: ['08:00', '14:30', '20:00'], endDate: hours(24 * 7) }, 'm2'));
+    await assertSucceeds(med(ALICE, { scheduleType: 'interval', intervalDays: 2, times: ['09:15'] }, 'm3'));
+  });
+
+  test('non-member cannot read or add meds', async () => {
+    await assertFails(getDocs(collection(db(EVE), meds)));
+    await assertFails(med(EVE, {}));
+  });
+
+  test('invalid meds are rejected', async () => {
+    await assertFails(med(ALICE, { name: '' }));
+    await assertFails(med(ALICE, { scheduleType: 'weekly' }));
+    await assertFails(med(ALICE, { times: [] }));
+    await assertFails(med(ALICE, { times: ['8:00'] }));
+    await assertFails(med(ALICE, { times: ['08:00', '25:00'] }));
+    await assertFails(med(ALICE, { times: ['08:00', '12:00', '16:00', '20:00'] }));
+    await assertFails(med(ALICE, { scheduleType: 'interval' }));
+    await assertFails(med(ALICE, { scheduleType: 'interval', intervalDays: 1 }));
+    await assertFails(med(ALICE, { endDate: hours(-48) }));
+    await assertFails(med(ALICE, { createdAt: Timestamp.now() }));
+    await assertFails(med(ALICE, { vet: 'Vetka' }));
+  });
+
+  test('partner edits and ends a med; createdAt stays; no hard delete', async () => {
+    await addBob();
+    await assertSucceeds(med(ALICE, {}));
+    const m1 = doc(db(BOB), `${meds}/m1`);
+    await assertSucceeds(updateDoc(m1, { times: ['07:30'], active: false }));
+    await assertFails(updateDoc(m1, { createdAt: Timestamp.now() }));
+    await assertFails(deleteDoc(m1));
+  });
+});
+
+describe('medication doses', () => {
+  const doses = `${dogPath}/d1/medDoses`;
+  const tick = (uid, data, id = 'm1_20261121_0800') =>
+    setDoc(doc(db(uid), `${doses}/${id}`), {
+      medId: 'm1',
+      slot: Timestamp.now(),
+      givenAt: Timestamp.now(),
+      by: uid,
+      deleted: false,
+      ...data,
+    });
+
+  test('member ticks a dose; partner unticks and re-ticks it', async () => {
+    await addBob();
+    await assertSucceeds(tick(ALICE, {}));
+    await assertSucceeds(tick(BOB, { deleted: true }));
+    await assertSucceeds(tick(ALICE, {}));
+  });
+
+  test('by must be the caller; non-member cannot tick', async () => {
+    await assertFails(tick(ALICE, { by: BOB }));
+    await assertFails(tick(EVE, {}));
+    await assertFails(getDocs(collection(db(EVE), doses)));
+  });
+
+  test('invalid doses are rejected; no hard delete', async () => {
+    await assertFails(tick(ALICE, { givenAt: hours(3) }));
+    await assertFails(tick(ALICE, { medId: '' }));
+    await assertFails(tick(ALICE, { amount: 2 }));
+    await assertSucceeds(tick(ALICE, {}));
+    await assertFails(deleteDoc(doc(db(ALICE), `${doses}/m1_20261121_0800`)));
+  });
+});
