@@ -50,6 +50,8 @@ class _FoodDialogState extends State<_FoodDialog> {
     final l10n = AppLocalizations.of(context);
     return AlertDialog(
       title: Text(widget.initial == null ? l10n.addFood : l10n.editFood),
+      // Scrolls when the keyboard leaves too little room.
+      scrollable: true,
       content: Form(
         key: _form,
         child: Column(
