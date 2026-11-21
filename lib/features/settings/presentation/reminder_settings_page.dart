@@ -49,6 +49,15 @@ class ReminderSettingsPage extends ConsumerWidget {
                   : null,
             ),
           ),
+          SwitchListTile(
+            key: const Key('weighRemindersEnabled'),
+            secondary: const Icon(Icons.monitor_weight_outlined),
+            title: Text(l10n.remindersWeighEnabled),
+            subtitle: Text(l10n.remindersWeighInfo),
+            value: settings.weighEnabled,
+            onChanged: controller.setWeighEnabled,
+          ),
+          const Divider(),
           ListTile(
             leading: const Icon(Icons.schedule),
             title: Text(l10n.remindersTime),

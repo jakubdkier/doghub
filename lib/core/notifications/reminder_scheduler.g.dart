@@ -108,6 +108,58 @@ final class FoodReminderPlanProvider
 
 String _$foodReminderPlanHash() => r'f9894d856adbdb6bef8196dbdb9ff27119b7afec';
 
+/// Everything to schedule, or null while data is still loading.
+
+@ProviderFor(reminderPlan)
+final reminderPlanProvider = ReminderPlanProvider._();
+
+/// Everything to schedule, or null while data is still loading.
+
+final class ReminderPlanProvider
+    extends
+        $FunctionalProvider<
+          List<PlannedReminder>?,
+          List<PlannedReminder>?,
+          List<PlannedReminder>?
+        >
+    with $Provider<List<PlannedReminder>?> {
+  /// Everything to schedule, or null while data is still loading.
+  ReminderPlanProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'reminderPlanProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$reminderPlanHash();
+
+  @$internal
+  @override
+  $ProviderElement<List<PlannedReminder>?> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  List<PlannedReminder>? create(Ref ref) {
+    return reminderPlan(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(List<PlannedReminder>? value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<List<PlannedReminder>?>(value),
+    );
+  }
+}
+
+String _$reminderPlanHash() => r'70f537019a18670c121750755a1805a98dd03755';
+
 /// Keeps scheduled notifications in sync with the data. Watched by the
 /// app root, so it runs on start and after every relevant change.
 
@@ -154,4 +206,4 @@ final class ReminderSyncProvider extends $FunctionalProvider<void, void, void>
   }
 }
 
-String _$reminderSyncHash() => r'dc8278db9d5b091b5cbd261823b2f7e4e4f851b7';
+String _$reminderSyncHash() => r'919025dad64e3c79843da440e1d4577831ad2512';

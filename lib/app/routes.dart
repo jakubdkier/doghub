@@ -11,6 +11,7 @@ abstract final class Routes {
   static const newPurchase = '/food/purchase/new';
   static String newPurchaseFor(String foodId) => '$newPurchase?foodId=$foodId';
   static const health = '/health';
+  static const healthWeight = '/health/weight';
   static const settings = '/settings';
   static const settingsHousehold = '/settings/household';
   static const settingsReminders = '/settings/reminders';

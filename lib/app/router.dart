@@ -19,6 +19,7 @@ import '../features/household/presentation/household_settings_page.dart';
 import '../features/household/presentation/onboarding_household_page.dart';
 import '../features/settings/presentation/reminder_settings_page.dart';
 import '../features/settings/presentation/settings_page.dart';
+import '../features/weight/presentation/weight_page.dart';
 import 'app_shell.dart';
 import 'onboarding_provider.dart';
 import 'onboarding_step.dart';
@@ -129,6 +130,12 @@ GoRouter router(Ref ref) {
               GoRoute(
                 path: Routes.health,
                 builder: (_, _) => const HealthPage(),
+                routes: [
+                  GoRoute(
+                    path: 'weight',
+                    builder: (_, _) => const WeightPage(),
+                  ),
+                ],
               ),
             ],
           ),

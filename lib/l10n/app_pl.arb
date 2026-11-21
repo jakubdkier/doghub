@@ -267,5 +267,53 @@
         "type": "String"
       }
     }
+  },
+  "reminderWeighTitle": "Czas zważyć: {dog}",
+  "@reminderWeighTitle": {
+    "placeholders": {
+      "dog": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderWeighBody": "Ostatni pomiar: {kg} kg ({date}).",
+  "@reminderWeighBody": {
+    "placeholders": {
+      "kg": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "weightTitle": "Waga",
+  "weightAdd": "Dodaj pomiar",
+  "weightEdit": "Edytuj pomiar",
+  "weightEmpty": "Brak pomiarów. Dodaj pierwszy, żeby zobaczyć wykres.",
+  "weightKgLabel": "Waga w kg",
+  "weightDayLabel": "Data",
+  "weightDeleted": "Usunięto pomiar",
+  "weightRange3m": "3M",
+  "weightRange6m": "6M",
+  "weightRange1y": "1R",
+  "weightRangeAll": "Wszystko",
+  "weightChartTooFew": "Za mało pomiarów w tym okresie.",
+  "weightHistoryHeader": "Pomiary",
+  "healthMoreSoon": "Szczepienia, odrobaczanie i wizyty u weta dojdą wkrótce.",
+  "remindersWeighEnabled": "Przypominaj o ważeniu",
+  "remindersWeighInfo": "Miesiąc po ostatnim pomiarze.",
+  "remindersFoodHeader": "Karma",
+  "remindersWeighHeader": "Waga",
+  "weightChange": "{change} kg od {date}",
+  "@weightChange": {
+    "placeholders": {
+      "change": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
   }
 }

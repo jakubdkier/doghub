@@ -479,4 +479,75 @@ class AppLocalizationsPl extends AppLocalizations {
   String remindersThreshold(String kg) {
     return 'Gdy zostanie mniej niż $kg kg';
   }
+
+  @override
+  String reminderWeighTitle(String dog) {
+    return 'Czas zważyć: $dog';
+  }
+
+  @override
+  String reminderWeighBody(String kg, String date) {
+    return 'Ostatni pomiar: $kg kg ($date).';
+  }
+
+  @override
+  String get weightTitle => 'Waga';
+
+  @override
+  String get weightAdd => 'Dodaj pomiar';
+
+  @override
+  String get weightEdit => 'Edytuj pomiar';
+
+  @override
+  String get weightEmpty =>
+      'Brak pomiarów. Dodaj pierwszy, żeby zobaczyć wykres.';
+
+  @override
+  String get weightKgLabel => 'Waga w kg';
+
+  @override
+  String get weightDayLabel => 'Data';
+
+  @override
+  String get weightDeleted => 'Usunięto pomiar';
+
+  @override
+  String get weightRange3m => '3M';
+
+  @override
+  String get weightRange6m => '6M';
+
+  @override
+  String get weightRange1y => '1R';
+
+  @override
+  String get weightRangeAll => 'Wszystko';
+
+  @override
+  String get weightChartTooFew => 'Za mało pomiarów w tym okresie.';
+
+  @override
+  String get weightHistoryHeader => 'Pomiary';
+
+  @override
+  String get healthMoreSoon =>
+      'Szczepienia, odrobaczanie i wizyty u weta dojdą wkrótce.';
+
+  @override
+  String get remindersWeighEnabled => 'Przypominaj o ważeniu';
+
+  @override
+  String get remindersWeighInfo => 'Miesiąc po ostatnim pomiarze.';
+
+  @override
+  String get remindersFoodHeader => 'Karma';
+
+  @override
+  String get remindersWeighHeader => 'Waga';
+
+  @override
+  String weightChange(String change, String date) {
+    return '$change kg od $date';
+  }
 }

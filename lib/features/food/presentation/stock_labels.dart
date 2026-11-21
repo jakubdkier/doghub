@@ -1,15 +1,11 @@
-import 'package:intl/intl.dart';
 import 'package:material_ui/material_ui.dart';
 
+import '../../../core/utils/formatting.dart';
 import '../../../l10n/app_localizations.dart';
 import '../domain/food.dart';
 import '../domain/stock_forecast.dart';
 
-String formatKg(double kg) =>
-    NumberFormat.decimalPatternDigits(decimalDigits: 1).format(kg);
-
-String formatPrice(double price) =>
-    NumberFormat.currency(symbol: 'zł', decimalDigits: 2).format(price);
+export '../../../core/utils/formatting.dart' show formatKg, formatPrice;
 
 /// "zostało 3,2 kg · ~9 dni" or "brak zakupów".
 String stockSummary(AppLocalizations l10n, StockForecast? stock) {

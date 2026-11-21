@@ -9,6 +9,7 @@ part 'reminder_settings_provider.g.dart';
 abstract final class _Keys {
   static const foodEnabled = 'reminders.food.enabled';
   static const foodThresholdKg = 'reminders.food.thresholdKg';
+  static const weighEnabled = 'reminders.weigh.enabled';
   static const hour = 'reminders.hour';
   static const minute = 'reminders.minute';
   static const permissionAsked = 'reminders.permissionAsked';
@@ -25,6 +26,7 @@ class ReminderSettingsController extends _$ReminderSettingsController {
       foodEnabled: prefs.getBool(_Keys.foodEnabled) ?? d.foodEnabled,
       foodThresholdKg:
           prefs.getDouble(_Keys.foodThresholdKg) ?? d.foodThresholdKg,
+      weighEnabled: prefs.getBool(_Keys.weighEnabled) ?? d.weighEnabled,
       hour: prefs.getInt(_Keys.hour) ?? d.hour,
       minute: prefs.getInt(_Keys.minute) ?? d.minute,
     );
@@ -33,6 +35,12 @@ class ReminderSettingsController extends _$ReminderSettingsController {
   void setFoodEnabled(bool enabled) {
     state = state.copyWith(foodEnabled: enabled);
     ref.read(sharedPreferencesProvider).setBool(_Keys.foodEnabled, enabled);
+    if (enabled) ensurePermission(force: true);
+  }
+
+  void setWeighEnabled(bool enabled) {
+    state = state.copyWith(weighEnabled: enabled);
+    ref.read(sharedPreferencesProvider).setBool(_Keys.weighEnabled, enabled);
     if (enabled) ensurePermission(force: true);
   }
 

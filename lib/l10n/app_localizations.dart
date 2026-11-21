@@ -915,6 +915,132 @@ abstract class AppLocalizations {
   /// In pl, this message translates to:
   /// **'Gdy zostanie mniej niż {kg} kg'**
   String remindersThreshold(String kg);
+
+  /// No description provided for @reminderWeighTitle.
+  ///
+  /// In pl, this message translates to:
+  /// **'Czas zważyć: {dog}'**
+  String reminderWeighTitle(String dog);
+
+  /// No description provided for @reminderWeighBody.
+  ///
+  /// In pl, this message translates to:
+  /// **'Ostatni pomiar: {kg} kg ({date}).'**
+  String reminderWeighBody(String kg, String date);
+
+  /// No description provided for @weightTitle.
+  ///
+  /// In pl, this message translates to:
+  /// **'Waga'**
+  String get weightTitle;
+
+  /// No description provided for @weightAdd.
+  ///
+  /// In pl, this message translates to:
+  /// **'Dodaj pomiar'**
+  String get weightAdd;
+
+  /// No description provided for @weightEdit.
+  ///
+  /// In pl, this message translates to:
+  /// **'Edytuj pomiar'**
+  String get weightEdit;
+
+  /// No description provided for @weightEmpty.
+  ///
+  /// In pl, this message translates to:
+  /// **'Brak pomiarów. Dodaj pierwszy, żeby zobaczyć wykres.'**
+  String get weightEmpty;
+
+  /// No description provided for @weightKgLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Waga w kg'**
+  String get weightKgLabel;
+
+  /// No description provided for @weightDayLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Data'**
+  String get weightDayLabel;
+
+  /// No description provided for @weightDeleted.
+  ///
+  /// In pl, this message translates to:
+  /// **'Usunięto pomiar'**
+  String get weightDeleted;
+
+  /// No description provided for @weightRange3m.
+  ///
+  /// In pl, this message translates to:
+  /// **'3M'**
+  String get weightRange3m;
+
+  /// No description provided for @weightRange6m.
+  ///
+  /// In pl, this message translates to:
+  /// **'6M'**
+  String get weightRange6m;
+
+  /// No description provided for @weightRange1y.
+  ///
+  /// In pl, this message translates to:
+  /// **'1R'**
+  String get weightRange1y;
+
+  /// No description provided for @weightRangeAll.
+  ///
+  /// In pl, this message translates to:
+  /// **'Wszystko'**
+  String get weightRangeAll;
+
+  /// No description provided for @weightChartTooFew.
+  ///
+  /// In pl, this message translates to:
+  /// **'Za mało pomiarów w tym okresie.'**
+  String get weightChartTooFew;
+
+  /// No description provided for @weightHistoryHeader.
+  ///
+  /// In pl, this message translates to:
+  /// **'Pomiary'**
+  String get weightHistoryHeader;
+
+  /// No description provided for @healthMoreSoon.
+  ///
+  /// In pl, this message translates to:
+  /// **'Szczepienia, odrobaczanie i wizyty u weta dojdą wkrótce.'**
+  String get healthMoreSoon;
+
+  /// No description provided for @remindersWeighEnabled.
+  ///
+  /// In pl, this message translates to:
+  /// **'Przypominaj o ważeniu'**
+  String get remindersWeighEnabled;
+
+  /// No description provided for @remindersWeighInfo.
+  ///
+  /// In pl, this message translates to:
+  /// **'Miesiąc po ostatnim pomiarze.'**
+  String get remindersWeighInfo;
+
+  /// No description provided for @remindersFoodHeader.
+  ///
+  /// In pl, this message translates to:
+  /// **'Karma'**
+  String get remindersFoodHeader;
+
+  /// No description provided for @remindersWeighHeader.
+  ///
+  /// In pl, this message translates to:
+  /// **'Waga'**
+  String get remindersWeighHeader;
+
+  /// No description provided for @weightChange.
+  ///
+  /// In pl, this message translates to:
+  /// **'{change} kg od {date}'**
+  String weightChange(String change, String date);
 }
 
 class _AppLocalizationsDelegate
