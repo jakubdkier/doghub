@@ -14,7 +14,11 @@ import '../core/notifications/local_notifications.dart';
 import '../features/food/presentation/food_detail_page.dart';
 import '../features/food/presentation/food_page.dart';
 import '../features/food/presentation/purchase_form_page.dart';
+import '../features/health/domain/health_entry.dart';
+import '../features/health/presentation/health_entry_form_page.dart';
 import '../features/health/presentation/health_page.dart';
+import '../features/health/presentation/health_section_page.dart';
+import '../features/health/presentation/template_settings_page.dart';
 import '../features/household/presentation/household_settings_page.dart';
 import '../features/household/presentation/onboarding_household_page.dart';
 import '../features/settings/presentation/reminder_settings_page.dart';
@@ -75,6 +79,10 @@ GoRouter router(Ref ref) {
             path: 'reminders',
             builder: (_, _) => const ReminderSettingsPage(),
           ),
+          GoRoute(
+            path: 'templates',
+            builder: (_, _) => const TemplateSettingsPage(),
+          ),
         ],
       ),
       GoRoute(
@@ -134,6 +142,28 @@ GoRouter router(Ref ref) {
                   GoRoute(
                     path: 'weight',
                     builder: (_, _) => const WeightPage(),
+                  ),
+                  GoRoute(
+                    path: 'new',
+                    builder: (_, state) => HealthEntryFormPage(
+                      type: HealthType.values
+                          .asNameMap()[state.uri.queryParameters['type']],
+                    ),
+                  ),
+                  GoRoute(
+                    path: 'type/:type',
+                    builder: (_, state) => HealthSectionPage(
+                      type:
+                          HealthType.values
+                              .asNameMap()[state.pathParameters['type']] ??
+                          HealthType.vet,
+                    ),
+                  ),
+                  GoRoute(
+                    path: 'entry/:id',
+                    builder: (_, state) => HealthEntryFormPage(
+                      entryId: state.pathParameters['id'],
+                    ),
                   ),
                 ],
               ),

@@ -1006,12 +1006,6 @@ abstract class AppLocalizations {
   /// **'Pomiary'**
   String get weightHistoryHeader;
 
-  /// No description provided for @healthMoreSoon.
-  ///
-  /// In pl, this message translates to:
-  /// **'Szczepienia, odrobaczanie i wizyty u weta dojdą wkrótce.'**
-  String get healthMoreSoon;
-
   /// No description provided for @remindersWeighEnabled.
   ///
   /// In pl, this message translates to:
@@ -1041,6 +1035,270 @@ abstract class AppLocalizations {
   /// In pl, this message translates to:
   /// **'{change} kg od {date}'**
   String weightChange(String change, String date);
+
+  /// No description provided for @reminderHealthSoonTitle.
+  ///
+  /// In pl, this message translates to:
+  /// **'Zbliża się: {name}'**
+  String reminderHealthSoonTitle(String name);
+
+  /// No description provided for @reminderHealthDueTitle.
+  ///
+  /// In pl, this message translates to:
+  /// **'Dziś termin: {name}'**
+  String reminderHealthDueTitle(String name);
+
+  /// No description provided for @reminderHealthOverdueTitle.
+  ///
+  /// In pl, this message translates to:
+  /// **'Po terminie: {name}'**
+  String reminderHealthOverdueTitle(String name);
+
+  /// No description provided for @reminderHealthBody.
+  ///
+  /// In pl, this message translates to:
+  /// **'{dog} · termin {date}'**
+  String reminderHealthBody(String dog, String date);
+
+  /// No description provided for @healthVaccination.
+  ///
+  /// In pl, this message translates to:
+  /// **'Szczepienia'**
+  String get healthVaccination;
+
+  /// No description provided for @healthDeworming.
+  ///
+  /// In pl, this message translates to:
+  /// **'Odrobaczanie'**
+  String get healthDeworming;
+
+  /// No description provided for @healthTicks.
+  ///
+  /// In pl, this message translates to:
+  /// **'Kleszcze i pchły'**
+  String get healthTicks;
+
+  /// No description provided for @healthVet.
+  ///
+  /// In pl, this message translates to:
+  /// **'Wizyty u weta'**
+  String get healthVet;
+
+  /// No description provided for @healthStatusOk.
+  ///
+  /// In pl, this message translates to:
+  /// **'OK'**
+  String get healthStatusOk;
+
+  /// No description provided for @healthStatusSoon.
+  ///
+  /// In pl, this message translates to:
+  /// **'Wkrótce'**
+  String get healthStatusSoon;
+
+  /// No description provided for @healthStatusOverdue.
+  ///
+  /// In pl, this message translates to:
+  /// **'Po terminie'**
+  String get healthStatusOverdue;
+
+  /// No description provided for @healthNoEntries.
+  ///
+  /// In pl, this message translates to:
+  /// **'Brak wpisów'**
+  String get healthNoEntries;
+
+  /// No description provided for @healthNoNextDue.
+  ///
+  /// In pl, this message translates to:
+  /// **'bez kolejnego terminu'**
+  String get healthNoNextDue;
+
+  /// No description provided for @healthAdd.
+  ///
+  /// In pl, this message translates to:
+  /// **'Dodaj wpis'**
+  String get healthAdd;
+
+  /// No description provided for @healthEdit.
+  ///
+  /// In pl, this message translates to:
+  /// **'Edycja wpisu'**
+  String get healthEdit;
+
+  /// No description provided for @healthOther.
+  ///
+  /// In pl, this message translates to:
+  /// **'Inne'**
+  String get healthOther;
+
+  /// No description provided for @healthNameLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Nazwa'**
+  String get healthNameLabel;
+
+  /// No description provided for @healthDateLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Data'**
+  String get healthDateLabel;
+
+  /// No description provided for @healthNextDueLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Następny termin'**
+  String get healthNextDueLabel;
+
+  /// No description provided for @healthNextDueNone.
+  ///
+  /// In pl, this message translates to:
+  /// **'brak'**
+  String get healthNextDueNone;
+
+  /// No description provided for @healthNextDueClear.
+  ///
+  /// In pl, this message translates to:
+  /// **'Usuń termin'**
+  String get healthNextDueClear;
+
+  /// No description provided for @healthTemplateLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Rodzaj'**
+  String get healthTemplateLabel;
+
+  /// No description provided for @healthTypeLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Kategoria'**
+  String get healthTypeLabel;
+
+  /// No description provided for @healthEntryDeleted.
+  ///
+  /// In pl, this message translates to:
+  /// **'Usunięto wpis'**
+  String get healthEntryDeleted;
+
+  /// No description provided for @healthHistory.
+  ///
+  /// In pl, this message translates to:
+  /// **'Historia'**
+  String get healthHistory;
+
+  /// No description provided for @healthEntryNotFound.
+  ///
+  /// In pl, this message translates to:
+  /// **'Nie znaleziono wpisu.'**
+  String get healthEntryNotFound;
+
+  /// No description provided for @healthMandatory.
+  ///
+  /// In pl, this message translates to:
+  /// **'obowiązkowe'**
+  String get healthMandatory;
+
+  /// No description provided for @settingsTemplates.
+  ///
+  /// In pl, this message translates to:
+  /// **'Szablony zdrowotne'**
+  String get settingsTemplates;
+
+  /// No description provided for @templateAdd.
+  ///
+  /// In pl, this message translates to:
+  /// **'Dodaj szablon'**
+  String get templateAdd;
+
+  /// No description provided for @templateEdit.
+  ///
+  /// In pl, this message translates to:
+  /// **'Edytuj szablon'**
+  String get templateEdit;
+
+  /// No description provided for @templateIntervalLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Co ile miesięcy (puste = bez terminu)'**
+  String get templateIntervalLabel;
+
+  /// No description provided for @templateIntervalInvalid.
+  ///
+  /// In pl, this message translates to:
+  /// **'Podaj od 1 do 60 miesięcy'**
+  String get templateIntervalInvalid;
+
+  /// No description provided for @templateMandatory.
+  ///
+  /// In pl, this message translates to:
+  /// **'Obowiązkowe'**
+  String get templateMandatory;
+
+  /// No description provided for @templateActive.
+  ///
+  /// In pl, this message translates to:
+  /// **'W użyciu'**
+  String get templateActive;
+
+  /// No description provided for @templateArchived.
+  ///
+  /// In pl, this message translates to:
+  /// **'Nieużywane'**
+  String get templateArchived;
+
+  /// No description provided for @templateNoInterval.
+  ///
+  /// In pl, this message translates to:
+  /// **'bez stałego terminu'**
+  String get templateNoInterval;
+
+  /// No description provided for @remindersHealthEnabled.
+  ///
+  /// In pl, this message translates to:
+  /// **'Przypominaj o terminach zdrowotnych'**
+  String get remindersHealthEnabled;
+
+  /// No description provided for @remindersHealthHeader.
+  ///
+  /// In pl, this message translates to:
+  /// **'Zdrowie'**
+  String get remindersHealthHeader;
+
+  /// No description provided for @templateInterval.
+  ///
+  /// In pl, this message translates to:
+  /// **'co {months, plural, =1{miesiąc} few{{months} miesiące} many{{months} miesięcy} other{{months} miesiąca}}'**
+  String templateInterval(int months);
+
+  /// No description provided for @remindersHealthDaysBefore.
+  ///
+  /// In pl, this message translates to:
+  /// **'{days, plural, =1{1 dzień} other{{days} dni}} przed terminem (wizyty: dzień przed)'**
+  String remindersHealthDaysBefore(int days);
+
+  /// No description provided for @healthDueIn.
+  ///
+  /// In pl, this message translates to:
+  /// **'{days, plural, =0{dziś} =1{jutro} other{za {days} dni}}'**
+  String healthDueIn(int days);
+
+  /// No description provided for @healthOverdueBy.
+  ///
+  /// In pl, this message translates to:
+  /// **'{days, plural, =1{wczoraj} other{{days} dni temu}}'**
+  String healthOverdueBy(int days);
+
+  /// No description provided for @healthNextDue.
+  ///
+  /// In pl, this message translates to:
+  /// **'termin {date}'**
+  String healthNextDue(String date);
+
+  /// No description provided for @healthAttentionBanner.
+  ///
+  /// In pl, this message translates to:
+  /// **'{count, plural, =1{1 termin wymaga uwagi} few{{count} terminy wymagają uwagi} other{{count} terminów wymaga uwagi}}'**
+  String healthAttentionBanner(int count);
 }
 
 class _AppLocalizationsDelegate

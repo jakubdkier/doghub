@@ -12,6 +12,9 @@ import '../../food/application/food_providers.dart';
 import '../../food/application/purchase_providers.dart';
 import '../../food/domain/food.dart';
 import '../../food/presentation/stock_labels.dart';
+import '../../health/application/health_providers.dart';
+import '../../health/domain/health_schedule.dart';
+import '../../health/presentation/health_labels.dart';
 import '../../settings/application/reminder_settings_provider.dart';
 import '../application/event_providers.dart';
 import '../application/hidden_events.dart';
@@ -59,7 +62,7 @@ class _TodayPageState extends ConsumerState<TodayPage> {
     final dog = ref.watch(currentDogProvider);
     final now = ref.watch(clockProvider)();
     final hidden = ref.watch(hiddenEventsProvider);
-    final recent = (ref.watch(recentEventsProvider).value ?? const [])
+    final recent = (ref.watch(recentEventsProvider).value ?? const <DogEvent>[])
         .where((e) => !hidden.contains(e.id))
         .toList();
     final today = eventsOnDay(recent, now);
@@ -81,6 +84,18 @@ class _TodayPageState extends ConsumerState<TodayPage> {
       body: ListView(
         padding: const EdgeInsets.only(bottom: 24),
         children: [
+          if (attentionNeeded(
+                ref.watch(healthSeriesListProvider) ?? const <HealthSeries>[],
+              )
+              case final attention when attention.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+              child: HealthAttentionBanner(
+                series: attention,
+                now: now,
+                onTap: () => context.go(Routes.health),
+              ),
+            ),
           const _QuickActions(),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),

@@ -6,6 +6,7 @@ import 'package:material_ui/material_ui.dart';
 import '../../../app/routes.dart';
 import '../../../core/utils/clock.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../events/domain/dog_event.dart';
 import '../../household/application/household_providers.dart';
 import '../../settings/application/reminder_settings_provider.dart';
 import '../application/food_providers.dart';
@@ -53,11 +54,11 @@ class FoodDetailPage extends ConsumerWidget {
       );
     }
     final stock = ref.watch(stockProvider)?[foodId];
-    final purchases = (ref.watch(purchasesProvider).value ?? const [])
+    final purchases = (ref.watch(purchasesProvider).value ?? const <Purchase>[])
         .where((p) => p.foodId == foodId)
         .toList();
     final now = ref.watch(clockProvider)();
-    final meals = ref.watch(mealsProvider).value ?? const [];
+    final meals = ref.watch(mealsProvider).value ?? const <DogEvent>[];
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(

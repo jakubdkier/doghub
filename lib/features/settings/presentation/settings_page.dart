@@ -28,6 +28,12 @@ class SettingsPage extends ConsumerWidget {
             trailing: const Icon(Icons.chevron_right),
             onTap: () => context.push(Routes.settingsReminders),
           ),
+          ListTile(
+            leading: const Icon(Icons.vaccines_outlined),
+            title: Text(l10n.settingsTemplates),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => context.push(Routes.settingsTemplates),
+          ),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.logout),

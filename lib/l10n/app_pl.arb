@@ -300,7 +300,6 @@
   "weightRangeAll": "Wszystko",
   "weightChartTooFew": "Za mało pomiarów w tym okresie.",
   "weightHistoryHeader": "Pomiary",
-  "healthMoreSoon": "Szczepienia, odrobaczanie i wizyty u weta dojdą wkrótce.",
   "remindersWeighEnabled": "Przypominaj o ważeniu",
   "remindersWeighInfo": "Miesiąc po ostatnim pomiarze.",
   "remindersFoodHeader": "Karma",
@@ -313,6 +312,123 @@
       },
       "date": {
         "type": "String"
+      }
+    }
+  },
+  "reminderHealthSoonTitle": "Zbliża się: {name}",
+  "@reminderHealthSoonTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderHealthDueTitle": "Dziś termin: {name}",
+  "@reminderHealthDueTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderHealthOverdueTitle": "Po terminie: {name}",
+  "@reminderHealthOverdueTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderHealthBody": "{dog} · termin {date}",
+  "@reminderHealthBody": {
+    "placeholders": {
+      "dog": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "healthVaccination": "Szczepienia",
+  "healthDeworming": "Odrobaczanie",
+  "healthTicks": "Kleszcze i pchły",
+  "healthVet": "Wizyty u weta",
+  "healthStatusOk": "OK",
+  "healthStatusSoon": "Wkrótce",
+  "healthStatusOverdue": "Po terminie",
+  "healthNoEntries": "Brak wpisów",
+  "healthNoNextDue": "bez kolejnego terminu",
+  "healthAdd": "Dodaj wpis",
+  "healthEdit": "Edycja wpisu",
+  "healthOther": "Inne",
+  "healthNameLabel": "Nazwa",
+  "healthDateLabel": "Data",
+  "healthNextDueLabel": "Następny termin",
+  "healthNextDueNone": "brak",
+  "healthNextDueClear": "Usuń termin",
+  "healthTemplateLabel": "Rodzaj",
+  "healthTypeLabel": "Kategoria",
+  "healthEntryDeleted": "Usunięto wpis",
+  "healthHistory": "Historia",
+  "healthEntryNotFound": "Nie znaleziono wpisu.",
+  "healthMandatory": "obowiązkowe",
+  "settingsTemplates": "Szablony zdrowotne",
+  "templateAdd": "Dodaj szablon",
+  "templateEdit": "Edytuj szablon",
+  "templateIntervalLabel": "Co ile miesięcy (puste = bez terminu)",
+  "templateIntervalInvalid": "Podaj od 1 do 60 miesięcy",
+  "templateMandatory": "Obowiązkowe",
+  "templateActive": "W użyciu",
+  "templateArchived": "Nieużywane",
+  "templateNoInterval": "bez stałego terminu",
+  "remindersHealthEnabled": "Przypominaj o terminach zdrowotnych",
+  "remindersHealthHeader": "Zdrowie",
+  "templateInterval": "co {months, plural, =1{miesiąc} few{{months} miesiące} many{{months} miesięcy} other{{months} miesiąca}}",
+  "@templateInterval": {
+    "placeholders": {
+      "months": {
+        "type": "int"
+      }
+    }
+  },
+  "remindersHealthDaysBefore": "{days, plural, =1{1 dzień} other{{days} dni}} przed terminem (wizyty: dzień przed)",
+  "@remindersHealthDaysBefore": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "healthDueIn": "{days, plural, =0{dziś} =1{jutro} other{za {days} dni}}",
+  "@healthDueIn": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "healthOverdueBy": "{days, plural, =1{wczoraj} other{{days} dni temu}}",
+  "@healthOverdueBy": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "healthNextDue": "termin {date}",
+  "@healthNextDue": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "healthAttentionBanner": "{count, plural, =1{1 termin wymaga uwagi} few{{count} terminy wymagają uwagi} other{{count} terminów wymaga uwagi}}",
+  "@healthAttentionBanner": {
+    "placeholders": {
+      "count": {
+        "type": "int"
       }
     }
   }

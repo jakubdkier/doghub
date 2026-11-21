@@ -34,6 +34,12 @@ Future<void> seedWeight(
 
 Future<void> openWeight(WidgetTester tester) async {
   await tapTab(tester, 'Zdrowie');
+  await tester.scrollUntilVisible(
+    find.byKey(const Key('weightCard')),
+    200,
+    scrollable: find.byType(Scrollable).first,
+  );
+  await tester.pumpAndSettle();
   await tester.tap(find.byKey(const Key('weightCard')));
   await tester.pumpAndSettle();
   expect(find.byType(WeightPage), findsOneWidget);
@@ -48,7 +54,10 @@ void main() {
 
     await tapTab(tester, 'Zdrowie');
     expect(
-      find.text('Brak pomiarów. Dodaj pierwszy, żeby zobaczyć wykres.'),
+      find.text(
+        'Brak pomiarów. Dodaj pierwszy, żeby zobaczyć wykres.',
+        skipOffstage: false,
+      ),
       findsOneWidget,
     );
     await openWeight(tester);

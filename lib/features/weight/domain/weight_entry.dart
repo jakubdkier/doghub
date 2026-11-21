@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../core/utils/dates.dart';
+
 part 'weight_entry.freezed.dart';
 
 /// Bounds shared with `validWeight()` in firestore.rules.
@@ -28,14 +30,8 @@ abstract class WeightEntry with _$WeightEntry {
   }
 }
 
-/// Measurements are per day; noon keeps the date stable across time zones.
-/// Never later than [now] (default: the current time), since the rules
-/// reject future times: a measurement today before noon keeps [now].
-DateTime weighDay(DateTime d, {DateTime? now}) {
-  final noon = DateTime(d.year, d.month, d.day, 12);
-  final current = now ?? DateTime.now();
-  return noon.isAfter(current) ? current : noon;
-}
+/// Measurements are per day (see [noonOf]); never stored in the future.
+DateTime weighDay(DateTime d, {DateTime? now}) => noonOf(d, now: now);
 
 /// Parses user input like "12,5" or "12.5 kg". Returns null if not a
 /// plausible dog weight (0 < kg < 150, same bounds as firestore.rules).

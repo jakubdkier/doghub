@@ -178,9 +178,10 @@ void main() {
     );
 
     final r = notifications.scheduled.single;
-    // (8 - 4) kg at ~400 g/day ≈ 10 days, at 9:00.
+    // (8 - 4) kg at ~400-450 g/day ≈ 9-10 days, at 9:00 (so 8-10 whole
+    // days from now depending on the time of day).
     expect(r.at.hour, 9);
-    expect(r.at.difference(DateTime.now()).inDays, inInclusiveRange(9, 11));
+    expect(r.at.difference(DateTime.now()).inDays, inInclusiveRange(8, 10));
   });
 
   testWidgets('tapping a notification opens the food', (tester) async {

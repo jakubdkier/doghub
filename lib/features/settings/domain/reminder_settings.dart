@@ -11,12 +11,19 @@ abstract class ReminderSettings with _$ReminderSettings {
   /// "Zważ psa" comes this long after the last measurement.
   static const weighIntervalDays = 30;
 
+  static const minHealthDaysBefore = 1;
+  static const maxHealthDaysBefore = 30;
+
   const factory ReminderSettings({
     @Default(true) bool foodEnabled,
 
     /// Remind when a food's stock drops to this many kg.
     @Default(2.0) double foodThresholdKg,
     @Default(true) bool weighEnabled,
+    @Default(true) bool healthEnabled,
+
+    /// Health reminder this many days before the due date (vet: 1 day).
+    @Default(7) int healthDaysBefore,
     @Default(18) int hour,
     @Default(0) int minute,
   }) = _ReminderSettings;

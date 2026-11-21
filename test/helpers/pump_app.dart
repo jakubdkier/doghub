@@ -13,7 +13,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:material_ui/material_ui.dart'
-    show MaterialLocalizations, NavigationBar;
+    show MaterialLocalizations, NavigationBar, Scaffold;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'fake_auth_repository.dart';
@@ -92,7 +92,7 @@ Future<void> tapTab(WidgetTester tester, String label) async {
 /// Taps the app bar back button (`pageBack` expects a Cupertino one).
 Future<void> tapBack(WidgetTester tester) async {
   final tooltip = MaterialLocalizations.of(
-    tester.element(find.byType(NavigationBar).first),
+    tester.element(find.byType(Scaffold).last),
   ).backButtonTooltip;
   await tester.tap(find.byTooltip(tooltip).last);
   await tester.pumpAndSettle();

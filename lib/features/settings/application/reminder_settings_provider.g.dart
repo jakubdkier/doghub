@@ -46,7 +46,7 @@ final class ReminderSettingsControllerProvider
 }
 
 String _$reminderSettingsControllerHash() =>
-    r'06ea64269f40f8d532510f790ce119321085fbd3';
+    r'6e64e072052a02ed472650f697f37cc91f6361cd';
 
 /// Per-device reminder settings stored in shared preferences.
 

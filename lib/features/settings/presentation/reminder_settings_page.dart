@@ -57,6 +57,32 @@ class ReminderSettingsPage extends ConsumerWidget {
             value: settings.weighEnabled,
             onChanged: controller.setWeighEnabled,
           ),
+          SwitchListTile(
+            key: const Key('healthRemindersEnabled'),
+            secondary: const Icon(Icons.vaccines_outlined),
+            title: Text(l10n.remindersHealthEnabled),
+            value: settings.healthEnabled,
+            onChanged: controller.setHealthEnabled,
+          ),
+          ListTile(
+            enabled: settings.healthEnabled,
+            title: Text(
+              l10n.remindersHealthDaysBefore(settings.healthDaysBefore),
+            ),
+            subtitle: Slider(
+              key: const Key('healthDaysBefore'),
+              min: ReminderSettings.minHealthDaysBefore.toDouble(),
+              max: ReminderSettings.maxHealthDaysBefore.toDouble(),
+              divisions:
+                  ReminderSettings.maxHealthDaysBefore -
+                  ReminderSettings.minHealthDaysBefore,
+              value: settings.healthDaysBefore.toDouble(),
+              label: '${settings.healthDaysBefore}',
+              onChanged: settings.healthEnabled
+                  ? (v) => controller.setHealthDaysBefore(v.round())
+                  : null,
+            ),
+          ),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.schedule),

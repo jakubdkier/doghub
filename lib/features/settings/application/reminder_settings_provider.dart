@@ -10,6 +10,8 @@ abstract final class _Keys {
   static const foodEnabled = 'reminders.food.enabled';
   static const foodThresholdKg = 'reminders.food.thresholdKg';
   static const weighEnabled = 'reminders.weigh.enabled';
+  static const healthEnabled = 'reminders.health.enabled';
+  static const healthDaysBefore = 'reminders.health.daysBefore';
   static const hour = 'reminders.hour';
   static const minute = 'reminders.minute';
   static const permissionAsked = 'reminders.permissionAsked';
@@ -27,6 +29,9 @@ class ReminderSettingsController extends _$ReminderSettingsController {
       foodThresholdKg:
           prefs.getDouble(_Keys.foodThresholdKg) ?? d.foodThresholdKg,
       weighEnabled: prefs.getBool(_Keys.weighEnabled) ?? d.weighEnabled,
+      healthEnabled: prefs.getBool(_Keys.healthEnabled) ?? d.healthEnabled,
+      healthDaysBefore:
+          prefs.getInt(_Keys.healthDaysBefore) ?? d.healthDaysBefore,
       hour: prefs.getInt(_Keys.hour) ?? d.hour,
       minute: prefs.getInt(_Keys.minute) ?? d.minute,
     );
@@ -42,6 +47,21 @@ class ReminderSettingsController extends _$ReminderSettingsController {
     state = state.copyWith(weighEnabled: enabled);
     ref.read(sharedPreferencesProvider).setBool(_Keys.weighEnabled, enabled);
     if (enabled) ensurePermission(force: true);
+  }
+
+  void setHealthEnabled(bool enabled) {
+    state = state.copyWith(healthEnabled: enabled);
+    ref.read(sharedPreferencesProvider).setBool(_Keys.healthEnabled, enabled);
+    if (enabled) ensurePermission(force: true);
+  }
+
+  void setHealthDaysBefore(int days) {
+    final clamped = days.clamp(
+      ReminderSettings.minHealthDaysBefore,
+      ReminderSettings.maxHealthDaysBefore,
+    );
+    state = state.copyWith(healthDaysBefore: clamped);
+    ref.read(sharedPreferencesProvider).setInt(_Keys.healthDaysBefore, clamped);
   }
 
   void setFoodThresholdKg(double kg) {

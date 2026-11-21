@@ -13,6 +13,8 @@ import '../../features/food/application/food_providers.dart';
 import '../../features/food/application/purchase_providers.dart';
 import '../../features/food/domain/food.dart';
 import '../../features/food/domain/food_reminder.dart';
+import '../../features/health/application/health_providers.dart';
+import '../../features/health/domain/health_reminder.dart';
 import '../../features/settings/application/reminder_settings_provider.dart';
 import '../../features/weight/application/weight_providers.dart';
 import '../../features/weight/domain/weigh_reminder.dart';
@@ -89,6 +91,7 @@ final _l10n = lookupAppLocalizations(const Locale('pl'));
 
 const _foodIdBase = 1000;
 const _weighId = 2000;
+const _healthIdBase = 3000;
 
 /// Planned food reminders for the current dog (empty when signed out).
 @Riverpod(keepAlive: true)
@@ -111,17 +114,24 @@ List<PlannedReminder>? reminderPlan(Ref ref) {
   final food = ref.watch(foodReminderPlanProvider);
   final stockLoaded = ref.watch(stockProvider) != null;
   final weights = ref.watch(weightsProvider).value;
-  if (!stockLoaded || weights == null) return null;
+  final health = ref.watch(healthSeriesListProvider);
+  if (!stockLoaded || weights == null || health == null) return null;
   final foods = {
     for (final f in ref.watch(foodsProvider).value ?? const <Food>[]) f.id: f,
   };
   final dogName = ref.watch(currentDogProvider.select((d) => d?.name)) ?? '';
   final settings = ref.watch(reminderSettingsControllerProvider);
+  final now = ref.read(clockProvider)();
   final latest = summarizeWeights(weights)?.latest;
   final weighAt = planWeighReminder(
     latest: latest,
     settings: settings,
-    now: ref.read(clockProvider)(),
+    now: now,
+  );
+  final healthReminders = planHealthReminders(
+    series: health,
+    settings: settings,
+    now: now,
   );
 
   return [
@@ -152,6 +162,25 @@ List<PlannedReminder>? reminderPlan(Ref ref) {
         ),
         at: weighAt,
         route: Routes.healthWeight,
+      ),
+    for (final (i, r) in healthReminders.indexed)
+      PlannedReminder(
+        id: _healthIdBase + i,
+        title: switch (r.kind) {
+          HealthReminderKind.before => _l10n.reminderHealthSoonTitle(
+            r.entry.name,
+          ),
+          HealthReminderKind.due => _l10n.reminderHealthDueTitle(r.entry.name),
+          HealthReminderKind.overdue => _l10n.reminderHealthOverdueTitle(
+            r.entry.name,
+          ),
+        },
+        body: _l10n.reminderHealthBody(
+          dogName,
+          DateFormat.yMMMMd().format(r.entry.nextDue!),
+        ),
+        at: r.at,
+        route: Routes.health,
       ),
   ];
 }

@@ -531,10 +531,6 @@ class AppLocalizationsPl extends AppLocalizations {
   String get weightHistoryHeader => 'Pomiary';
 
   @override
-  String get healthMoreSoon =>
-      'Szczepienia, odrobaczanie i wizyty u weta dojdą wkrótce.';
-
-  @override
   String get remindersWeighEnabled => 'Przypominaj o ważeniu';
 
   @override
@@ -549,5 +545,191 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String weightChange(String change, String date) {
     return '$change kg od $date';
+  }
+
+  @override
+  String reminderHealthSoonTitle(String name) {
+    return 'Zbliża się: $name';
+  }
+
+  @override
+  String reminderHealthDueTitle(String name) {
+    return 'Dziś termin: $name';
+  }
+
+  @override
+  String reminderHealthOverdueTitle(String name) {
+    return 'Po terminie: $name';
+  }
+
+  @override
+  String reminderHealthBody(String dog, String date) {
+    return '$dog · termin $date';
+  }
+
+  @override
+  String get healthVaccination => 'Szczepienia';
+
+  @override
+  String get healthDeworming => 'Odrobaczanie';
+
+  @override
+  String get healthTicks => 'Kleszcze i pchły';
+
+  @override
+  String get healthVet => 'Wizyty u weta';
+
+  @override
+  String get healthStatusOk => 'OK';
+
+  @override
+  String get healthStatusSoon => 'Wkrótce';
+
+  @override
+  String get healthStatusOverdue => 'Po terminie';
+
+  @override
+  String get healthNoEntries => 'Brak wpisów';
+
+  @override
+  String get healthNoNextDue => 'bez kolejnego terminu';
+
+  @override
+  String get healthAdd => 'Dodaj wpis';
+
+  @override
+  String get healthEdit => 'Edycja wpisu';
+
+  @override
+  String get healthOther => 'Inne';
+
+  @override
+  String get healthNameLabel => 'Nazwa';
+
+  @override
+  String get healthDateLabel => 'Data';
+
+  @override
+  String get healthNextDueLabel => 'Następny termin';
+
+  @override
+  String get healthNextDueNone => 'brak';
+
+  @override
+  String get healthNextDueClear => 'Usuń termin';
+
+  @override
+  String get healthTemplateLabel => 'Rodzaj';
+
+  @override
+  String get healthTypeLabel => 'Kategoria';
+
+  @override
+  String get healthEntryDeleted => 'Usunięto wpis';
+
+  @override
+  String get healthHistory => 'Historia';
+
+  @override
+  String get healthEntryNotFound => 'Nie znaleziono wpisu.';
+
+  @override
+  String get healthMandatory => 'obowiązkowe';
+
+  @override
+  String get settingsTemplates => 'Szablony zdrowotne';
+
+  @override
+  String get templateAdd => 'Dodaj szablon';
+
+  @override
+  String get templateEdit => 'Edytuj szablon';
+
+  @override
+  String get templateIntervalLabel => 'Co ile miesięcy (puste = bez terminu)';
+
+  @override
+  String get templateIntervalInvalid => 'Podaj od 1 do 60 miesięcy';
+
+  @override
+  String get templateMandatory => 'Obowiązkowe';
+
+  @override
+  String get templateActive => 'W użyciu';
+
+  @override
+  String get templateArchived => 'Nieużywane';
+
+  @override
+  String get templateNoInterval => 'bez stałego terminu';
+
+  @override
+  String get remindersHealthEnabled => 'Przypominaj o terminach zdrowotnych';
+
+  @override
+  String get remindersHealthHeader => 'Zdrowie';
+
+  @override
+  String templateInterval(int months) {
+    String _temp0 = intl.Intl.pluralLogic(
+      months,
+      locale: localeName,
+      other: '$months miesiąca',
+      many: '$months miesięcy',
+      few: '$months miesiące',
+      one: 'miesiąc',
+    );
+    return 'co $_temp0';
+  }
+
+  @override
+  String remindersHealthDaysBefore(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days dni',
+      one: '1 dzień',
+    );
+    return '$_temp0 przed terminem (wizyty: dzień przed)';
+  }
+
+  @override
+  String healthDueIn(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'za $days dni',
+      one: 'jutro',
+      zero: 'dziś',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String healthOverdueBy(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days dni temu',
+      one: 'wczoraj',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String healthNextDue(String date) {
+    return 'termin $date';
+  }
+
+  @override
+  String healthAttentionBanner(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count terminów wymaga uwagi',
+      few: '$count terminy wymagają uwagi',
+      one: '1 termin wymaga uwagi',
+    );
+    return '$_temp0';
   }
 }

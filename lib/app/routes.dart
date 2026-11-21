@@ -12,9 +12,14 @@ abstract final class Routes {
   static String newPurchaseFor(String foodId) => '$newPurchase?foodId=$foodId';
   static const health = '/health';
   static const healthWeight = '/health/weight';
+  static const healthNew = '/health/new';
+  static String healthNewFor(String type) => '$healthNew?type=$type';
+  static String healthType(String type) => '/health/type/$type';
+  static String healthEntry(String id) => '/health/entry/$id';
   static const settings = '/settings';
   static const settingsHousehold = '/settings/household';
   static const settingsReminders = '/settings/reminders';
+  static const settingsTemplates = '/settings/templates';
 
   /// Edit an event (outside the shell, like settings).
   static const eventPattern = '/event/:id';
