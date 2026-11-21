@@ -12,6 +12,8 @@ import '../features/events/presentation/quick_add.dart';
 import '../features/events/presentation/today_page.dart';
 import '../core/notifications/local_notifications.dart';
 import '../features/home_widget/data/home_widget_service.dart';
+import '../features/meds/presentation/med_form_page.dart';
+import '../features/meds/presentation/meds_page.dart';
 import '../features/food/presentation/food_detail_page.dart';
 import '../features/food/presentation/food_page.dart';
 import '../features/food/presentation/purchase_form_page.dart';
@@ -143,6 +145,22 @@ GoRouter router(Ref ref) {
                   GoRoute(
                     path: 'weight',
                     builder: (_, _) => const WeightPage(),
+                  ),
+                  GoRoute(
+                    path: 'meds',
+                    builder: (_, _) => const MedsPage(),
+                    routes: [
+                      // Before ':id' so "new" isn't taken as an id.
+                      GoRoute(
+                        path: 'new',
+                        builder: (_, _) => const MedFormPage(),
+                      ),
+                      GoRoute(
+                        path: ':id',
+                        builder: (_, state) =>
+                            MedFormPage(medId: state.pathParameters['id']),
+                      ),
+                    ],
                   ),
                   GoRoute(
                     path: 'new',

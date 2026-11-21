@@ -13,6 +13,9 @@ abstract final class Routes {
   static const health = '/health';
   static const healthWeight = '/health/weight';
   static const healthNew = '/health/new';
+  static const meds = '/health/meds';
+  static const medNew = '/health/meds/new';
+  static String med(String id) => '/health/meds/$id';
   static String healthNewFor(String type) => '$healthNew?type=$type';
   static String healthType(String type) => '/health/type/$type';
   static String healthEntry(String id) => '/health/entry/$id';

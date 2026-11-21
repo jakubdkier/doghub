@@ -455,5 +455,101 @@
         "type": "int"
       }
     }
+  },
+  "medsTitle": "Leki",
+  "medsToday": "Leki na dziś",
+  "medAdd": "Dodaj lek",
+  "medEdit": "Edytuj lek",
+  "medNameLabel": "Nazwa leku",
+  "medDoseLabel": "Dawka (opcjonalnie), np. 1 tabletka",
+  "medScheduleDaily": "Codziennie",
+  "medScheduleInterval": "Co kilka dni",
+  "medTimesLabel": "Godziny",
+  "medAddTime": "Dodaj godzinę",
+  "medRemoveTime": "Usuń godzinę",
+  "medIntervalLabel": "Co ile dni",
+  "medIntervalInvalid": "Podaj od 2 do 60 dni",
+  "medStartLabel": "Od",
+  "medEndLabel": "Do",
+  "medEndNone": "bez końca",
+  "medEndClear": "Usuń datę końca",
+  "medActive": "W użyciu",
+  "medsEnded": "Zakończone",
+  "medsEmpty": "Brak leków. Dodaj lek, żeby odhaczać dawki.",
+  "medHistory": "Ostatnie 30 dni",
+  "medNotGiven": "nie podano",
+  "medNotFound": "Nie znaleziono leku.",
+  "remindersMedsEnabled": "Przypominaj o lekach",
+  "medNoDosesToday": "Dziś nie ma dawek.",
+  "medGivenBy": "podał(a) {name} o {time}",
+  "@medGivenBy": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "medAdherence": "{given}/{expected} dawek w ostatnich 7 dniach",
+  "@medAdherence": {
+    "placeholders": {
+      "given": {
+        "type": "int"
+      },
+      "expected": {
+        "type": "int"
+      }
+    }
+  },
+  "medEveryDays": "co {days} dni o {time}",
+  "@medEveryDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "medDailyAt": "codziennie o {times}",
+  "@medDailyAt": {
+    "placeholders": {
+      "times": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderMedTitle": "Czas na lek: {name}",
+  "@reminderMedTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderMedBody": "{dog} · {details}",
+  "@reminderMedBody": {
+    "placeholders": {
+      "dog": {
+        "type": "String"
+      },
+      "details": {
+        "type": "String"
+      }
+    }
+  },
+  "widgetMeds": "Leki: {given}/{total} dziś",
+  "@widgetMeds": {
+    "placeholders": {
+      "given": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
   }
 }

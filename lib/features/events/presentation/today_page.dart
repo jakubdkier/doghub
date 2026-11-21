@@ -15,6 +15,7 @@ import '../../food/presentation/stock_labels.dart';
 import '../../health/application/health_providers.dart';
 import '../../health/domain/health_schedule.dart';
 import '../../health/presentation/health_labels.dart';
+import '../../meds/presentation/today_meds_section.dart';
 import '../../settings/application/reminder_settings_provider.dart';
 import '../application/event_providers.dart';
 import '../application/hidden_events.dart';
@@ -125,6 +126,7 @@ class _TodayPageState extends ConsumerState<TodayPage> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: _FoodStockTile(recent: recent),
           ),
+          const TodayMedsSection(),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
             child: Text(l10n.todayTimelineHeader, style: textTheme.titleMedium),

@@ -58,6 +58,13 @@ class ReminderSettingsPage extends ConsumerWidget {
             onChanged: controller.setWeighEnabled,
           ),
           SwitchListTile(
+            key: const Key('medsRemindersEnabled'),
+            secondary: const Icon(Icons.medication_liquid_outlined),
+            title: Text(l10n.remindersMedsEnabled),
+            value: settings.medsEnabled,
+            onChanged: controller.setMedsEnabled,
+          ),
+          SwitchListTile(
             key: const Key('healthRemindersEnabled'),
             secondary: const Icon(Icons.vaccines_outlined),
             title: Text(l10n.remindersHealthEnabled),

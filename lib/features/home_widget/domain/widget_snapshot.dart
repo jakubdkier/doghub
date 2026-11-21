@@ -23,6 +23,12 @@ abstract class WidgetSnapshot with _$WidgetSnapshot {
     /// E.g. "1 termin po terminie"; null hides the line.
     String? healthText,
     @Default(false) bool healthOverdue,
+
+    /// E.g. "Leki: 0/1 dziś"; null when no doses are due today.
+    String? medsText,
+
+    /// A dose due earlier today hasn't been ticked.
+    @Default(false) bool medsMissed,
   }) = _WidgetSnapshot;
 
   const WidgetSnapshot._();
@@ -39,6 +45,8 @@ abstract class WidgetSnapshot with _$WidgetSnapshot {
     WidgetKeys.foodLow: foodLow ? '1' : '0',
     WidgetKeys.health: healthText ?? '',
     WidgetKeys.healthAlert: healthOverdue ? '1' : '0',
+    WidgetKeys.meds: medsText ?? '',
+    WidgetKeys.medsAlert: medsMissed ? '1' : '0',
   };
 
   static String _millis(DateTime? t) =>
@@ -56,6 +64,8 @@ abstract final class WidgetKeys {
   static const foodLow = 'dh_food_low';
   static const health = 'dh_health';
   static const healthAlert = 'dh_health_alert';
+  static const meds = 'dh_meds';
+  static const medsAlert = 'dh_meds_alert';
 }
 
 /// Widget tap URIs (`doghub://quick-add?type=meal`, `doghub://today`) to

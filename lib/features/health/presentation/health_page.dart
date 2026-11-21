@@ -12,6 +12,11 @@ import '../../weight/domain/weight_entry.dart';
 import '../../weight/domain/weight_stats.dart';
 import '../../weight/presentation/weight_chart.dart';
 import '../../weight/presentation/weight_labels.dart';
+import '../../meds/application/med_providers.dart';
+import '../../meds/domain/med.dart';
+import '../../meds/domain/med_dose.dart';
+import '../../meds/domain/med_schedule.dart';
+import '../../meds/presentation/med_labels.dart';
 import '../application/health_providers.dart';
 import '../domain/health_entry.dart';
 import '../domain/health_schedule.dart';
@@ -65,6 +70,7 @@ class HealthPage extends ConsumerWidget {
               ],
               now: now,
             ),
+          _MedsCard(now: now),
           const SizedBox(height: 8),
           Card(
             key: const Key('weightCard'),
@@ -176,6 +182,66 @@ class _SectionCard extends StatelessWidget {
                           ),
                         ),
                         HealthStatusChip(status: s.status),
+                      ],
+                    ),
+                  ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _MedsCard extends ConsumerWidget {
+  const _MedsCard({required this.now});
+
+  final DateTime now;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final textTheme = Theme.of(context).textTheme;
+    final meds = (ref.watch(medsProvider).value ?? const <Med>[])
+        .where((m) => m.active)
+        .toList();
+    final doses = ref.watch(medDosesProvider).value ?? const <MedDose>[];
+    return Card(
+      key: const Key('medsCard'),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: () => context.push(Routes.meds),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const Icon(Icons.medication_outlined),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(l10n.medsTitle, style: textTheme.titleMedium),
+                  ),
+                  const Icon(Icons.chevron_right),
+                ],
+              ),
+              const SizedBox(height: 8),
+              if (meds.isEmpty)
+                Text(l10n.medsEmpty, style: textTheme.bodySmall)
+              else
+                for (final m in meds)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 2),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(medTitle(m)),
+                        Text(switch (adherence(m, doses, now)) {
+                          (given: final g, expected: final e) when e > 0 =>
+                            l10n.medAdherence(g, e),
+                          _ => scheduleText(l10n, m),
+                        }, style: textTheme.bodySmall),
                       ],
                     ),
                   ),

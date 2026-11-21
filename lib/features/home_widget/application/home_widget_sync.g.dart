@@ -52,7 +52,7 @@ final class WidgetSnapshotProvider
   }
 }
 
-String _$widgetSnapshotHash() => r'1a0fcda9f822f15beb01153ef4198bb4d50cb129';
+String _$widgetSnapshotHash() => r'6eceaa0ea2a8d4553fd0f0213d0bc280d9773b5b';
 
 /// Pushes the snapshot to the home screen widgets when it changes.
 /// Watched by the app root.

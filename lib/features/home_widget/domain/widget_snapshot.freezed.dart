@@ -17,7 +17,9 @@ mixin _$WidgetSnapshot {
 
  bool get ready; String get dogName; DateTime? get lastMealAt; DateTime? get lastPoopAt; DateTime? get lastWalkAt;/// E.g. "Karma: ~9 dni"; null hides the line.
  String? get foodText; bool get foodLow;/// E.g. "1 termin po terminie"; null hides the line.
- String? get healthText; bool get healthOverdue;
+ String? get healthText; bool get healthOverdue;/// E.g. "Leki: 0/1 dziś"; null when no doses are due today.
+ String? get medsText;/// A dose due earlier today hasn't been ticked.
+ bool get medsMissed;
 /// Create a copy of WidgetSnapshot
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,20 +31,20 @@ $WidgetSnapshotCopyWith<WidgetSnapshot> get copyWith => _$WidgetSnapshotCopyWith
 @override
 bool operator ==(Object other) {
   final _this = this as WidgetSnapshot;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WidgetSnapshot&&(identical(other.ready, _this.ready) || other.ready == _this.ready)&&(identical(other.dogName, _this.dogName) || other.dogName == _this.dogName)&&(identical(other.lastMealAt, _this.lastMealAt) || other.lastMealAt == _this.lastMealAt)&&(identical(other.lastPoopAt, _this.lastPoopAt) || other.lastPoopAt == _this.lastPoopAt)&&(identical(other.lastWalkAt, _this.lastWalkAt) || other.lastWalkAt == _this.lastWalkAt)&&(identical(other.foodText, _this.foodText) || other.foodText == _this.foodText)&&(identical(other.foodLow, _this.foodLow) || other.foodLow == _this.foodLow)&&(identical(other.healthText, _this.healthText) || other.healthText == _this.healthText)&&(identical(other.healthOverdue, _this.healthOverdue) || other.healthOverdue == _this.healthOverdue));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WidgetSnapshot&&(identical(other.ready, _this.ready) || other.ready == _this.ready)&&(identical(other.dogName, _this.dogName) || other.dogName == _this.dogName)&&(identical(other.lastMealAt, _this.lastMealAt) || other.lastMealAt == _this.lastMealAt)&&(identical(other.lastPoopAt, _this.lastPoopAt) || other.lastPoopAt == _this.lastPoopAt)&&(identical(other.lastWalkAt, _this.lastWalkAt) || other.lastWalkAt == _this.lastWalkAt)&&(identical(other.foodText, _this.foodText) || other.foodText == _this.foodText)&&(identical(other.foodLow, _this.foodLow) || other.foodLow == _this.foodLow)&&(identical(other.healthText, _this.healthText) || other.healthText == _this.healthText)&&(identical(other.healthOverdue, _this.healthOverdue) || other.healthOverdue == _this.healthOverdue)&&(identical(other.medsText, _this.medsText) || other.medsText == _this.medsText)&&(identical(other.medsMissed, _this.medsMissed) || other.medsMissed == _this.medsMissed));
 }
 
 
 @override
 int get hashCode {
   final _this = this as WidgetSnapshot;
-  return Object.hash(runtimeType,_this.ready,_this.dogName,_this.lastMealAt,_this.lastPoopAt,_this.lastWalkAt,_this.foodText,_this.foodLow,_this.healthText,_this.healthOverdue);
+  return Object.hash(runtimeType,_this.ready,_this.dogName,_this.lastMealAt,_this.lastPoopAt,_this.lastWalkAt,_this.foodText,_this.foodLow,_this.healthText,_this.healthOverdue,_this.medsText,_this.medsMissed);
 }
 
 @override
 String toString() {
   final _this = this as WidgetSnapshot;
-  return 'WidgetSnapshot(ready: ${_this.ready}, dogName: ${_this.dogName}, lastMealAt: ${_this.lastMealAt}, lastPoopAt: ${_this.lastPoopAt}, lastWalkAt: ${_this.lastWalkAt}, foodText: ${_this.foodText}, foodLow: ${_this.foodLow}, healthText: ${_this.healthText}, healthOverdue: ${_this.healthOverdue})';
+  return 'WidgetSnapshot(ready: ${_this.ready}, dogName: ${_this.dogName}, lastMealAt: ${_this.lastMealAt}, lastPoopAt: ${_this.lastPoopAt}, lastWalkAt: ${_this.lastWalkAt}, foodText: ${_this.foodText}, foodLow: ${_this.foodLow}, healthText: ${_this.healthText}, healthOverdue: ${_this.healthOverdue}, medsText: ${_this.medsText}, medsMissed: ${_this.medsMissed})';
 }
 
 
@@ -53,7 +55,7 @@ abstract mixin class $WidgetSnapshotCopyWith<$Res>  {
   factory $WidgetSnapshotCopyWith(WidgetSnapshot value, $Res Function(WidgetSnapshot) _then) = _$WidgetSnapshotCopyWithImpl;
 @useResult
 $Res call({
- bool ready, String dogName, DateTime? lastMealAt, DateTime? lastPoopAt, DateTime? lastWalkAt, String? foodText, bool foodLow, String? healthText, bool healthOverdue
+ bool ready, String dogName, DateTime? lastMealAt, DateTime? lastPoopAt, DateTime? lastWalkAt, String? foodText, bool foodLow, String? healthText, bool healthOverdue, String? medsText, bool medsMissed
 });
 
 
@@ -70,7 +72,7 @@ class _$WidgetSnapshotCopyWithImpl<$Res>
 
 /// Create a copy of WidgetSnapshot
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? ready = null,Object? dogName = null,Object? lastMealAt = freezed,Object? lastPoopAt = freezed,Object? lastWalkAt = freezed,Object? foodText = freezed,Object? foodLow = null,Object? healthText = freezed,Object? healthOverdue = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? ready = null,Object? dogName = null,Object? lastMealAt = freezed,Object? lastPoopAt = freezed,Object? lastWalkAt = freezed,Object? foodText = freezed,Object? foodLow = null,Object? healthText = freezed,Object? healthOverdue = null,Object? medsText = freezed,Object? medsMissed = null,}) {
   return _then(WidgetSnapshot(
 ready: null == ready ? _self.ready : ready // ignore: cast_nullable_to_non_nullable
 as bool,dogName: null == dogName ? _self.dogName : dogName // ignore: cast_nullable_to_non_nullable
@@ -81,6 +83,8 @@ as DateTime?,foodText: freezed == foodText ? _self.foodText : foodText // ignore
 as String?,foodLow: null == foodLow ? _self.foodLow : foodLow // ignore: cast_nullable_to_non_nullable
 as bool,healthText: freezed == healthText ? _self.healthText : healthText // ignore: cast_nullable_to_non_nullable
 as String?,healthOverdue: null == healthOverdue ? _self.healthOverdue : healthOverdue // ignore: cast_nullable_to_non_nullable
+as bool,medsText: freezed == medsText ? _self.medsText : medsText // ignore: cast_nullable_to_non_nullable
+as String?,medsMissed: null == medsMissed ? _self.medsMissed : medsMissed // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
@@ -166,10 +170,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool ready,  String dogName,  DateTime? lastMealAt,  DateTime? lastPoopAt,  DateTime? lastWalkAt,  String? foodText,  bool foodLow,  String? healthText,  bool healthOverdue)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool ready,  String dogName,  DateTime? lastMealAt,  DateTime? lastPoopAt,  DateTime? lastWalkAt,  String? foodText,  bool foodLow,  String? healthText,  bool healthOverdue,  String? medsText,  bool medsMissed)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _WidgetSnapshot() when $default != null:
-return $default(_that.ready,_that.dogName,_that.lastMealAt,_that.lastPoopAt,_that.lastWalkAt,_that.foodText,_that.foodLow,_that.healthText,_that.healthOverdue);case _:
+return $default(_that.ready,_that.dogName,_that.lastMealAt,_that.lastPoopAt,_that.lastWalkAt,_that.foodText,_that.foodLow,_that.healthText,_that.healthOverdue,_that.medsText,_that.medsMissed);case _:
   return orElse();
 
 }
@@ -187,10 +191,10 @@ return $default(_that.ready,_that.dogName,_that.lastMealAt,_that.lastPoopAt,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool ready,  String dogName,  DateTime? lastMealAt,  DateTime? lastPoopAt,  DateTime? lastWalkAt,  String? foodText,  bool foodLow,  String? healthText,  bool healthOverdue)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool ready,  String dogName,  DateTime? lastMealAt,  DateTime? lastPoopAt,  DateTime? lastWalkAt,  String? foodText,  bool foodLow,  String? healthText,  bool healthOverdue,  String? medsText,  bool medsMissed)  $default,) {final _that = this;
 switch (_that) {
 case _WidgetSnapshot():
-return $default(_that.ready,_that.dogName,_that.lastMealAt,_that.lastPoopAt,_that.lastWalkAt,_that.foodText,_that.foodLow,_that.healthText,_that.healthOverdue);case _:
+return $default(_that.ready,_that.dogName,_that.lastMealAt,_that.lastPoopAt,_that.lastWalkAt,_that.foodText,_that.foodLow,_that.healthText,_that.healthOverdue,_that.medsText,_that.medsMissed);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -207,10 +211,10 @@ return $default(_that.ready,_that.dogName,_that.lastMealAt,_that.lastPoopAt,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool ready,  String dogName,  DateTime? lastMealAt,  DateTime? lastPoopAt,  DateTime? lastWalkAt,  String? foodText,  bool foodLow,  String? healthText,  bool healthOverdue)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool ready,  String dogName,  DateTime? lastMealAt,  DateTime? lastPoopAt,  DateTime? lastWalkAt,  String? foodText,  bool foodLow,  String? healthText,  bool healthOverdue,  String? medsText,  bool medsMissed)?  $default,) {final _that = this;
 switch (_that) {
 case _WidgetSnapshot() when $default != null:
-return $default(_that.ready,_that.dogName,_that.lastMealAt,_that.lastPoopAt,_that.lastWalkAt,_that.foodText,_that.foodLow,_that.healthText,_that.healthOverdue);case _:
+return $default(_that.ready,_that.dogName,_that.lastMealAt,_that.lastPoopAt,_that.lastWalkAt,_that.foodText,_that.foodLow,_that.healthText,_that.healthOverdue,_that.medsText,_that.medsMissed);case _:
   return null;
 
 }
@@ -222,7 +226,7 @@ return $default(_that.ready,_that.dogName,_that.lastMealAt,_that.lastPoopAt,_tha
 
 
 class _WidgetSnapshot extends WidgetSnapshot {
-  const _WidgetSnapshot({this.ready = false, this.dogName = '', this.lastMealAt, this.lastPoopAt, this.lastWalkAt, this.foodText, this.foodLow = false, this.healthText, this.healthOverdue = false}): super._();
+  const _WidgetSnapshot({this.ready = false, this.dogName = '', this.lastMealAt, this.lastPoopAt, this.lastWalkAt, this.foodText, this.foodLow = false, this.healthText, this.healthOverdue = false, this.medsText, this.medsMissed = false}): super._();
   
 
 @override@JsonKey() final  bool ready;
@@ -236,6 +240,10 @@ class _WidgetSnapshot extends WidgetSnapshot {
 /// E.g. "1 termin po terminie"; null hides the line.
 @override final  String? healthText;
 @override@JsonKey() final  bool healthOverdue;
+/// E.g. "Leki: 0/1 dziś"; null when no doses are due today.
+@override final  String? medsText;
+/// A dose due earlier today hasn't been ticked.
+@override@JsonKey() final  bool medsMissed;
 
 /// Create a copy of WidgetSnapshot
 /// with the given fields replaced by the non-null parameter values.
@@ -247,18 +255,18 @@ _$WidgetSnapshotCopyWith<_WidgetSnapshot> get copyWith => __$WidgetSnapshotCopyW
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _WidgetSnapshot&&(identical(other.ready, ready) || other.ready == ready)&&(identical(other.dogName, dogName) || other.dogName == dogName)&&(identical(other.lastMealAt, lastMealAt) || other.lastMealAt == lastMealAt)&&(identical(other.lastPoopAt, lastPoopAt) || other.lastPoopAt == lastPoopAt)&&(identical(other.lastWalkAt, lastWalkAt) || other.lastWalkAt == lastWalkAt)&&(identical(other.foodText, foodText) || other.foodText == foodText)&&(identical(other.foodLow, foodLow) || other.foodLow == foodLow)&&(identical(other.healthText, healthText) || other.healthText == healthText)&&(identical(other.healthOverdue, healthOverdue) || other.healthOverdue == healthOverdue));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _WidgetSnapshot&&(identical(other.ready, ready) || other.ready == ready)&&(identical(other.dogName, dogName) || other.dogName == dogName)&&(identical(other.lastMealAt, lastMealAt) || other.lastMealAt == lastMealAt)&&(identical(other.lastPoopAt, lastPoopAt) || other.lastPoopAt == lastPoopAt)&&(identical(other.lastWalkAt, lastWalkAt) || other.lastWalkAt == lastWalkAt)&&(identical(other.foodText, foodText) || other.foodText == foodText)&&(identical(other.foodLow, foodLow) || other.foodLow == foodLow)&&(identical(other.healthText, healthText) || other.healthText == healthText)&&(identical(other.healthOverdue, healthOverdue) || other.healthOverdue == healthOverdue)&&(identical(other.medsText, medsText) || other.medsText == medsText)&&(identical(other.medsMissed, medsMissed) || other.medsMissed == medsMissed));
 }
 
 
 @override
 int get hashCode {
-    return Object.hash(runtimeType,ready,dogName,lastMealAt,lastPoopAt,lastWalkAt,foodText,foodLow,healthText,healthOverdue);
+    return Object.hash(runtimeType,ready,dogName,lastMealAt,lastPoopAt,lastWalkAt,foodText,foodLow,healthText,healthOverdue,medsText,medsMissed);
 }
 
 @override
 String toString() {
-    return 'WidgetSnapshot(ready: $ready, dogName: $dogName, lastMealAt: $lastMealAt, lastPoopAt: $lastPoopAt, lastWalkAt: $lastWalkAt, foodText: $foodText, foodLow: $foodLow, healthText: $healthText, healthOverdue: $healthOverdue)';
+    return 'WidgetSnapshot(ready: $ready, dogName: $dogName, lastMealAt: $lastMealAt, lastPoopAt: $lastPoopAt, lastWalkAt: $lastWalkAt, foodText: $foodText, foodLow: $foodLow, healthText: $healthText, healthOverdue: $healthOverdue, medsText: $medsText, medsMissed: $medsMissed)';
 }
 
 
@@ -269,7 +277,7 @@ abstract mixin class _$WidgetSnapshotCopyWith<$Res> implements $WidgetSnapshotCo
   factory _$WidgetSnapshotCopyWith(_WidgetSnapshot value, $Res Function(_WidgetSnapshot) _then) = __$WidgetSnapshotCopyWithImpl;
 @override @useResult
 $Res call({
- bool ready, String dogName, DateTime? lastMealAt, DateTime? lastPoopAt, DateTime? lastWalkAt, String? foodText, bool foodLow, String? healthText, bool healthOverdue
+ bool ready, String dogName, DateTime? lastMealAt, DateTime? lastPoopAt, DateTime? lastWalkAt, String? foodText, bool foodLow, String? healthText, bool healthOverdue, String? medsText, bool medsMissed
 });
 
 
@@ -286,7 +294,7 @@ class __$WidgetSnapshotCopyWithImpl<$Res>
 
 /// Create a copy of WidgetSnapshot
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? ready = null,Object? dogName = null,Object? lastMealAt = freezed,Object? lastPoopAt = freezed,Object? lastWalkAt = freezed,Object? foodText = freezed,Object? foodLow = null,Object? healthText = freezed,Object? healthOverdue = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? ready = null,Object? dogName = null,Object? lastMealAt = freezed,Object? lastPoopAt = freezed,Object? lastWalkAt = freezed,Object? foodText = freezed,Object? foodLow = null,Object? healthText = freezed,Object? healthOverdue = null,Object? medsText = freezed,Object? medsMissed = null,}) {
   return _then(_WidgetSnapshot(
 ready: null == ready ? _self.ready : ready // ignore: cast_nullable_to_non_nullable
 as bool,dogName: null == dogName ? _self.dogName : dogName // ignore: cast_nullable_to_non_nullable
@@ -297,6 +305,8 @@ as DateTime?,foodText: freezed == foodText ? _self.foodText : foodText // ignore
 as String?,foodLow: null == foodLow ? _self.foodLow : foodLow // ignore: cast_nullable_to_non_nullable
 as bool,healthText: freezed == healthText ? _self.healthText : healthText // ignore: cast_nullable_to_non_nullable
 as String?,healthOverdue: null == healthOverdue ? _self.healthOverdue : healthOverdue // ignore: cast_nullable_to_non_nullable
+as bool,medsText: freezed == medsText ? _self.medsText : medsText // ignore: cast_nullable_to_non_nullable
+as String?,medsMissed: null == medsMissed ? _self.medsMissed : medsMissed // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }

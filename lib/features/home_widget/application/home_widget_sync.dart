@@ -16,6 +16,11 @@ import '../../food/domain/food.dart';
 import '../../food/presentation/stock_labels.dart';
 import '../../health/application/health_providers.dart';
 import '../../health/domain/health_schedule.dart';
+import '../../meds/application/med_providers.dart';
+import '../../meds/domain/med.dart';
+import '../../meds/domain/med_dose.dart';
+import '../../meds/domain/med_schedule.dart';
+import '../../../core/utils/clock.dart';
 import '../../settings/application/reminder_settings_provider.dart';
 import '../data/home_widget_service.dart';
 import '../domain/widget_snapshot.dart';
@@ -43,6 +48,14 @@ WidgetSnapshot widgetSnapshot(Ref ref) {
   );
   final overdue = attention.where((s) => s.status == HealthStatus.overdue);
 
+  final now = ref.read(clockProvider)();
+  final doses = dosesOn(
+    ref.watch(medsProvider).value ?? const <Med>[],
+    ref.watch(medDosesProvider).value ?? const <MedDose>[],
+    now,
+  );
+  final givenCount = doses.where((d) => d.given).length;
+
   return WidgetSnapshot(
     ready: true,
     dogName: dogName,
@@ -60,6 +73,8 @@ WidgetSnapshot widgetSnapshot(Ref ref) {
         ? _l10n.widgetHealthOverdue(overdue.length)
         : _l10n.widgetHealthSoon(attention.length),
     healthOverdue: overdue.isNotEmpty,
+    medsText: doses.isEmpty ? null : _l10n.widgetMeds(givenCount, doses.length),
+    medsMissed: doses.any((d) => !d.given && d.slot.isBefore(now)),
   );
 }
 

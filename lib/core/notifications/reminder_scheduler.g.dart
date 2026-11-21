@@ -158,7 +158,7 @@ final class ReminderPlanProvider
   }
 }
 
-String _$reminderPlanHash() => r'72988924484bc8f6c5a42e97e6c96e832ac6f808';
+String _$reminderPlanHash() => r'f1b05e56fab938b54b0bdc979750676c7738fb23';
 
 /// Keeps scheduled notifications in sync with the data. Watched by the
 /// app root, so it runs on start and after every relevant change.

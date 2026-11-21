@@ -18,6 +18,8 @@ object WidgetKeys {
     const val FOOD_LOW = "dh_food_low"
     const val HEALTH = "dh_health"
     const val HEALTH_ALERT = "dh_health_alert"
+    const val MEDS = "dh_meds"
+    const val MEDS_ALERT = "dh_meds_alert"
 }
 
 internal fun SharedPreferences.text(key: String): String = getString(key, null) ?: ""

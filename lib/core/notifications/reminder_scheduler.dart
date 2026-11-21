@@ -15,6 +15,8 @@ import '../../features/food/domain/food.dart';
 import '../../features/food/domain/food_reminder.dart';
 import '../../features/health/application/health_providers.dart';
 import '../../features/health/domain/health_reminder.dart';
+import '../../features/meds/application/med_providers.dart';
+import '../../features/meds/domain/med_schedule.dart';
 import '../../features/settings/application/reminder_settings_provider.dart';
 import '../../features/weight/application/weight_providers.dart';
 import '../../features/weight/domain/weigh_reminder.dart';
@@ -92,6 +94,7 @@ final _l10n = lookupAppLocalizations(const Locale('pl'));
 const _foodIdBase = 1000;
 const _weighId = 2000;
 const _healthIdBase = 3000;
+const _medIdBase = 4000;
 
 /// Planned food reminders for the current dog (empty when signed out).
 @Riverpod(keepAlive: true)
@@ -115,7 +118,15 @@ List<PlannedReminder>? reminderPlan(Ref ref) {
   final stockLoaded = ref.watch(stockProvider) != null;
   final weights = ref.watch(weightsProvider).value;
   final health = ref.watch(healthSeriesListProvider);
-  if (!stockLoaded || weights == null || health == null) return null;
+  final meds = ref.watch(medsProvider).value;
+  final doses = ref.watch(medDosesProvider).value;
+  if (!stockLoaded ||
+      weights == null ||
+      health == null ||
+      meds == null ||
+      doses == null) {
+    return null;
+  }
   final foods = {
     for (final f in ref.watch(foodsProvider).value ?? const <Food>[]) f.id: f,
   };
@@ -125,6 +136,12 @@ List<PlannedReminder>? reminderPlan(Ref ref) {
   final latest = summarizeWeights(weights)?.latest;
   final weighAt = planWeighReminder(
     latest: latest,
+    settings: settings,
+    now: now,
+  );
+  final medReminders = planMedReminders(
+    meds: meds,
+    doses: doses,
     settings: settings,
     now: now,
   );
@@ -181,6 +198,20 @@ List<PlannedReminder>? reminderPlan(Ref ref) {
         ),
         at: r.at,
         route: Routes.health,
+      ),
+    for (final (i, m) in medReminders.indexed)
+      PlannedReminder(
+        id: _medIdBase + i,
+        title: _l10n.reminderMedTitle(m.med.name),
+        body: _l10n.reminderMedBody(
+          dogName,
+          [
+            DateFormat.Hm().format(m.slot),
+            if (m.med.dose case final dose? when dose.isNotEmpty) dose,
+          ].join(' · '),
+        ),
+        at: m.slot,
+        route: Routes.today,
       ),
   ];
 }

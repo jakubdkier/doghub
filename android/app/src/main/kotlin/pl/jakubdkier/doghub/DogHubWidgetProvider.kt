@@ -36,6 +36,7 @@ class DogHubWidgetProvider : HomeWidgetProvider() {
 
         line(context, views, R.id.widget_food, data.text(WidgetKeys.FOOD), data.flag(WidgetKeys.FOOD_LOW))
         line(context, views, R.id.widget_health, data.text(WidgetKeys.HEALTH), data.flag(WidgetKeys.HEALTH_ALERT))
+        line(context, views, R.id.widget_meds, data.text(WidgetKeys.MEDS), data.flag(WidgetKeys.MEDS_ALERT))
         views.setViewVisibility(
             R.id.widget_info,
             if (data.text(WidgetKeys.FOOD).isEmpty() && data.text(WidgetKeys.HEALTH).isEmpty()) View.GONE else View.VISIBLE,

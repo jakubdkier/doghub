@@ -1317,6 +1317,198 @@ abstract class AppLocalizations {
   /// In pl, this message translates to:
   /// **'{count, plural, =1{1 termin wkrótce} few{{count} terminy wkrótce} other{{count} terminów wkrótce}}'**
   String widgetHealthSoon(int count);
+
+  /// No description provided for @medsTitle.
+  ///
+  /// In pl, this message translates to:
+  /// **'Leki'**
+  String get medsTitle;
+
+  /// No description provided for @medsToday.
+  ///
+  /// In pl, this message translates to:
+  /// **'Leki na dziś'**
+  String get medsToday;
+
+  /// No description provided for @medAdd.
+  ///
+  /// In pl, this message translates to:
+  /// **'Dodaj lek'**
+  String get medAdd;
+
+  /// No description provided for @medEdit.
+  ///
+  /// In pl, this message translates to:
+  /// **'Edytuj lek'**
+  String get medEdit;
+
+  /// No description provided for @medNameLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Nazwa leku'**
+  String get medNameLabel;
+
+  /// No description provided for @medDoseLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Dawka (opcjonalnie), np. 1 tabletka'**
+  String get medDoseLabel;
+
+  /// No description provided for @medScheduleDaily.
+  ///
+  /// In pl, this message translates to:
+  /// **'Codziennie'**
+  String get medScheduleDaily;
+
+  /// No description provided for @medScheduleInterval.
+  ///
+  /// In pl, this message translates to:
+  /// **'Co kilka dni'**
+  String get medScheduleInterval;
+
+  /// No description provided for @medTimesLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Godziny'**
+  String get medTimesLabel;
+
+  /// No description provided for @medAddTime.
+  ///
+  /// In pl, this message translates to:
+  /// **'Dodaj godzinę'**
+  String get medAddTime;
+
+  /// No description provided for @medRemoveTime.
+  ///
+  /// In pl, this message translates to:
+  /// **'Usuń godzinę'**
+  String get medRemoveTime;
+
+  /// No description provided for @medIntervalLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Co ile dni'**
+  String get medIntervalLabel;
+
+  /// No description provided for @medIntervalInvalid.
+  ///
+  /// In pl, this message translates to:
+  /// **'Podaj od 2 do 60 dni'**
+  String get medIntervalInvalid;
+
+  /// No description provided for @medStartLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Od'**
+  String get medStartLabel;
+
+  /// No description provided for @medEndLabel.
+  ///
+  /// In pl, this message translates to:
+  /// **'Do'**
+  String get medEndLabel;
+
+  /// No description provided for @medEndNone.
+  ///
+  /// In pl, this message translates to:
+  /// **'bez końca'**
+  String get medEndNone;
+
+  /// No description provided for @medEndClear.
+  ///
+  /// In pl, this message translates to:
+  /// **'Usuń datę końca'**
+  String get medEndClear;
+
+  /// No description provided for @medActive.
+  ///
+  /// In pl, this message translates to:
+  /// **'W użyciu'**
+  String get medActive;
+
+  /// No description provided for @medsEnded.
+  ///
+  /// In pl, this message translates to:
+  /// **'Zakończone'**
+  String get medsEnded;
+
+  /// No description provided for @medsEmpty.
+  ///
+  /// In pl, this message translates to:
+  /// **'Brak leków. Dodaj lek, żeby odhaczać dawki.'**
+  String get medsEmpty;
+
+  /// No description provided for @medHistory.
+  ///
+  /// In pl, this message translates to:
+  /// **'Ostatnie 30 dni'**
+  String get medHistory;
+
+  /// No description provided for @medNotGiven.
+  ///
+  /// In pl, this message translates to:
+  /// **'nie podano'**
+  String get medNotGiven;
+
+  /// No description provided for @medNotFound.
+  ///
+  /// In pl, this message translates to:
+  /// **'Nie znaleziono leku.'**
+  String get medNotFound;
+
+  /// No description provided for @remindersMedsEnabled.
+  ///
+  /// In pl, this message translates to:
+  /// **'Przypominaj o lekach'**
+  String get remindersMedsEnabled;
+
+  /// No description provided for @medNoDosesToday.
+  ///
+  /// In pl, this message translates to:
+  /// **'Dziś nie ma dawek.'**
+  String get medNoDosesToday;
+
+  /// No description provided for @medGivenBy.
+  ///
+  /// In pl, this message translates to:
+  /// **'podał(a) {name} o {time}'**
+  String medGivenBy(String name, String time);
+
+  /// No description provided for @medAdherence.
+  ///
+  /// In pl, this message translates to:
+  /// **'{given}/{expected} dawek w ostatnich 7 dniach'**
+  String medAdherence(int given, int expected);
+
+  /// No description provided for @medEveryDays.
+  ///
+  /// In pl, this message translates to:
+  /// **'co {days} dni o {time}'**
+  String medEveryDays(int days, String time);
+
+  /// No description provided for @medDailyAt.
+  ///
+  /// In pl, this message translates to:
+  /// **'codziennie o {times}'**
+  String medDailyAt(String times);
+
+  /// No description provided for @reminderMedTitle.
+  ///
+  /// In pl, this message translates to:
+  /// **'Czas na lek: {name}'**
+  String reminderMedTitle(String name);
+
+  /// No description provided for @reminderMedBody.
+  ///
+  /// In pl, this message translates to:
+  /// **'{dog} · {details}'**
+  String reminderMedBody(String dog, String details);
+
+  /// No description provided for @widgetMeds.
+  ///
+  /// In pl, this message translates to:
+  /// **'Leki: {given}/{total} dziś'**
+  String widgetMeds(int given, int total);
 }
 
 class _AppLocalizationsDelegate

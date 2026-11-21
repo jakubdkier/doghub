@@ -761,4 +761,114 @@ class AppLocalizationsPl extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get medsTitle => 'Leki';
+
+  @override
+  String get medsToday => 'Leki na dziś';
+
+  @override
+  String get medAdd => 'Dodaj lek';
+
+  @override
+  String get medEdit => 'Edytuj lek';
+
+  @override
+  String get medNameLabel => 'Nazwa leku';
+
+  @override
+  String get medDoseLabel => 'Dawka (opcjonalnie), np. 1 tabletka';
+
+  @override
+  String get medScheduleDaily => 'Codziennie';
+
+  @override
+  String get medScheduleInterval => 'Co kilka dni';
+
+  @override
+  String get medTimesLabel => 'Godziny';
+
+  @override
+  String get medAddTime => 'Dodaj godzinę';
+
+  @override
+  String get medRemoveTime => 'Usuń godzinę';
+
+  @override
+  String get medIntervalLabel => 'Co ile dni';
+
+  @override
+  String get medIntervalInvalid => 'Podaj od 2 do 60 dni';
+
+  @override
+  String get medStartLabel => 'Od';
+
+  @override
+  String get medEndLabel => 'Do';
+
+  @override
+  String get medEndNone => 'bez końca';
+
+  @override
+  String get medEndClear => 'Usuń datę końca';
+
+  @override
+  String get medActive => 'W użyciu';
+
+  @override
+  String get medsEnded => 'Zakończone';
+
+  @override
+  String get medsEmpty => 'Brak leków. Dodaj lek, żeby odhaczać dawki.';
+
+  @override
+  String get medHistory => 'Ostatnie 30 dni';
+
+  @override
+  String get medNotGiven => 'nie podano';
+
+  @override
+  String get medNotFound => 'Nie znaleziono leku.';
+
+  @override
+  String get remindersMedsEnabled => 'Przypominaj o lekach';
+
+  @override
+  String get medNoDosesToday => 'Dziś nie ma dawek.';
+
+  @override
+  String medGivenBy(String name, String time) {
+    return 'podał(a) $name o $time';
+  }
+
+  @override
+  String medAdherence(int given, int expected) {
+    return '$given/$expected dawek w ostatnich 7 dniach';
+  }
+
+  @override
+  String medEveryDays(int days, String time) {
+    return 'co $days dni o $time';
+  }
+
+  @override
+  String medDailyAt(String times) {
+    return 'codziennie o $times';
+  }
+
+  @override
+  String reminderMedTitle(String name) {
+    return 'Czas na lek: $name';
+  }
+
+  @override
+  String reminderMedBody(String dog, String details) {
+    return '$dog · $details';
+  }
+
+  @override
+  String widgetMeds(int given, int total) {
+    return 'Leki: $given/$total dziś';
+  }
 }

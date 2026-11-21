@@ -12,6 +12,8 @@ void main() {
       foodLow: true,
       healthText: '1 termin po terminie',
       healthOverdue: true,
+      medsText: 'Leki: 0/1 dziś',
+      medsMissed: true,
     ).toWidgetData();
     expect(data, {
       'dh_ready': '1',
@@ -23,6 +25,8 @@ void main() {
       'dh_food_low': '1',
       'dh_health': '1 termin po terminie',
       'dh_health_alert': '1',
+      'dh_meds': 'Leki: 0/1 dziś',
+      'dh_meds_alert': '1',
     });
     expect(WidgetSnapshot.empty.toWidgetData()['dh_ready'], '0');
   });
