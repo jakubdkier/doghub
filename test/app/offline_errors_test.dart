@@ -8,7 +8,6 @@ import 'package:dog_app/features/health/application/health_providers.dart';
 import 'package:dog_app/features/weight/application/weight_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:material_ui/material_ui.dart';
 
 import '../helpers/fake_auth_repository.dart';
 import '../helpers/pump_app.dart';
