@@ -21,6 +21,7 @@ abstract class ReminderSettings with _$ReminderSettings {
     @Default(2.0) double foodThresholdKg,
     @Default(true) bool weighEnabled,
     @Default(true) bool healthEnabled,
+    @Default(true) bool medsEnabled,
 
     /// Health reminder this many days before the due date (vet: 1 day).
     @Default(7) int healthDaysBefore,
