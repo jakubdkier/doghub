@@ -37,6 +37,24 @@ service cloud.firestore {
       return !(key in data) || data[key] == null || data[key] is timestamp;
     }
 
+    function unchanged(key) {
+      return request.resource.data.get(key, null) == resource.data.get(key, null);
+    }
+
+    function present(data, key) {
+      return key in data && data[key] != null;
+    }
+
+    function optionalNumberIn(data, key, minExclusive, maxInclusive) {
+      return !(key in data) || data[key] == null
+        || (data[key] is number && data[key] > minExclusive && data[key] <= maxInclusive);
+    }
+
+    function optionalIntIn(data, key, minInclusive, maxInclusive) {
+      return !(key in data) || data[key] == null
+        || (data[key] is int && data[key] >= minInclusive && data[key] <= maxInclusive);
+    }
+
     // Only the caller's own entry in memberNames may change, and it must be a name.
     function ownMemberNameOnly() {
       let names = request.resource.data.memberNames;
@@ -85,6 +103,29 @@ service cloud.firestore {
           && invite != null
           && invite.data.householdId == h
           && invite.data.expiresAt > request.time;
+      }
+
+      // ---------- health templates ----------
+      // Built-in defaults live in the app; a doc overrides one by id or adds
+      // a custom template. Written with merge, so createdAt is optional.
+      match /healthTemplates/{t} {
+        allow read: if isMember(h);
+        allow create: if isMember(h)
+          && validTemplate()
+          && (!('createdAt' in request.resource.data)
+            || request.resource.data.createdAt == request.time);
+        allow update: if isMember(h) && validTemplate() && unchanged('createdAt');
+        allow delete: if false;
+
+        function validTemplate() {
+          let t = request.resource.data;
+          return t.keys().hasOnly(['name', 'type', 'intervalMonths', 'mandatory', 'active', 'createdAt'])
+            && isShortString(t.name, 1, 50)
+            && t.type in ['vaccination', 'deworming', 'ticks', 'vet']
+            && optionalIntIn(t, 'intervalMonths', 1, 60)
+            && t.mandatory is bool
+            && t.active is bool;
+        }
       }
 
       // ---------- dogs ----------
@@ -164,28 +205,19 @@ service cloud.firestore {
           allow delete: if false;
         }
 
-        // Validated in stage 6.
+        // ---------- health ----------
         match /health/{id} {
-          allow read, create, update: if isMember(h);
+          allow read: if isMember(h);
+          allow create: if isMember(h)
+            && validHealth()
+            && request.resource.data.by == uid()
+            && request.resource.data.createdAt == request.time;
+          allow update: if isMember(h)
+            && validHealth()
+            && unchanged('by')
+            && unchanged('createdAt');
+          // Soft delete only (`deleted: true`).
           allow delete: if false;
-        }
-
-        function unchanged(key) {
-          return request.resource.data.get(key, null) == resource.data.get(key, null);
-        }
-
-        function optionalNumberIn(data, key, minExclusive, maxInclusive) {
-          return !(key in data) || data[key] == null
-            || (data[key] is number && data[key] > minExclusive && data[key] <= maxInclusive);
-        }
-
-        function optionalIntIn(data, key, minInclusive, maxInclusive) {
-          return !(key in data) || data[key] == null
-            || (data[key] is int && data[key] >= minInclusive && data[key] <= maxInclusive);
-        }
-
-        function present(data, key) {
-          return key in data && data[key] != null;
         }
 
         function validEvent() {
@@ -220,6 +252,21 @@ service cloud.firestore {
             && w.by is string
             // Optional for entries written before stage 5.
             && (!('deleted' in w) || w.deleted is bool);
+        }
+
+        function validHealth() {
+          let e = request.resource.data;
+          return e.keys().hasOnly(['type', 'templateId', 'name', 'date', 'nextDue',
+              'note', 'by', 'createdAt', 'deleted'])
+            && e.type in ['vaccination', 'deworming', 'ticks', 'vet']
+            && optionalShortString(e, 'templateId', 100)
+            && isShortString(e.name, 1, 50)
+            && e.date is timestamp
+            && e.date <= request.time + duration.value(1, 'h')
+            && (!present(e, 'nextDue') || (e.nextDue is timestamp && e.nextDue >= e.date))
+            && optionalShortString(e, 'note', 500)
+            && e.by is string
+            && e.deleted is bool;
         }
 
         function validFood() {

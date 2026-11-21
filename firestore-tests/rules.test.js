@@ -582,3 +582,102 @@ describe('weights', () => {
     await assertSucceeds(updateDoc(doc(db(ALICE), `${weights}/old`), { deleted: true }));
   });
 });
+
+describe('health entries', () => {
+  const health = `${dogPath}/d1/health`;
+  const days = (n) => hours(24 * n);
+  const entry = (uid, data, id = 'e1') =>
+    setDoc(doc(db(uid), `${health}/${id}`), {
+      type: 'vaccination',
+      templateId: 'rabies',
+      name: 'Wścieklizna',
+      date: Timestamp.now(),
+      nextDue: days(365),
+      by: uid,
+      createdAt: serverTimestamp(),
+      deleted: false,
+      ...data,
+    });
+
+  test('member adds entries of each type, with or without next due', async () => {
+    await assertSucceeds(entry(ALICE, {}));
+    await assertSucceeds(entry(ALICE, { type: 'deworming', templateId: 'deworming', name: 'Odrobaczanie' }, 'e2'));
+    await assertSucceeds(entry(ALICE, { type: 'ticks', name: 'Obroża', note: 'Seresto' }, 'e3'));
+    await assertSucceeds(
+      setDoc(doc(db(ALICE), `${health}/e4`), {
+        type: 'vet',
+        name: 'Wizyta',
+        date: Timestamp.now(),
+        by: ALICE,
+        createdAt: serverTimestamp(),
+        deleted: false,
+      }),
+    );
+    await assertSucceeds(entry(ALICE, { date: days(-400), nextDue: days(-35) }, 'e5'));
+  });
+
+  test('non-member cannot read or add', async () => {
+    await assertFails(getDocs(collection(db(EVE), health)));
+    await assertFails(entry(EVE, {}));
+  });
+
+  test('author and server time are enforced', async () => {
+    await assertFails(entry(ALICE, { by: BOB }));
+    await assertFails(entry(ALICE, { createdAt: Timestamp.now() }));
+  });
+
+  test('invalid entries are rejected', async () => {
+    await assertFails(entry(ALICE, { type: 'grooming' }));
+    await assertFails(entry(ALICE, { name: '' }));
+    await assertFails(entry(ALICE, { name: 'x'.repeat(51) }));
+    await assertFails(entry(ALICE, { date: days(2) }));
+    await assertFails(entry(ALICE, { nextDue: days(-1) }));
+    await assertFails(entry(ALICE, { note: 'x'.repeat(501) }));
+    await assertFails(entry(ALICE, { clinic: 'Vetka' }));
+  });
+
+  test('partner edits and soft-deletes; author stays; no hard delete', async () => {
+    await addBob();
+    await assertSucceeds(entry(ALICE, {}));
+    const e1 = doc(db(BOB), `${health}/e1`);
+    await assertSucceeds(updateDoc(e1, { nextDue: deleteField(), note: 'przesunięte' }));
+    await assertSucceeds(updateDoc(e1, { deleted: true }));
+    await assertFails(updateDoc(e1, { by: BOB }));
+    await assertFails(updateDoc(e1, { createdAt: Timestamp.now() }));
+    await assertFails(deleteDoc(e1));
+  });
+});
+
+describe('health templates', () => {
+  const templates = `households/${H}/healthTemplates`;
+  const tpl = (uid, data, id = 'tick_collar') =>
+    setDoc(
+      doc(db(uid), `${templates}/${id}`),
+      { name: 'Obroża na kleszcze', type: 'ticks', intervalMonths: 6, mandatory: false, active: true, ...data },
+      { merge: true },
+    );
+
+  test('member overrides a default and adds a custom template', async () => {
+    await assertSucceeds(tpl(ALICE, {}));
+    await assertSucceeds(tpl(ALICE, { intervalMonths: 8 }));
+    await assertSucceeds(tpl(ALICE, { name: 'Lepto', type: 'vaccination', intervalMonths: 12, createdAt: serverTimestamp() }, 'c1'));
+    await assertSucceeds(tpl(ALICE, { intervalMonths: deleteField() }, 'c2'));
+  });
+
+  test('non-member cannot read or write templates', async () => {
+    await assertFails(getDocs(collection(db(EVE), templates)));
+    await assertFails(tpl(EVE, {}));
+  });
+
+  test('invalid templates are rejected; no hard delete', async () => {
+    await assertFails(tpl(ALICE, { type: 'spa' }));
+    await assertFails(tpl(ALICE, { intervalMonths: 0 }));
+    await assertFails(tpl(ALICE, { intervalMonths: 2.5 }));
+    await assertFails(tpl(ALICE, { mandatory: 'yes' }));
+    await assertFails(tpl(ALICE, { name: '' }));
+    await assertFails(tpl(ALICE, { price: 10 }));
+    await assertFails(tpl(ALICE, { createdAt: Timestamp.now() }, 'c3'));
+    await assertSucceeds(tpl(ALICE, {}));
+    await assertFails(deleteDoc(doc(db(ALICE), `${templates}/tick_collar`)));
+  });
+});
